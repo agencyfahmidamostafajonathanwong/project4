@@ -100,17 +100,19 @@ app.setupGame = function(){
 //Sets up the player hand from totalDeck
 app.setupPlayerCards = function(){
   for (let i = 0; i < 5; i++) {
-    let playerHand = Math.floor(Math.random() * app.totalDeck.length);
-    console.log(playerHand);
-    app.playerHand.push(app.totalDeck[playerHand]);
-    app.totalDeck.splice(playerHand, 1);
+    let randomIndex = Math.floor(Math.random() * app.totalDeck.length);
+    app.playerHand.push(app.totalDeck[randomIndex]);
+    app.totalDeck.splice(randomIndex, 1);
   }
-  console.log(app.playerHand);
 }
 
 //Sets up initial opponent hand from totalDeck
 app.setupOpponentCards = function(){
-
+  for (let i = 0; i < 5; i++) {
+    let randomIndex = Math.floor(Math.random() * app.totalDeck.length);
+    app.opponentHand.push(app.totalDeck[randomIndex]);
+    app.totalDeck.splice(randomIndex, 1);
+  }
 }
 
 //Execute if turn === 'opponent'
@@ -126,22 +128,23 @@ app.executeOpponentMove = function() {
 
 app.clickGameBoard = () => {
   //Event delegation for gameboard.
-  $('.gameboard').on('click', () => {
-    //If click on playercard and turn ='player'
-    if (e.target.matches('.player-card')){
-      const playerCard = e.target.closest('.player-card');
-      const playerCardId = playerCard.dataset.cardid;
-      app.currentPlayerCard = app.getPlayerCard(playerCardId);
-    }
+  $('.gameboard').on('click', (e) => {
     
-    //Click on opponents-card and turn = "opponent"
-    //Could also set opponent attack here? or on button click.
-    if(e.target.matches('.opponent-card')){
-      const opponentCard = e.target.closest('.opponent-card');
-      const opponentCardId = opponentCard.dataset.cardid;
-      app.currentOpponentCard = app.getOpponentCard(opponentCardId);
+    if(app.turn === 'player') {
+      console.log("test");
+      if (e.target.matches('.player-card, .player-card *')){
+        const playerCard = e.target.closest('.player-card');
+        const playerCardId = playerCard.dataset.cardid;
+        app.currentPlayerCard = app.getPlayerCard(playerCardId);
+      }
+      
+      if(e.target.matches('.opponent-card')){
+        const opponentCard = e.target.closest('.opponent-card');
+        const opponentCardId = opponentCard.dataset.cardid;
+        app.currentOpponentCard = app.getOpponentCard(opponentCardId);  
+      }
     }
-  });
+  })
 }
 // UI LOGIC
 
@@ -188,6 +191,8 @@ app.renderOpponentCards = () => {
 app.init = async() => {
   await app.getDeck();
   await app.setupPlayerCards();
+  await app.setupOpponentCards();
+  app.clickGameBoard();
 }
 
 $(function() {
