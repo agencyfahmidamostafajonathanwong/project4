@@ -83,7 +83,7 @@ app.getDeck = async function(){
     }
   });
 
-  console.log(response[0]);
+  // console.log(response[0]);
   app.totalDeck = response[0];
   //Ajax call to deck
   //filter deck by attack power
@@ -99,7 +99,13 @@ app.setupGame = function(){
 
 //Sets up the player hand from totalDeck
 app.setupPlayerCards = function(){
-
+  for (let i = 0; i < 5; i++) {
+    let playerHand = Math.floor(Math.random() * app.totalDeck.length);
+    console.log(playerHand);
+    app.playerHand.push(app.totalDeck[playerHand]);
+    app.totalDeck.splice(playerHand, 1);
+  }
+  console.log(app.playerHand);
 }
 
 //Sets up initial opponent hand from totalDeck
@@ -181,6 +187,7 @@ app.renderOpponentCards = () => {
 
 app.init = async() => {
   await app.getDeck();
+  await app.setupPlayerCards();
 }
 
 $(function() {
