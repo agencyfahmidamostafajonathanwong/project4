@@ -71,13 +71,20 @@ app.drawPlayerCard = () => {
   //return the new card
 }
 
-app.getDeck = function(){
+app.getDeck = async function(){
 
-  const response = $.ajax({
+  const response = await $.ajax({
     url : 'https://db.ygoprodeck.com/api/v2/cardinfo.php?',
     method : "GET",
-    type : "JSON"
-  })
+    type : "JSON",
+
+    data : {
+      type : "Normal Monster"
+    }
+  });
+
+  console.log(response[0]);
+  app.totalDeck = response[0];
   //Ajax call to deck
   //filter deck by attack power
   //set this.totalDeck to filtered array
@@ -172,8 +179,8 @@ app.renderOpponentCards = () => {
 //Renders player hand in case we don't off beginning
 }
 
-app.init = () => {
-  app.getDeck();
+app.init = async() => {
+  await app.getDeck();
 }
 
 $(function() {
