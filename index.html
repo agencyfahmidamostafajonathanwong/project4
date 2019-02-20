@@ -13,9 +13,37 @@
   </style>
 </head>
 <body>
-  <div class="gameboard">
-      <h1 class="player-card" data-cardid ='AbcTest'>CARD</h1>
-  </div>
+  <main class="gameboard">
+    <section class="opponent-side"></section>
+      <div class="opponent-stats">
+        <ul>
+          <li class="opponent-life-points"></li>
+          <li class="opponent-atk-display"></li>
+        </ul>
+      </div>
+      <ul>
+        <li class="opponent-card"><div class="opponent-atk"></div></li>
+        <li class="opponent-card"><div class="opponent-atk"></div></li>
+        <li class="opponent-card"><div class="opponent-atk"></div></li>
+        <li class="opponent-card"><div class="opponent-atk"></div></li>
+        <li class="opponent-card"><div class="opponent-atk"></div></li>
+      </ul>
+    <section class="player-side">
+      <ul>
+        <li class="player-card"><div class="player-atk"></div></li>
+        <li class="player-card"><div class="player-atk"></div></li>
+        <li class="player-card"><div class="player-atk"></div></li>
+        <li class="player-card"><div class="player-atk"></div></li>
+        <li class="player-card"><div class="player-atk"></div></li>
+      </ul>
+      <div class="player-stats">
+        <ul>
+          <li class="player-life-points"></li>
+          <li class="player-atk"></li>
+        </ul>
+      </div>
+    </section>
+    </main>
   
   <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='crossorigin='anonymous'></script>
   <script src="scripts/script.js"></script>

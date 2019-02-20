@@ -136,6 +136,9 @@ app.clickGameBoard = () => {
         const playerCard = e.target.closest('.player-card');
         const playerCardId = playerCard.dataset.cardid;
         app.currentPlayerCard = app.getPlayerCard(playerCardId);
+        // right now, user clicked card
+        // want to display atk points in atk li
+        // also, zoom the card on click
       }
       
       if(e.target.matches('.opponent-card')){
