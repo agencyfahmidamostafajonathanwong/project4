@@ -2,7 +2,7 @@
 @import "base/setup";
 @import "layout/gameboard";
 @import "sections/player-side";
-@import "sections/opponent-side";
+@import "sections/_opponent-side.scss";
 //Need to style things and figure out how to render card information to screen
 //Test logic. Fingers crossed.
 

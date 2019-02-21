@@ -161,8 +161,87 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 .player-side {
   height: 50%;
-  background: blue; }
+  background: blue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end; }
+
+.player-hand {
+  border: 2px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.player-card {
+  margin: 1rem;
+  width: 15%;
+  height: 4rem;
+  background: pink;
+  -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75); }
+
+.player-stats ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.player-life-points, .player-atk-display {
+  padding: 1rem 2rem;
+  background: lightcyan; }
 
 .opponent-side {
   height: 50%;
   background: red; }
+
+.opponent-hand {
+  border: 2px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.opponent-card {
+  margin: 1rem;
+  width: 15%;
+  height: 4rem;
+  background: pink;
+  -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75); }
+
+.opponent-stats ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+.opponent-life-points, .opponent-atk-display {
+  padding: 1rem 2rem;
+  background: lightcyan; }

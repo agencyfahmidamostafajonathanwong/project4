@@ -1,4 +1,35 @@
 .player-side {
   height:50%;
   background:blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.player-hand {
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-card {
+  margin: 1rem;
+  width: 15%;
+  height: 4rem;
+  background: pink;
+  -webkit-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+  box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+}
+
+.player-stats ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-life-points, .player-atk-display {
+  padding: 1rem 2rem;
+  background: lightcyan;
 }

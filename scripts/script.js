@@ -212,8 +212,14 @@ app.renderPlayerCards = () => {
 //Renders player hand in case we don't off beginning
 }
 
-app.renderOpponentCards = () => {
+app.renderOpponentCards = function() {
 //Renders player hand in case we don't off beginning
+  // console.log(app.opponentHand);
+  // hand[i].attr("src", hand[i].image_url).
+
+  $('.opponent-card-img').toArray().forEach() {
+    card.
+  );
 }
 
 app.init = async() => {
@@ -221,6 +227,7 @@ app.init = async() => {
   await app.setupPlayerCards();
   await app.setupOpponentCards();
   app.clickGameBoard();
+  app.renderOpponentCards();
 }
 
 $(function() {
