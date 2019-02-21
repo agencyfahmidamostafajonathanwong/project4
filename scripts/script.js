@@ -9,14 +9,14 @@ app.currentPlayerCard = {};
 app.currentOpponentCard = {};
 app.playerLife = 0;
 app.opponentLife = 0;
-app.turn ='player';
+app.turn = 1;
 app.playerBoosts = 3;
 
 app.calcPlayerAttack = function(playerAttack, opponentAttack){
   //If player wins and there are still monsters on field
   if (playerAttack > opponentAttack && app.opponentHand.length > 0){
     const overFlowDamage = playerAttack - opponentAttack;
-    app.opponentLife -+ overFlowDamage;
+    app.opponentLife -= overFlowDamage;
     app.turn = 'opponent';
     return true;
   //If no monsters direct attack
@@ -25,6 +25,7 @@ app.calcPlayerAttack = function(playerAttack, opponentAttack){
     return true;
   //Failed attack
   } else {
+    app.playerLife -= (opponentAttack - playerAttack);
     app.turn = 'opponent';
     return false;
   }
@@ -124,13 +125,14 @@ app.executeOpponentMove = function() {
   // Execute calc opponent attack function.
   // update player life points.
   // reset currentPlayerCard and currentOpponentCard to null.
+  // increment turn.
 }
 
 app.clickGameBoard = () => {
   //Event delegation for gameboard.
   $('.gameboard').on('click', (e) => {
     
-    if(app.turn === 'player') {
+    if(app.turn % 2 === 1) {
       console.log("test");
       if (e.target.matches('.player-card, .player-card *')){
         const playerCard = e.target.closest('.player-card');
@@ -149,6 +151,22 @@ app.clickGameBoard = () => {
     }
   })
 }
+
+app.handlePlayerButtons = () => {
+  $(".player-atk-button").on("click", () => {
+      app.calcPlayerAttack(app.currentPlayerCard.atk, app.currentOpponentCard.atk);
+      app.updatePlayerLifePoints(app.playerLife);
+      app.updateOpponentLifePoints(app.updateOpponentLifePoints);
+      app.turn += 1;
+      executeOpponentMove();
+      //End turn = Switch to Opponent.
+      //Increment the turn
+      //Call Opponent move function   
+  });
+
+  //Cancel button. Set current cards to null, remove styles.
+}
+
 // UI LOGIC
 
 app.togglePlayerCardStyle = () => {
@@ -159,12 +177,12 @@ app.toggleOpponentCardStyle = () => {
   //Sets style for current opponent card style
 }
 
-app.updatePlayerLifePoints = () => {
-  //Updates UI with player life points.
+app.updatePlayerLifePoints = (lifePoints) => {
+  $(".player-life-points").text(lifePoints);
 }
 
-app.updateOpponentLifePoints = () => {
-  //Updates UI with opponent life points.
+app.updateOpponentLifePoints = (lifePoints) => {
+  $(".opponent-life-points").text(lifePoints);
 }
 
 app.clearPlayerCardInterface = () => {
