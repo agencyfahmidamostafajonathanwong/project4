@@ -190,7 +190,10 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   background: pink;
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75); }
+  box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
+  -webkit-transition: .2s all;
+  -o-transition: .2s all;
+  transition: .2s all; }
 
 .player-stats ul {
   display: -webkit-box;
@@ -231,7 +234,10 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   background: pink;
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75); }
+  box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
+  -webkit-transition: .2s all;
+  -o-transition: .2s all;
+  transition: .2s all; }
 
 .opponent-stats ul {
   display: -webkit-box;

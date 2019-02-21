@@ -13,17 +13,19 @@ app.turn = 1;
 app.playerBoosts = 3;
 
 app.calcPlayerAttack = function(){
+  const playerAttack = parseInt(app.currentPlayerCard.atk,10);
+  const opponentAttack = parseInt(app.currentOpponentCard.atk,10);
   //If player wins and there are still monsters on field
-  if (app.currentPlayerCard.atk > app.currentOpponentCard.atk && app.opponentHand.length > 0){
-    const overFlowDamage = app.currentPlayerCard.atk - appOpponentCard.atk;
+  if (playerAttack >opponentAttack && app.opponentHand.length > 0){
+    const overFlowDamage = playerAttack -opponentAttack;
     app.opponentLife -= overFlowDamage;
     app.removeOpponentCard();
   //If no monsters direct attack
-  } else if (app.opponentHand.length === 0) {
-    app.opponentLife -= app.currentPlayerCard.atk;
+  } else if (app.opponentHand.length === 0) { 
+    app.opponentLife -= playerAttack;
   //Failed attack
-  } else if (app.currentOpponentCard.atk > app.currentPlayerCard.atk) {
-    app.playerLife -= (appOpponentCard.atk - app.currentPlayerCard.atk);
+  } else if (opponentAttack > playerAttack) {
+    app.playerLife -= (opponentAttack - playerAttack);
     app.removePlayerCard();
   } else{
     app.removePlayerCard();
@@ -148,6 +150,7 @@ app.clickGameBoard = () => {
 
        
         app.currentPlayerCard = app.getPlayerCard(playerCardId);
+        console.log(`current player card is ${parseInt(app.currentPlayerCard.atk)}`);
         app.toggleHighlight('player', playerCard);
         app.resetPlayerButtons();
         // right now, user clicked card
@@ -159,6 +162,7 @@ app.clickGameBoard = () => {
         const opponentCard = e.target.closest('.opponent-card');
         const opponentCardId = opponentCard.dataset.id;
         app.currentOpponentCard = app.getOpponentCard(opponentCardId);
+        console.log(`current opponent card is ${parseInt(app.currentOpponentCard.atk,10)}`);
         app.toggleHighlight('opponent', opponentCard);
         app.resetPlayerButtons();
       }
@@ -169,11 +173,11 @@ app.clickGameBoard = () => {
 app.handlePlayerButtons = () => {
   $(".player-atk-button").on("click", () => {
 
-      // app.calcPlayerAttack();
-      app.updatePlayerLifePoints(app.playerLife);
-      app.updateOpponentLifePoints(app.updateOpponentLifePoints);
+      app.calcPlayerAttack();
+      app.updateLifePoints();
       app.resetCurrentCards();
-      app.resetPlayerButtons();;
+      app.resetPlayerButtons();
+      app.toggleHighlight();
       app.turn += 1;
       console.log("the turn is " + app.turn);
       // executeOpponentMove();
@@ -236,12 +240,9 @@ app.toggleHighlight = function(cardType, currentCard){
   }
 }
 
-app.updatePlayerLifePoints = (lifePoints) => {
-  $(".player-life-points").text(lifePoints);
-}
-
-app.updateOpponentLifePoints = (lifePoints) => {
-  $(".opponent-life-points").text(lifePoints);
+app.updateLifePoints = () => {
+  $(".player-life-points").text(app.playerLife);
+  $(".opponent-life-points").text(app.opponentLife);
 }
 
 app.clearPlayerCardInterface = () => {
