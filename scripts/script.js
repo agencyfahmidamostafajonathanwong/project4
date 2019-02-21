@@ -12,43 +12,52 @@ app.opponentLife = 0;
 app.turn = 1;
 app.playerBoosts = 3;
 
-app.calcPlayerAttack = function(playerAttack, opponentAttack){
+app.calcPlayerAttack = function(){
   //If player wins and there are still monsters on field
-  if (playerAttack > opponentAttack && app.opponentHand.length > 0){
-    const overFlowDamage = playerAttack - opponentAttack;
+  if (app.currentPlayerCard.atk > app.currentOpponentCard.atk && app.opponentHand.length > 0){
+    const overFlowDamage = app.currentPlayerCard.atk - appOpponentCard.atk;
     app.opponentLife -= overFlowDamage;
+    app.removeOpponentCard();
   //If no monsters direct attack
   } else if (app.opponentHand.length === 0) {
-    app.opponentLife -= playerAttack;
+    app.opponentLife -= app.currentPlayerCard.atk;
   //Failed attack
-  } else {
-    app.playerLife -= (opponentAttack - playerAttack);
+  } else if (app.currentOpponentCard.atk > app.currentPlayerCard.atk) {
+    app.playerLife -= (appOpponentCard.atk - app.currentPlayerCard.atk);
+    app.removePlayerCard();
+  } else{
+    app.removePlayerCard();
+    app.removeOpponentCard();
   }
 };
 
 app.calcOpponentAttack = function() {
   if (app.currentOpponentCard.atk > app.currentPlayerCard.atk && app.playerHand.length > 0) {
     playerLife -= (app.currentOpponentCard.atk - app.currentPlayerCard.atk);
-    
+    app.removePlayerCard();
   } else if (app.playerHand.length ===0 ) {
     playerLife -= app.currentOpponentCard.atk;
-
-  } else if (app.currentOpponentCard.atk > app.currentPlayerCard.atk && app.playerHand.length > 0) {
+   
+  } else if (app.currentOpponentCard.atk < app.currentPlayerCard.atk && app.playerHand.length > 0) {
     opponentLife -= (app.currentPlayerCard.atk - app.currentOpponentCard.atk);
-
+    app.removeOpponentCard();
   } else {
+    app.removePlayerCard();
+    app.removeOpponentCard();
     // pass tie result (destruction of both cards) to "next" function
   }
 }
 
 // Write function for nulling cards that get defeated
-
-app.removePlayerCard = function(id) {
-  //loop through player cards and find index. splice from array.
+//If run into problem change it to name.
+app.removePlayerCard = function() {
+  const index = app.playerHand.findIndex(card => card.id === app.currentPlayerCard.id);
+  app.playerHand.splice(index ,1);
 }
 
-app.removeOpponentCard = function(id) {
-  //loop through opponent card and find index. splice from array.
+app.removeOpponentCard = function() {
+  const index = app.opponentHand.findIndex(card => card.id === app.currentOpponentCard.id);
+  app.opponentHand.splice(index , 1);
 }
 
 app.getPlayerCard = function(id){
@@ -120,7 +129,7 @@ app.executeOpponentMove = function() {
   // Execute calc opponent attack function.
   // update player life points.
   // reset currentPlayerCard and currentOpponentCard to null.
-  // increment turn.
+  app.turn += 1;
 }
 
 app.clickGameBoard = () => {
