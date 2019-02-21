@@ -1,21 +1,20 @@
 .player-side {
   height:50%;
   background:blue;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .player-hand {
+  height: 80%;
   border: 2px solid black;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .player-card {
   margin: 1rem;
-  width: 15%;
+  width: 12%;
+  height: 80%;
   background: pink;
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
@@ -24,8 +23,8 @@
 
 .player-stats ul {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .player-life-points, .player-atk-display {

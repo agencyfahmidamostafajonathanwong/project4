@@ -161,19 +161,10 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 .player-side {
   height: 50%;
-  background: blue;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end; }
+  background: blue; }
 
 .player-hand {
+  height: 80%;
   border: 2px solid black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -181,13 +172,14 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end; }
 
 .player-card {
   margin: 1rem;
-  width: 15%;
+  width: 12%;
+  height: 80%;
   background: pink;
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
@@ -197,12 +189,12 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
 
 .player-life-points, .player-atk-display {
   padding: 1rem 2rem;
@@ -213,6 +205,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   background: red; }
 
 .opponent-hand {
+  height: 80%;
   border: 2px solid black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -220,13 +213,14 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start; }
 
 .opponent-card {
   margin: 1rem;
-  width: 15%;
+  width: 12%;
+  height: 80%;
   background: pink;
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);

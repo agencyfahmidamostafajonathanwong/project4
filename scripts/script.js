@@ -5,8 +5,8 @@ app.totalDeck = [];
 // app.opponentDeck = [];
 app.playerHand = [];
 app.opponentHand = [];
-app.currentPlayerCard = {};
-app.currentOpponentCard = {};
+app.currentPlayerCard = null;
+app.currentOpponentCard = null;
 app.playerLife = 0;
 app.opponentLife = 0;
 app.turn = 1;
@@ -142,6 +142,7 @@ app.clickGameBoard = () => {
         const playerCard = e.target.closest('.player-card');
         const playerCardId = playerCard.dataset.id;
         app.currentPlayerCard = app.getPlayerCard(playerCardId);
+        app.toggleAttackButton();
         console.log(app.currentPlayerCard.name);
         console.log('Click player button, turn is ' + app.turn)  
         // right now, user clicked card
@@ -153,6 +154,7 @@ app.clickGameBoard = () => {
         const opponentCard = e.target.closest('.opponent-card');
         const opponentCardId = opponentCard.dataset.id;
         app.currentOpponentCard = app.getOpponentCard(opponentCardId);
+        app.toggleAttackButton();
         console.log(app.currentOpponentCard.name);  
         console.log('Click opponent button, turn is ' + app.turn) 
       }
@@ -179,6 +181,26 @@ app.handlePlayerButtons = () => {
     app.currentOpponentCard = null;
     // remove styles
   })
+}
+
+app.toggleAttackButton = function() {
+  if(app.currentOpponentCard && app.currentPlayerCard) {
+    console.log(app.currentOpponentCard);
+    console.log(app.currentPlayerCard);
+    $('.player-atk-button').attr('enabled', true)
+  } else {
+    $('.player-atk-button').attr('enabled', false)
+  }
+}
+
+app.toggleCancelButton = function () {
+  if (app.currentOpponentCard && app.currentPlayerCard) {
+    console.log(app.currentOpponentCard);
+    console.log(app.currentPlayerCard);
+    $('.player-cancel-button').attr('enabled', true)
+  } else {
+    $('.player-atk-button').attr('enabled', false)
+  }
 }
 
 // UI LOGIC
@@ -248,6 +270,8 @@ app.init = async() => {
   app.clickGameBoard();
   app.renderOpponentCards();
   app.renderPlayerCards();
+  app.toggleAttackButton();
+  app.toggleCancelButton();
 }
 
 $(function() {
