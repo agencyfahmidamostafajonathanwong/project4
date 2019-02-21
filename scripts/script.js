@@ -17,36 +17,31 @@ app.calcPlayerAttack = function(playerAttack, opponentAttack){
   if (playerAttack > opponentAttack && app.opponentHand.length > 0){
     const overFlowDamage = playerAttack - opponentAttack;
     app.opponentLife -= overFlowDamage;
-    app.turn = 'opponent';
-    return true;
   //If no monsters direct attack
   } else if (app.opponentHand.length === 0) {
     app.opponentLife -= playerAttack;
-    return true;
   //Failed attack
   } else {
     app.playerLife -= (opponentAttack - playerAttack);
-    app.turn = 'opponent';
-    return false;
   }
 };
 
-app.calcOpponentAttack = function(playerAttack, opponentAttack){
-  if (opponentAttack > playerAttack && app.playerHand.length >0) {
-    //calculate overflow damage if any
-    //subtract from player life
-    //app.turn === player
-    //return true
-  } else if (app.playerHand.length ===0 ) {
-    //no monsters
+app.calcOpponentAttack = function() {
+  if (app.currentOpponentCard.atk > app.currentPlayerCard.atk && app.playerHand.length > 0) {
+    playerLife -= (app.currentOpponentCard.atk - app.currentPlayerCard.atk);
     
-    //take direct damage
-    return true;
+  } else if (app.playerHand.length ===0 ) {
+    playerLife -= app.currentOpponentCard.atk;
+
+  } else if (app.currentOpponentCard.atk > app.currentPlayerCard.atk && app.playerHand.length > 0) {
+    opponentLife -= (app.currentPlayerCard.atk - app.currentOpponentCard.atk);
+
   } else {
-    //app.turn === player
-    //attack fail
+    // pass tie result (destruction of both cards) to "next" function
   }
 }
+
+// Write function for nulling cards that get defeated
 
 app.removePlayerCard = function(id) {
   //loop through player cards and find index. splice from array.
@@ -154,17 +149,20 @@ app.clickGameBoard = () => {
 
 app.handlePlayerButtons = () => {
   $(".player-atk-button").on("click", () => {
-      app.calcPlayerAttack(app.currentPlayerCard.atk, app.currentOpponentCard.atk);
+      app.calcPlayerAttack();
       app.updatePlayerLifePoints(app.playerLife);
       app.updateOpponentLifePoints(app.updateOpponentLifePoints);
       app.turn += 1;
       executeOpponentMove();
-      //End turn = Switch to Opponent.
-      //Increment the turn
-      //Call Opponent move function   
   });
 
-  //Cancel button. Set current cards to null, remove styles.
+  $(".player-cancel-button").on("click", () => {
+    app.currentPlayerCard = null;
+    // remove styles
+
+    app.currentOpponentCard = null;
+    // remove styles
+  })
 }
 
 // UI LOGIC
