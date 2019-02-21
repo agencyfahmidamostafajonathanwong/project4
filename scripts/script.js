@@ -140,17 +140,21 @@ app.clickGameBoard = () => {
       console.log("test");
       if (e.target.matches('.player-card, .player-card *')){
         const playerCard = e.target.closest('.player-card');
-        const playerCardId = playerCard.dataset.cardid;
+        const playerCardId = playerCard.dataset.id;
         app.currentPlayerCard = app.getPlayerCard(playerCardId);
+        console.log(app.currentPlayerCard.name);
+        console.log('Click player button, turn is ' + app.turn)  
         // right now, user clicked card
         // want to display atk points in atk li
         // also, zoom the card on click
       }
       
-      if(e.target.matches('.opponent-card')){
+      if(e.target.matches('.opponent-card, .opponent-card *')){
         const opponentCard = e.target.closest('.opponent-card');
-        const opponentCardId = opponentCard.dataset.cardid;
-        app.currentOpponentCard = app.getOpponentCard(opponentCardId);  
+        const opponentCardId = opponentCard.dataset.id;
+        app.currentOpponentCard = app.getOpponentCard(opponentCardId);
+        console.log(app.currentOpponentCard.name);  
+        console.log('Click opponent button, turn is ' + app.turn) 
       }
     }
   })
@@ -158,11 +162,14 @@ app.clickGameBoard = () => {
 
 app.handlePlayerButtons = () => {
   $(".player-atk-button").on("click", () => {
-      app.calcPlayerAttack();
+    console.log('attack');
+      // app.calcPlayerAttack();
       app.updatePlayerLifePoints(app.playerLife);
       app.updateOpponentLifePoints(app.updateOpponentLifePoints);
+      
       app.turn += 1;
-      executeOpponentMove();
+      console.log("the turn is " + app.turn);
+      // executeOpponentMove();
   });
 
   $(".player-cancel-button").on("click", () => {
@@ -210,24 +217,37 @@ app.renderNewOpponentCard = () => {
 
 app.renderPlayerCards = () => {
 //Renders player hand in case we don't off beginning
+  $('.player-card-img').toArray().forEach(function(card, index) {
+    $(card).attr("src", app.playerHand[index].image_url);
+    $(card).attr("alt", app.playerHand[index].name);
+    
+  }) 
+  $('.player-card').toArray().forEach(function(card, index) {
+    $(card).attr("data-id", app.playerHand[index].id);
+  });
 }
 
 app.renderOpponentCards = function() {
 //Renders player hand in case we don't off beginning
-  // console.log(app.opponentHand);
-  // hand[i].attr("src", hand[i].image_url).
+  
+  $('.opponent-card-img').toArray().forEach(function(card, index) {
+    $(card).attr("src", app.opponentHand[index].image_url);
+    $(card).attr("alt", app.opponentHand[index].name);
+  }) 
 
-  $('.opponent-card-img').toArray().forEach() {
-    card.
-  );
+  $('.opponent-card').toArray().forEach(function(card, index) {
+    $(card).attr("data-id", app.opponentHand[index].id);
+  });
 }
 
 app.init = async() => {
   await app.getDeck();
   await app.setupPlayerCards();
   await app.setupOpponentCards();
+  app.handlePlayerButtons();
   app.clickGameBoard();
   app.renderOpponentCards();
+  app.renderPlayerCards();
 }
 
 $(function() {
