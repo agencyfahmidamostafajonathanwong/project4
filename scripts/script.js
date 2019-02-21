@@ -7,8 +7,8 @@ app.playerHand = [];
 app.opponentHand = [];
 app.currentPlayerCard = null;
 app.currentOpponentCard = null;
-app.playerLife = 0;
-app.opponentLife = 0;
+app.playerLife = 2000;
+app.opponentLife = 2000;
 app.turn = 1;
 app.playerBoosts = 3;
 
@@ -120,6 +120,11 @@ app.setupOpponentCards = function(){
   }
 }
 
+app.resetCurrentCards = function(){
+  app.currentPlayerCard = null;
+  app.currentOpponentCard = null;
+}
+
 //Execute if turn === 'opponent'
 app.executeOpponentMove = function() {
   // Get a random number from 1 - currentOpponentHand size, set currentOpponentCard
@@ -137,14 +142,14 @@ app.clickGameBoard = () => {
   $('.gameboard').on('click', (e) => {
     
     if(app.turn % 2 === 1) {
-      console.log("test");
-      if (e.target.matches('.player-card, .player-card *')){
+      if (e.target.matches('.player-card, .player-card *')){  
         const playerCard = e.target.closest('.player-card');
-        const playerCardId = playerCard.dataset.id;
+        const playerCardId = playerCard.dataset.id; 
+
+       
         app.currentPlayerCard = app.getPlayerCard(playerCardId);
-        app.toggleAttackButton();
-        console.log(app.currentPlayerCard.name);
-        console.log('Click player button, turn is ' + app.turn)  
+        app.toggleHighlight('player', playerCard);
+        app.resetPlayerButtons();
         // right now, user clicked card
         // want to display atk points in atk li
         // also, zoom the card on click
@@ -154,9 +159,8 @@ app.clickGameBoard = () => {
         const opponentCard = e.target.closest('.opponent-card');
         const opponentCardId = opponentCard.dataset.id;
         app.currentOpponentCard = app.getOpponentCard(opponentCardId);
-        app.toggleAttackButton();
-        console.log(app.currentOpponentCard.name);  
-        console.log('Click opponent button, turn is ' + app.turn) 
+        app.toggleHighlight('opponent', opponentCard);
+        app.resetPlayerButtons();
       }
     }
   })
@@ -164,53 +168,72 @@ app.clickGameBoard = () => {
 
 app.handlePlayerButtons = () => {
   $(".player-atk-button").on("click", () => {
-    console.log('attack');
+
       // app.calcPlayerAttack();
       app.updatePlayerLifePoints(app.playerLife);
       app.updateOpponentLifePoints(app.updateOpponentLifePoints);
-      
+      app.resetCurrentCards();
+      app.resetPlayerButtons();;
       app.turn += 1;
       console.log("the turn is " + app.turn);
       // executeOpponentMove();
   });
 
   $(".player-cancel-button").on("click", () => {
-    app.currentPlayerCard = null;
-    // remove styles
+    app.toggleHighlight();
+    app.resetCurrentCards();
+    app.resetPlayerButtons(); 
+  });
+}
 
-    app.currentOpponentCard = null;
-    // remove styles
-  })
+
+
+// UI LOGIC
+
+app.resetPlayerButtons = function(){
+  app.toggleAttackButton();
+  app.toggleCancelButton();
 }
 
 app.toggleAttackButton = function() {
   if(app.currentOpponentCard && app.currentPlayerCard) {
-    console.log(app.currentOpponentCard);
-    console.log(app.currentPlayerCard);
-    $('.player-atk-button').attr('enabled', true)
+    $('.player-atk-button').attr('disabled', false)
   } else {
-    $('.player-atk-button').attr('enabled', false)
+    $('.player-atk-button').attr('disabled', true)
   }
 }
 
 app.toggleCancelButton = function () {
   if (app.currentOpponentCard && app.currentPlayerCard) {
-    console.log(app.currentOpponentCard);
-    console.log(app.currentPlayerCard);
-    $('.player-cancel-button').attr('enabled', true)
+    $('.player-cancel-button').attr('disabled', false)
+    
   } else {
-    $('.player-atk-button').attr('enabled', false)
+    $('.player-cancel-button').attr('disabled', true)
   }
 }
 
-// UI LOGIC
+app.toggleHighlight = function(cardType, currentCard){
+  if (cardType === 'player'){
+    $(".player-card").toArray().forEach(card => {
+      $(card).removeClass('highlight');
+    });
 
-app.togglePlayerCardStyle = () => {
-  //Sets style for currently highlighted card
-}
+    $(currentCard).toggleClass('highlight');
+  } else if(cardType === 'opponent') {
+    $(".opponent-card").toArray().forEach(card => {
+      $(card).removeClass('highlight');
+    });
 
-app.toggleOpponentCardStyle = () => {
-  //Sets style for current opponent card style
+    $(currentCard).toggleClass('highlight');
+  } else {
+    $(".player-card").toArray().forEach(card => {
+      $(card).removeClass('highlight');
+    });
+
+    $(".opponent-card").toArray().forEach(card => {
+      $(card).removeClass('highlight');
+    });
+  }
 }
 
 app.updatePlayerLifePoints = (lifePoints) => {

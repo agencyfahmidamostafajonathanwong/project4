@@ -154,6 +154,13 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+.highlight {
+  z-index: 2;
+  border: 3px solid red;
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3); }
+
 .gameboard {
   height: 100vh;
   background: grey;
