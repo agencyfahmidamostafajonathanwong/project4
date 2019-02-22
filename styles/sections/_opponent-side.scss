@@ -5,17 +5,17 @@
 
 .opponent-hand {
   height: 80%;
-  border: 2px solid black;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  
 }
 
 .opponent-card {
   margin: 1rem;
   width: 12%;
   height: 80%;
-  background: pink;
+  background:rgba(0,0,0,.75);
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
   box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
@@ -36,8 +36,15 @@
 
 .opponent-life-points, .opponent-atk-display {
   padding: 1rem 2rem;
-  background: lightcyan;
   font-size: 1.5rem;
   width: 10rem;
   text-align: center;
+  color:yellow;
+  text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+  background-image: linear-gradient(to right,blue,white, purple);
+  border:2px solid black;
 }

@@ -8,8 +8,19 @@ button {
     display: block;
     padding: 1rem;
     align-self: stretch;
+    z-index:10;
+    position:relative;
+    border-radius:10px;
+    background: darkblue;
+    color:white;
+    transform: scale(1);
+    
   &:disabled {
     background: darkgrey;
-    color: white;
+    color: grey;
+  }
+
+  &:hover, &:focus {
+    transform: scale(1.1);
   }
 }

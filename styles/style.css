@@ -3,7 +3,7 @@ html {
 
 body {
   background: url(../assets/H3iy16W.jpg);
-  background-size: contain;
+  background-size: cover;
   font-family: 'Press Start 2P', cursive; }
 
 ul {
@@ -167,10 +167,22 @@ button {
   padding: 1rem;
   -ms-flex-item-align: stretch;
   -ms-grid-row-align: stretch;
-  align-self: stretch; }
+  align-self: stretch;
+  z-index: 10;
+  position: relative;
+  border-radius: 10px;
+  background: darkblue;
+  color: white;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1); }
   button:disabled {
     background: darkgrey;
-    color: white; }
+    color: grey; }
+  button:hover, button:focus {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1); }
 
 .gameboard {
   height: 100vh;
@@ -178,11 +190,20 @@ button {
   width: 100%; }
 
 .player-side {
-  height: 50%; }
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end; }
 
 .player-hand {
   height: 80%;
-  border: 2px solid black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -197,7 +218,7 @@ button {
   margin: 1rem;
   width: 12%;
   height: 80%;
-  background: pink;
+  background: rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
@@ -220,24 +241,34 @@ button {
   align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between; }
+  justify-content: space-between;
+  -ms-flex-item-align: end;
+  align-self: flex-end; }
+
+.player-atk-button {
+  margin-right: .5rem; }
 
 .player-life-points, .player-atk-display {
   padding: 1rem 2rem;
-  background: lightcyan;
   -ms-flex-item-align: stretch;
   -ms-grid-row-align: stretch;
   align-self: stretch;
   font-size: 1.5rem;
   width: 10rem;
-  text-align: center; }
+  text-align: center;
+  color: yellow;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  background-image: -webkit-gradient(linear, left top, right top, from(blue), color-stop(white), to(purple));
+  background-image: -webkit-linear-gradient(left, blue, white, purple);
+  background-image: -o-linear-gradient(left, blue, white, purple);
+  background-image: linear-gradient(to right, blue, white, purple);
+  border: 2px solid black; }
 
 .opponent-side {
   height: 50%; }
 
 .opponent-hand {
   height: 80%;
-  border: 2px solid black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -252,7 +283,7 @@ button {
   margin: 1rem;
   width: 12%;
   height: 80%;
-  background: pink;
+  background: rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
@@ -276,10 +307,16 @@ button {
 
 .opponent-life-points, .opponent-atk-display {
   padding: 1rem 2rem;
-  background: lightcyan;
   font-size: 1.5rem;
   width: 10rem;
-  text-align: center; }
+  text-align: center;
+  color: yellow;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  background-image: -webkit-gradient(linear, left top, right top, from(blue), color-stop(white), to(purple));
+  background-image: -webkit-linear-gradient(left, blue, white, purple);
+  background-image: -o-linear-gradient(left, blue, white, purple);
+  background-image: linear-gradient(to right, blue, white, purple);
+  border: 2px solid black; }
 
 .game-over-background {
   height: 100vh;
