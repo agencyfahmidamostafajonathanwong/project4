@@ -84,7 +84,7 @@ app.calcOpponentAttack = function() {
 
   app.toggleOpponentHighlightDelay(opponentCardNode);
   app.toggleHighlight("opponent", opponentCardNode);
-  app.togglePlayerHighlightDelay(playerCardNode);
+  
   app.toggleHighlight("player", playerCardNode);
   setTimeout(() => {
     app.toggleOpponentHighlightDelay(opponentCardNode);
