@@ -159,7 +159,19 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   border: 3px solid red;
   -webkit-transform: scale(1.3);
   -ms-transform: scale(1.3);
-  transform: scale(1.3); }
+  transform: scale(1.3);
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s; }
+
+.opponent-transition-delay {
+  -webkit-transition-delay: 5s;
+  -o-transition-delay: 5s;
+  transition-delay: 5s; }
+
+.player-transition-delay {
+  -webkit-transition-delay: 10s;
+  -o-transition-delay: 10s;
+  transition-delay: 10s; }
 
 .gameboard {
   height: 100vh;

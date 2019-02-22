@@ -81,9 +81,11 @@ app.calcOpponentAttack = function() {
   console.log(opponentId);
   const playerCardNode = $(`[data-id="${playerId}"]`);
   const opponentCardNode = $(`[data-id="${opponentId}"]`);
-  
-  app.toggleHighlight("player", playerCardNode);
+
+  // app.toggleOpponentHighlightDelay(opponentCardNode);
   app.toggleHighlight("opponent", opponentCardNode);
+  // app.togglePlayerHighlightDelay(playerCardNode);
+  app.toggleHighlight("player", playerCardNode);
   setTimeout(() => {
     app.currentPlayerCard.atk = parseInt(app.currentPlayerCard.atk,10);
     app.currentOpponentCard.atk = parseInt(app.currentOpponentCard.atk);
@@ -275,12 +277,14 @@ app.toggleHighlight = function(cardType, currentCard){
       $(card).removeClass("highlight");
     });
 
+    $(currentCard).toggleClass("player-transition-delay");
     $(currentCard).toggleClass("highlight");
   } else if(cardType === "opponent") { //toggles opponent card highlights.
     $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
 
+    $(currentCard).toggleClass("player-transition-delay");
     $(currentCard).toggleClass("highlight");
   } else { //Removes the highlight for both opponent and player cards.
     $(".player-card").toArray().forEach(card => {
@@ -292,6 +296,14 @@ app.toggleHighlight = function(cardType, currentCard){
     });
   }
 }
+
+// app.toggleOpponentHighlightDelay = function(opponentCardNode) {
+//   $(opponentCardNode).toggleClass('opponent-transition-delay');
+// }
+
+// app.togglePlayerHighlightDelay = function (playerCardNode) {
+//   $(playerCardNode).toggleClass('player-transition-delay');
+// }
 
 app.updateLifePoints = () => {
   $(".player-life-points").text(app.playerLife);
