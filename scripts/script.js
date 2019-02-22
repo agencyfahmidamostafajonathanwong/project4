@@ -1,8 +1,6 @@
 const app = {};
 
 app.totalDeck = [];
-// app.playerDeck = [];
-// app.opponentDeck = [];
 app.playerHand = [];
 app.opponentHand = [];
 app.currentPlayerCard = null;
@@ -10,7 +8,6 @@ app.currentOpponentCard = null;
 app.playerLife = 2000;
 app.opponentLife = 2000;
 app.turn = 1;
-
 
 app.calcPlayerAttack = function(){
   const playerAttack = parseInt(app.currentPlayerCard.atk,10);
@@ -35,29 +32,6 @@ app.calcPlayerAttack = function(){
 
 app.calcOpponentAttack = function() {
   
-  // app.currentOpponentCard = app.opponentHand[0];
-  // app.currentPlayerCard = app.playerHand[0];
-  // let highestAtkDifference = 0;
-  //   for ( i = 0; i < app.opponentHand.length; i++ ) {
-  //     for ( j = 0; j < app.playerHand.length; j++ ) {
-  //       if(parseInt(app.opponentHand[i].atk,10) > parseInt(app.playerHand[j].atk,10)){
-  //         let atkDifference = parseInt(app.opponentHand[i].atk,10) - parseInt(app.playerHand[j].atk,10);
-
-  //         console.log(`attack difference ${atkDifference}`);
-  //         let oldAttackDifference = highestAtkDifference;
-  //         console.log(`old attack difference ${oldAttackDifference}`);
-  //         highestAtkDifference = Math.max(oldAttackDifference, atkDifference);
-  //         console.log(`highest attack difference ${highestAtkDifference}`);
-  //         if(highestAtkDifference > oldAttackDifference){
-  //           app.currentOpponentCard = app.getOpponentCard(app.opponentHand[i].id);
-  //           app.currentPlayerCard = app.getPlayerCard(app.playerHand[j].id);
-  //         }
-  //         console.log(app.currentOpponentCard.name, app.currentOpponentCard.atk );
-  //         console.log(app.currentPlayerCard.name, app.currentPlayerCard.atk );
-  //         console.log("============================================")
-  //       }
-  //   }
-  // }  
   app.currentOpponentCard = app.opponentHand[0];
   app.currentPlayerCard = app.playerHand[0];
   
@@ -72,20 +46,25 @@ app.calcOpponentAttack = function() {
       app.currentPlayerCard = app.playerHand[i];
     } 
   }
-  //Note for Fahmida! Accessing the Nodes for the player and opponent card here
-  // Toggle the highlight class on them and use setTimeout to create a delay 
   
   const playerId = app.currentPlayerCard.id;
   const opponentId = app.currentOpponentCard.id;
-  console.log(playerId);
-  console.log(opponentId);
   const playerCardNode = $(`[data-id="${playerId}"]`);
   const opponentCardNode = $(`[data-id="${opponentId}"]`);
 
   app.toggleOpponentHighlightDelay(opponentCardNode);
   app.toggleHighlight("opponent", opponentCardNode);
-  
+  app.togglePlayerHighlightDelay(playerCardNode);
   app.toggleHighlight("player", playerCardNode);
+
+  setTimeout(() => {
+    app.updateOpponentAtkDisplay();
+  }, 2000)
+
+  setTimeout (() => {
+    app.updatePlayerAtkDisplay();
+  }, 4000)
+
   setTimeout(() => {
     app.toggleOpponentHighlightDelay(opponentCardNode);
     app.togglePlayerHighlightDelay(playerCardNode);
@@ -96,31 +75,24 @@ app.calcOpponentAttack = function() {
       const overFlowDamage = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
       app.playerLife -= overFlowDamage;
       app.removePlayerCard();
-      console.log("opponent wins");
     } else if (app.playerHand.length === 0) {
       app.playerLife -= app.currentOpponentCard.atk;
-      //Failed attack
     } else if (app.currentPlayerCard.atk > app.currentOpponentCard.atk) {
       app.opponentLife -= (app.currentPlayerCard.atk - app.currentOpponentCard.atk);
-      console.log("player wins");
       app.removeOpponentCard();
     } else {
-      console.log("tie");
       app.removePlayerCard();
       app.removeOpponentCard();
     }
+    app.updateLifePoints();
+    app.resetAttackDisplay();
     app.turn += 1;
   },7000) 
-  console.log(app.currentOpponentCard.name, app.currentOpponentCard.atk );
-  console.log(app.currentPlayerCard.name, app.currentPlayerCard.atk );
-  console.log("============================================")
 }
-
 
 //Removes player card from the UI and database.
 app.removePlayerCard = function() {
   const index = app.playerHand.findIndex(card => card.id === app.currentPlayerCard.id);
-  // console.log($(`li[data-id="${app.currentPlayerCard.id}"]`));
   $(`li[data-id="${app.currentPlayerCard.id}"]`).remove();
   app.playerHand.splice(index ,1);
 }
@@ -142,14 +114,6 @@ app.getOpponentCard = function(id) {
   return this.opponentHand.find(card => card.id === id);
 }
 
-app.drawPlayerCard = () => {
-  //Create random number at playerDeck.length
-  //Use it to select a random card from player deck. and store in variable
-  //Splice it from the playerDeck (randomIndex,1)
-  //Push it onto the playerHand array.
-  //return the new card
-}
-
 app.getDeck = async function(){
   const response = await $.ajax({
     url : "https://db.ygoprodeck.com/api/v2/cardinfo.php?",
@@ -161,9 +125,6 @@ app.getDeck = async function(){
     }
   });
   app.totalDeck = response[0];
-
-  //filter deck by attack power
-  //set this.totalDeck to filtered array
 }
 
 //Sets up the player hand from totalDeck
@@ -192,28 +153,21 @@ app.resetCurrentCards = function(){
 
 //Executes computer move
 app.executeOpponentMove = function() {
-  app.calcOpponentAttack();
-  app.updateLifePoints();
-  
+  app.toggleHighlight();
+  app.resetAttackDisplay();
+  app.calcOpponentAttack();  
 }
 
-
-  // // Set highlight class on currentOpponentCard
-  // // Get random number from 1 - currentPlayerHand Size, set currentPlayerCard (to be attacked)
-  // // Set highlight class on currentPlayerCard to be attacked class.
-  // // Execute calc opponent attack function.
-  // // update player life points.
-  // // reset currentPlayerCard and currentOpponentCard to null.
-  
 app.clickGameBoard = () => {
   //Event delegation for gameboard.
   $(".gameboard").on("click", (e) => {
-    
+
     if(app.turn % 2 === 1) {
       if (e.target.matches(".player-card, .player-card *")){  
         const playerCard = e.target.closest(".player-card");
         const playerCardId = playerCard.dataset.id; 
         app.currentPlayerCard = app.getPlayerCard(playerCardId);
+        app.updatePlayerAtkDisplay();
         app.toggleHighlight("player", playerCard);
         app.resetPlayerButtons();
       }
@@ -222,6 +176,7 @@ app.clickGameBoard = () => {
         const opponentCard = e.target.closest(".opponent-card");
         const opponentCardId = opponentCard.dataset.id;
         app.currentOpponentCard = app.getOpponentCard(opponentCardId);
+        app.updateOpponentAtkDisplay();
         app.toggleHighlight("opponent", opponentCard);
         app.resetPlayerButtons();
       }
@@ -246,6 +201,23 @@ app.handlePlayerButtons = () => {
     app.resetPlayerButtons(); 
   });
 }
+
+app.updatePlayerAtkDisplay = function() {
+  $('.player-atk-display').text(app.currentPlayerCard.atk);
+}
+
+app.updateOpponentAtkDisplay = function() {
+  $('.opponent-atk-display').text(app.currentOpponentCard.atk);
+}
+
+app.resetAttackDisplay = function() {
+  $('.player-atk-display').text('');
+  $('.opponent-atk-display').text('');
+}
+
+// app.gameOver() {
+//   // disable clicking on the screen
+// }
 
 // UI LOGIC
 
@@ -285,16 +257,12 @@ app.toggleHighlight = function(cardType, currentCard){
     $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
-    // $(currentCard).toggleClass("player-transition-delay");
-    // $(currentCard).toggleClass("opponent-transition-delay");
     $(currentCard).toggleClass("highlight");
   } else { //Removes the highlight for both opponent and player cards.
-    console.log("removing player highlights");
     $(".player-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
 
-    console.log('removing opponent highlights');
     $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
@@ -302,15 +270,11 @@ app.toggleHighlight = function(cardType, currentCard){
 }
 
 app.toggleOpponentHighlightDelay = function(opponentCardNode) {
-  console.log('opponent transition delay added');
   $(opponentCardNode).toggleClass('opponent-transition-delay');
-  console.log(opponentCardNode);
 }
 
 app.togglePlayerHighlightDelay = function (playerCardNode) {
-  console.log('player transition delay added');
   $(playerCardNode).toggleClass('player-transition-delay');
-  console.log(playerCardNode);
 }
 
 app.updateLifePoints = () => {
@@ -346,7 +310,6 @@ app.renderOpponentCards = function() {
 
   $(".opponent-card").toArray().forEach(function(card, index) {
     $(card).attr("data-id", app.opponentHand[index].id);
-    console.log(card);
   });
 }
 
