@@ -34,25 +34,54 @@ app.calcPlayerAttack = function(){
 };
 
 app.calcOpponentAttack = function() {
-  const playerAttack = parseInt(app.currentPlayerCard.atk, 10);
-  const opponentAttack = parseInt(app.currentOpponentCard.atk, 10);
-  //If opponent wins and there are still monsters on field
-  if (opponentAttack > playerAttack && app.playerHand.length > 0) {
-    const overFlowDamage = opponentAttack - playerAttack;
+  
+  app.currentOpponentCard = app.opponentHand[0];
+  app.currentPlayerCard = app.playerHand[0];
+  let highestAtkDifference = 0;
+    for ( i = 0; i < app.opponentHand.length; i++ ) {
+      for ( j = 0; j < app.playerHand.length; j++ ) {
+        if(parseInt(app.opponentHand[i].atk,10) > parseInt(app.playerHand[j].atk,10)){
+          let atkDifference = parseInt(app.opponentHand[i].atk,10) - parseInt(app.playerHand[j].atk,10);
+
+          console.log(`attack difference ${atkDifference}`);
+          let oldAttackDifference = highestAtkDifference;
+          console.log(`old attack difference ${oldAttackDifference}`);
+          highestAtkDifference = Math.max(oldAttackDifference, atkDifference);
+          console.log(`highest attack difference ${highestAtkDifference}`);
+          if(highestAtkDifference > oldAttackDifference){
+            app.currentOpponentCard = app.getOpponentCard(app.opponentHand[i].id);
+            app.currentPlayerCard = app.getPlayerCard(app.playerHand[j].id);
+          }
+          console.log(app.currentOpponentCard.name, app.currentOpponentCard.atk );
+          console.log(app.currentPlayerCard.name, app.currentPlayerCard.atk );
+          console.log('============================================')
+        }
+    }
+  }
+  console.log(app.currentOpponentCard.name, app.currentOpponentCard.atk );
+  console.log(app.currentPlayerCard.name, app.currentPlayerCard.atk );
+  console.log('============================================')
+  app.currentPlayerCard.atk = parseInt(app.currentPlayerCard.atk,10);
+  app.currentOpponentCard.atk = parseInt(app.currentOpponentCard.atk);
+  if (app.currentOpponentCard.atk > app.currentPlayerCard.atk){
+    const overFlowDamage = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
     app.playerLife -= overFlowDamage;
-    app.removeOpponentCard();
-    //If no monsters direct attack
-  } else if (app.playerHand.length === 0) {
-    app.playerLife -= opponentAttack;
-    //Failed attack
-  } else if (playerAttack > opponentAttack) {
-    app.opponentLife -= (playerAttack - opponentAttack);
     app.removePlayerCard();
+    console.log('opponent wins')
+  } else if (app.playerHand.length === 0) {
+    app.playerLife -= app.currentOpponentCard.atk;
+    //Failed attack
+  } else if (app.currentPlayerCard.atk > app.currentOpponentCard.atk) {
+    app.opponentLife -= (app.currentPlayerCard.atk - app.currentOpponentCard.atk);
+    console.log('player wins');
+    app.removeOpponentCard();
   } else {
+    console.log('tie');
     app.removePlayerCard();
     app.removeOpponentCard();
   }
 }
+
 
 // Write function for nulling cards that get defeated
 //If run into problem change it to name.
@@ -135,35 +164,15 @@ app.resetCurrentCards = function(){
   app.currentOpponentCard = null;
 }
 
+
+
+
 //Execute if turn === 'opponent'
 app.executeOpponentMove = function() {
-  // const playerAttack = parseInt(app.currentPlayerCard.atk, 10);
-  // const opponentAttack = parseInt(app.currentOpponentCard.atk, 10);
-  // // AFTER DEALING WITH LOGIC ON HOW TO DESTROY CARD AND UPDATING FIRST-CHILD LI, COME BACK HERE TO STATE THAT chosenAttackWithCard AND chosenToAttack CARDS ARE THE FIRST-CHILD LI'S IN THE RESPECTIVE UL'S.
-  // const chosenAttackWithCard = app.opponentHand[0];
-  // const chosenToAttackCard = app.playerHand[0];
-  // let highestAtkDifference = 0;
-
-  // // Get a random number from 1 - currentOpponentHand size, set currentOpponentCard
-  // if (app.turn % 2 === 0 && playerHand.length != 0) {
-  //   // determining which card to choose to attack and which card to choose to attack with
-  //   for ( i = 0; i < playerHand.length; i++ ) {
-  //     for ( j = 0; j < opponentHand.length; j++ ) {
-  //       if ( opponentAttack > playerAttack ) {
-  //         let atkDifference = opponentAttack - playerAttack;
-  //         chosenAttackWithCard = ;
-  //         chosenToAttackCard = ;
-
-  //         if (atkDifference > highestAtkDifference) {
-  //           chosenAttackWithCard = app.getOpponentCard();
-  //           chosenToAttackCard = app.getPlayerCard();
-  //         }
-
-  //         highestAtkDifference = math.Max((highestAtkDIfference, atkDifference);
-
-  //       }
-  //     }
-  //   }
+  // AFTER DEALING WITH LOGIC ON HOW TO DESTROY CARD AND UPDATING FIRST-CHILD LI, COME BACK HERE TO STATE THAT app.currentOpponentCard AND chosenToAttack CARDS ARE THE FIRST-CHILD LI'S IN THE RESPECTIVE UL'S.
+  app.calcOpponentAttack();
+  app.turn += 1;
+}
   // }
 
   // // Set highlight class on currentOpponentCard
@@ -172,8 +181,8 @@ app.executeOpponentMove = function() {
   // // Execute calc opponent attack function.
   // // update player life points.
   // // reset currentPlayerCard and currentOpponentCard to null.
-  // app.turn += 1;
-}
+  
+ 
 
 app.clickGameBoard = () => {
   //Event delegation for gameboard.
@@ -213,7 +222,7 @@ app.handlePlayerButtons = () => {
       app.toggleHighlight();
       app.turn += 1;
       // console.log("the turn is " + app.turn);
-      // executeOpponentMove();
+      app.executeOpponentMove();
   });
 
   $(".player-cancel-button").on("click", () => {
