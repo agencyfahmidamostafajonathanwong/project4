@@ -1,0 +1,24 @@
+.game-over-background {
+  height:100vh;
+  width:100vw;
+  background: rgba(0,0,0,.4);
+  position:absolute;
+  display:none;
+}
+
+.game-over-body {
+  z-index:5;
+  position:relative;
+  background:white;
+  width:50%;
+  margin: auto;
+  padding: 2rem;
+  text-align:center;
+  border:10px solid black;
+  border-radius:10px;
+  background-color: red;
+}
+
+.game-over-heading{
+  margin:0;  
+}

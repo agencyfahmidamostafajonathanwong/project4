@@ -86,7 +86,18 @@ app.calcOpponentAttack = function() {
     }
     app.updateLifePoints();
     app.resetAttackDisplay();
-    app.turn += 1;
+    if(app.playerLife > 0 && app.opponentLife > 0){
+      app.turn += 1;
+    } else {
+      if(app.playerLife <= 0) {
+        $('.game-over-winner').text("The Computer!");
+      } else {
+        $('.game-over-winner').text("YOU!");
+      }
+      $(".game-over-background").css("display", "flex");
+    }
+    
+    
   },7000) 
 }
 
@@ -115,7 +126,9 @@ app.getOpponentCard = function(id) {
 }
 
 app.getDeck = async function(){
-  const response = await $.ajax({
+
+  try {
+    const response = await $.ajax({
     url : "https://db.ygoprodeck.com/api/v2/cardinfo.php?",
     method : "GET",
     type : "JSON",
@@ -124,7 +137,11 @@ app.getDeck = async function(){
       type : "Normal Monster"
     }
   });
+  
   app.totalDeck = response[0];
+  } catch(error){
+    throw error;
+  }  
 }
 
 //Sets up the player hand from totalDeck
@@ -137,7 +154,7 @@ app.setupPlayerCards = function(){
 }
 
 //Sets up initial opponent hand from totalDeck
-app.setupOpponentCards = function(){
+app.setupOpponentCards = function() {
   for (let i = 0; i < 5; i++) {
     let randomIndex = Math.floor(Math.random() * app.totalDeck.length);
     app.opponentHand.push(app.totalDeck[randomIndex]);
@@ -151,11 +168,27 @@ app.resetCurrentCards = function(){
   app.currentOpponentCard = null;
 }
 
+app.playAgain = function() {
+  $(".game-over-play-again").on("click", () => {
+    window.location.reload();
+  });
+}
+
+
 //Executes computer move
 app.executeOpponentMove = function() {
-  app.toggleHighlight();
-  app.resetAttackDisplay();
-  app.calcOpponentAttack();  
+  if(app.playerLife > 0 && app.opponentLife > 0) {
+    app.toggleHighlight();
+    app.resetAttackDisplay();
+    app.calcOpponentAttack();
+  } else {
+    if(app.playerLife <= 0) {
+      $('.game-over-winner').text("The Computer!");
+    } else {
+      $('.game-over-winner').text("YOU!");
+    }
+    $(".game-over-background").css("display", "flex");
+  }
 }
 
 app.clickGameBoard = () => {
@@ -282,14 +315,6 @@ app.updateLifePoints = () => {
   $(".opponent-life-points").text(app.opponentLife);
 }
 
-app.renderNewPlayerCard = () => {
-  //Adds a new player card to the field
-}
-
-app.renderNewOpponentCard = () => {
-  //Adds a new opponent card to the field
-}
-
 app.renderPlayerCards = () => {
   $(".player-card-img").toArray().forEach(function(card, index) {
     $(card).attr("src", app.playerHand[index].image_url);
@@ -302,7 +327,6 @@ app.renderPlayerCards = () => {
 }
 
 app.renderOpponentCards = function() {
-
   $(".opponent-card-img").toArray().forEach(function(card, index) {
     $(card).attr("src", app.opponentHand[index].image_url);
     $(card).attr("alt", app.opponentHand[index].name);
@@ -323,6 +347,7 @@ app.init = async() => {
   app.renderPlayerCards();
   app.toggleAttackButton();
   app.toggleCancelButton();
+  app.playAgain();
 }
 
 $(function() {
