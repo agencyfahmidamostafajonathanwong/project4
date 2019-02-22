@@ -82,18 +82,21 @@ app.calcOpponentAttack = function() {
   const playerCardNode = $(`[data-id="${playerId}"]`);
   const opponentCardNode = $(`[data-id="${opponentId}"]`);
 
-  // app.toggleOpponentHighlightDelay(opponentCardNode);
+  app.toggleOpponentHighlightDelay(opponentCardNode);
   app.toggleHighlight("opponent", opponentCardNode);
-  // app.togglePlayerHighlightDelay(playerCardNode);
+  app.togglePlayerHighlightDelay(playerCardNode);
   app.toggleHighlight("player", playerCardNode);
   setTimeout(() => {
+    app.toggleOpponentHighlightDelay(opponentCardNode);
+    app.togglePlayerHighlightDelay(playerCardNode);
+    app.toggleHighlight();
     app.currentPlayerCard.atk = parseInt(app.currentPlayerCard.atk,10);
     app.currentOpponentCard.atk = parseInt(app.currentOpponentCard.atk);
     if (app.currentOpponentCard.atk > app.currentPlayerCard.atk){
       const overFlowDamage = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
       app.playerLife -= overFlowDamage;
       app.removePlayerCard();
-      console.log("opponent wins")
+      console.log("opponent wins");
     } else if (app.playerHand.length === 0) {
       app.playerLife -= app.currentOpponentCard.atk;
       //Failed attack
@@ -106,8 +109,8 @@ app.calcOpponentAttack = function() {
       app.removePlayerCard();
       app.removeOpponentCard();
     }
-    app.toggleHighlight();
-  },2000) 
+    app.turn += 1;
+  },7000) 
   console.log(app.currentOpponentCard.name, app.currentOpponentCard.atk );
   console.log(app.currentPlayerCard.name, app.currentPlayerCard.atk );
   console.log("============================================")
@@ -191,7 +194,7 @@ app.resetCurrentCards = function(){
 app.executeOpponentMove = function() {
   app.calcOpponentAttack();
   app.updateLifePoints();
-  app.turn += 1;
+  
 }
 
 
@@ -277,33 +280,38 @@ app.toggleHighlight = function(cardType, currentCard){
       $(card).removeClass("highlight");
     });
 
-    $(currentCard).toggleClass("player-transition-delay");
     $(currentCard).toggleClass("highlight");
   } else if(cardType === "opponent") { //toggles opponent card highlights.
     $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
-
-    $(currentCard).toggleClass("player-transition-delay");
+    // $(currentCard).toggleClass("player-transition-delay");
+    // $(currentCard).toggleClass("opponent-transition-delay");
     $(currentCard).toggleClass("highlight");
   } else { //Removes the highlight for both opponent and player cards.
+    console.log("removing player highlights");
     $(".player-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
 
+    console.log('removing opponent highlights');
     $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
   }
 }
 
-// app.toggleOpponentHighlightDelay = function(opponentCardNode) {
-//   $(opponentCardNode).toggleClass('opponent-transition-delay');
-// }
+app.toggleOpponentHighlightDelay = function(opponentCardNode) {
+  console.log('opponent transition delay added');
+  $(opponentCardNode).toggleClass('opponent-transition-delay');
+  console.log(opponentCardNode);
+}
 
-// app.togglePlayerHighlightDelay = function (playerCardNode) {
-//   $(playerCardNode).toggleClass('player-transition-delay');
-// }
+app.togglePlayerHighlightDelay = function (playerCardNode) {
+  console.log('player transition delay added');
+  $(playerCardNode).toggleClass('player-transition-delay');
+  console.log(playerCardNode);
+}
 
 app.updateLifePoints = () => {
   $(".player-life-points").text(app.playerLife);

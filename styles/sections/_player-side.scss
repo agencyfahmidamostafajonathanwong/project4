@@ -22,6 +22,12 @@
   transition: .2s all;
 }
 
+.player-transition-delay {
+  transition: .2s all 4s;
+  -webkit-transition: .2s all 4s;
+  -moz-transition: .2s all 4s;
+}
+
 .player-stats ul {
   display: flex;
   align-items: center;
