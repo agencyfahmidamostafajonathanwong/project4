@@ -1,6 +1,6 @@
 .opponent-side {
   height:50%;
-  background:red;
+  // background:red;
 }
 
 .opponent-hand {
@@ -37,4 +37,7 @@
 .opponent-life-points, .opponent-atk-display {
   padding: 1rem 2rem;
   background: lightcyan;
+  font-size: 1.5rem;
+  width: 10rem;
+  text-align: center;
 }

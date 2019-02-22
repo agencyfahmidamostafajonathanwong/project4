@@ -86,6 +86,7 @@ app.calcOpponentAttack = function() {
     }
     app.updateLifePoints();
     app.resetAttackDisplay();
+    app.resetCurrentCards();
     if(app.playerLife > 0 && app.opponentLife > 0){
       app.turn += 1;
     } else {

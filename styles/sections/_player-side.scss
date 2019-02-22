@@ -1,6 +1,6 @@
 .player-side {
   height:50%;
-  background:blue;
+  // background:blue;
 }
 
 .player-hand {
@@ -38,4 +38,7 @@
   padding: 1rem 2rem;
   background: lightcyan;
   align-self: stretch;
+  font-size: 1.5rem;
+  width: 10rem;
+  text-align: center;
 }
