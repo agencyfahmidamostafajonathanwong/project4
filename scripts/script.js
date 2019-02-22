@@ -72,6 +72,8 @@ app.calcOpponentAttack = function() {
       app.currentPlayerCard = app.playerHand[i];
     } 
   }
+  //Note for Fahmida! Accessing the Nodes for the player and opponent card here
+  // Toggle the highlight class on them and use setTimeout to create a delay 
   
   const playerId = app.currentPlayerCard.id;
   const opponentId = app.currentOpponentCard.id;
