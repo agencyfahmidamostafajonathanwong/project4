@@ -158,9 +158,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .highlight {
   z-index: 2;
   border: 3px solid red;
-  -webkit-transform: scale(1.3);
-  -ms-transform: scale(1.3);
-  transform: scale(1.3); }
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5); }
 
 button {
   display: block;
@@ -207,7 +207,7 @@ button {
   margin: 0;
   padding: 1rem 1.5rem;
   font-size: 1.5rem;
-  width: 9.5rem;
+  width: 10rem;
   height: 3.6rem;
   text-align: center;
   color: yellow;
@@ -218,11 +218,17 @@ button {
   background-image: linear-gradient(to right, blue, white, purple);
   border: 2px solid black; }
 
+.card:focus {
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  z-index: 0; }
+
 @media (max-width: 1000px) {
   .highlight {
-    -webkit-transform: scale(1.75);
-    -ms-transform: scale(1.75);
-    transform: scale(1.75); }
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5); }
   .card {
     width: 6.5rem;
     height: 10rem;
@@ -243,11 +249,41 @@ button {
       top: 5rem;
       left: calc(58% - 4rem); } }
 
-.card:focus {
-  -webkit-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  transform: scale(1.5);
-  z-index: 0; }
+@media (max-width: 800px) {
+  .opponent-card:nth-child(1) {
+    top: 6.5rem;
+    left: calc(50% - 4rem); }
+  .opponent-card:nth-child(2) {
+    top: 6.5rem;
+    left: calc(52% - 4rem); }
+  .opponent-card:nth-child(3) {
+    top: 6.5rem;
+    left: calc(54% - 4rem); }
+  .opponent-card:nth-child(4) {
+    top: 6.5rem;
+    left: calc(56% - 4rem); }
+  .opponent-card:nth-child(5) {
+    top: 6.5rem;
+    left: calc(58% - 4rem); }
+  .player-card:nth-child(1) {
+    top: 0rem;
+    left: calc(50% - 4rem); }
+  .player-card:nth-child(2) {
+    top: 0rem;
+    left: calc(52% - 4rem); }
+  .player-card:nth-child(3) {
+    top: 0rem;
+    left: calc(54% - 4rem); }
+  .player-card:nth-child(4) {
+    top: 0rem;
+    left: calc(56% - 4rem); }
+  .player-card:nth-child(5) {
+    top: 0rem;
+    left: calc(58% - 4rem); } }
+
+@media (max-width: 500px) {
+  button, .opponent-life-points-label, .opponent-atk-display-label, .player-life-points-label, .player-atk-display-label {
+    font-size: 0.75rem; } }
 
 .gameboard {
   height: 100vh;
@@ -257,14 +293,6 @@ button {
 .gameboard-half {
   height: 50%;
   position: relative; }
-
-@media (max-width: 1000px) {
-  .start-game-instructions {
-    font-size: 0.65rem; } }
-
-@media (max-width: 750px) {
-  .modal-heading, h3 {
-    font-size: 1rem; } }
 
 .player-side {
   height: 50%;
@@ -339,24 +367,24 @@ button {
     text-decoration: none;
     color: white; }
   .player-side:hover .buttons.prev {
-    left: 45%;
+    left: 40%;
     display: block;
     -webkit-animation: bounceInLeft 300ms;
     animation: bounceInLeft 300ms; }
     .player-side:hover .buttons.prev::after {
       content: '<';
-      border-radius: 50%;
+      border-radius: 30%;
       padding: 0.3rem;
       background: rgba(0, 0, 0, 0.5);
       border: 1px solid white; }
   .player-side:hover .buttons.next {
-    right: 25%;
+    right: 30%;
     display: block;
     -webkit-animation: bounceInRight 300ms;
     animation: bounceInRight 300ms; }
     .player-side:hover .buttons.next::after {
       content: '>';
-      border-radius: 50%;
+      border-radius: 30%;
       padding: 0.3rem;
       background: rgba(0, 0, 0, 0.5);
       border: 1px solid white; }
@@ -368,7 +396,7 @@ button {
     animation: prevCard 100ms;
     display: none; } }
 
-@media (max-width: 740px) {
+@media (max-width: 800px) {
   .gameboard {
     position: relative; }
   .player-button-list {
@@ -386,7 +414,161 @@ button {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%); }
   .player-atk-button {
-    margin-right: 0; } }
+    margin-right: 0; }
+  .player-side .buttons {
+    top: 30%; } }
+
+@-webkit-keyframes prevCard {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0; }
+  20% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.10; }
+  40% {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    opacity: 0.20; }
+  60% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.40; }
+  80% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0.80; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes prevCard {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0; }
+  20% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.10; }
+  40% {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    opacity: 0.20; }
+  60% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.40; }
+  80% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0.80; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@-webkit-keyframes nextCard {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; }
+  20% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.80; }
+  40% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.40; }
+  60% {
+    -webkit-transform: translateX(60px);
+    transform: translateX(60px);
+    opacity: 0.20; }
+  80% {
+    -webkit-transform: translateX(80px);
+    transform: translateX(80px);
+    opacity: 0.10; }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0; } }
+
+@keyframes nextCard {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; }
+  20% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.80; }
+  40% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.40; }
+  60% {
+    -webkit-transform: translateX(60px);
+    transform: translateX(60px);
+    opacity: 0.20; }
+  80% {
+    -webkit-transform: translateX(80px);
+    transform: translateX(80px);
+    opacity: 0.10; }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0; } }
+
+@-webkit-keyframes scaleCard {
+  0% {
+    top: 5px; }
+  100% {
+    top: 24px; } }
+
+@keyframes scaleCard {
+  0% {
+    top: 5px; }
+  100% {
+    top: 24px; } }
+
+@-webkit-keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@-webkit-keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-40px);
+    transform: translateX(-40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-40px);
+    transform: translateX(-40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
 
 .opponent-hand {
   height: 80%;
@@ -432,7 +614,7 @@ button {
 
 .opponent-atk-display-label {
   position: absolute;
-  top: 4rem;
+  top: 3.6rem;
   right: 0;
   color: white; }
 
@@ -446,28 +628,28 @@ button {
   .opponent-side .buttons {
     z-index: 10;
     position: absolute;
-    top: 60%;
+    top: 65%;
     text-decoration: none;
     color: white; }
   .opponent-side:hover .buttons.prev {
-    left: 45%;
+    left: 40%;
     display: block;
     -webkit-animation: bounceInLeft 300ms;
     animation: bounceInLeft 300ms; }
     .opponent-side:hover .buttons.prev::after {
       content: '<';
-      border-radius: 50%;
+      border-radius: 30%;
       padding: 0.3rem;
       background: rgba(0, 0, 0, 0.5);
       border: 1px solid white; }
   .opponent-side:hover .buttons.next {
-    right: 25%;
+    right: 30%;
     display: block;
     -webkit-animation: bounceInRight 300ms;
     animation: bounceInRight 300ms; }
     .opponent-side:hover .buttons.next::after {
       content: '>';
-      border-radius: 50%;
+      border-radius: 30%;
       padding: 0.3rem;
       background: rgba(0, 0, 0, 0.5);
       border: 1px solid white; }
@@ -502,11 +684,28 @@ button {
 .modal-button {
   margin: 0 auto; }
 
+@media (max-width: 750px) {
+  .modal-heading, h3 {
+    font-size: .8rem; }
+  .modal-heading {
+    font-size: .8rem;
+    text-transform: uppercase; }
+  .modal-body {
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh; } }
+
 .game-over-background {
   display: none; }
 
 .game-over-body {
   width: 50%; }
+
+@media (max-width: 750px) {
+  .modal-body {
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh; } }
 
 .start-game {
   display: -webkit-box;
@@ -522,3 +721,8 @@ button {
 
 .start-game-instructions li {
   margin-bottom: 1rem; }
+
+@media (max-width: 1000px) {
+  .start-game-instructions {
+    font-size: 0.65rem;
+    margin-bottom: .5rem; } }

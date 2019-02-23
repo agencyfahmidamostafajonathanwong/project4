@@ -34,29 +34,35 @@ app.calcOpponentAttack = function () {
 
   app.currentOpponentCard = app.opponentHand[0];
   app.currentPlayerCard = app.playerHand[0];
-
-  for (let i = 1; i < app.opponentHand.length; i++) {
-    if (parseInt(app.opponentHand[i].atk, 10) > parseInt(app.currentOpponentCard.atk, 10)) {
-      app.currentOpponentCard = app.opponentHand[i];
+  let playerCardNode;
+  let opponentCardNode;
+  //Small timeout incase highest attack power monster is attacked.
+  setTimeout(() => {
+    //Finds highest attack opponent card and sets to current opponent card.
+    for (let i = 1; i < app.opponentHand.length; i++) {
+      if (parseInt(app.opponentHand[i].atk, 10) > parseInt(app.currentOpponentCard.atk, 10)) {
+        app.currentOpponentCard = app.opponentHand[i];
+      }
     }
-  }
-
-  for (let i = 1; i < app.playerHand.length; i++) {
-    if (parseInt(app.playerHand[i].atk, 10) < parseInt(app.currentPlayerCard.atk, 10)) {
-      app.currentPlayerCard = app.playerHand[i];
+    //Finds lowest attack player card and sets to current player card
+    for (let i = 1; i < app.playerHand.length; i++) {
+      if (parseInt(app.playerHand[i].atk, 10) < parseInt(app.currentPlayerCard.atk, 10)) {
+        app.currentPlayerCard = app.playerHand[i];
+      }
     }
-  }
-
-  const playerId = app.currentPlayerCard.id;
-  const opponentId = app.currentOpponentCard.id;
-  const playerCardNode = $(`[data-id="${playerId}"]`);
-  const opponentCardNode = $(`[data-id="${opponentId}"]`);
-
-  app.toggleOpponentHighlightDelay(opponentCardNode);
-  app.toggleHighlight("opponent", opponentCardNode);
-  app.togglePlayerHighlightDelay(playerCardNode);
-  app.toggleHighlight("player", playerCardNode);
-
+  
+    const playerId = app.currentPlayerCard.id;
+    const opponentId = app.currentOpponentCard.id;
+    playerCardNode = $(`[data-id="${playerId}"]`);
+    opponentCardNode = $(`[data-id="${opponentId}"]`);
+  
+    app.toggleOpponentHighlightDelay(opponentCardNode);
+    app.toggleHighlight("opponent", opponentCardNode);
+    app.togglePlayerHighlightDelay(playerCardNode);
+    app.toggleHighlight("player", playerCardNode);
+    
+  }, 500)
+  
   setTimeout(() => {
     app.updateOpponentAtkDisplay();
   }, 2000)
@@ -66,6 +72,7 @@ app.calcOpponentAttack = function () {
   }, 4000)
 
   setTimeout(() => {
+    
     app.toggleOpponentHighlightDelay(opponentCardNode);
     app.togglePlayerHighlightDelay(playerCardNode);
     app.toggleHighlight();
@@ -99,7 +106,7 @@ app.calcOpponentAttack = function () {
     }
 
 
-  }, 7000)
+  }, 8000)
 }
 
 //Removes player card from the UI and database.
@@ -182,7 +189,6 @@ app.startGame = () => {
   });
 }
 
-
 //Executes computer move
 app.executeOpponentMove = function () {
   if (app.playerLife > 0 && app.opponentLife > 0) {
@@ -254,7 +260,7 @@ app.loadEventHandlers = function(e) {
       $('.player-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
       setTimeout(function () { appendToList(); }, 150);
     }
-
+    //Select a player card
     if (e.target.matches(".player-card, .player-card *")) {
       const playerCard = e.target.closest(".player-card");
       const playerCardId = playerCard.dataset.id;
@@ -264,6 +270,7 @@ app.loadEventHandlers = function(e) {
       app.resetPlayerButtons();
     }
 
+    //Select an opponent card
     if (e.target.matches(".opponent-card, .opponent-card *")) {
       const opponentCard = e.target.closest(".opponent-card");
       const opponentCardId = opponentCard.dataset.id;
@@ -371,6 +378,16 @@ app.toggleHighlight = function (cardType, currentCard) {
       $(card).removeClass("highlight");
     });
   }
+}
+
+app.clearHighLights = () => {
+  $(".player-card").toArray().forEach(card => {
+    $(card).removeClass("highlight");
+  });
+
+  $(".opponent-card").toArray().forEach(card => {
+    $(card).removeClass("highlight");
+  });
 }
 
 app.toggleOpponentHighlightDelay = function (opponentCardNode) {

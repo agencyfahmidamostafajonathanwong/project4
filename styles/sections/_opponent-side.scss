@@ -30,7 +30,7 @@
 
 .opponent-atk-display-label {
   position: absolute;
-  top: 4rem;
+  top: 3.6rem;
   right: 0;
   color: white;
 }
@@ -50,31 +50,31 @@
     .buttons {
       z-index: 10;
       position: absolute;
-      top: 60%;
+      top: 65%;
       text-decoration: none;
       color: white;
     }
 
     &:hover {
       .buttons.prev {
-        left: 45%;
+        left: 40%;
         display: block;
         animation: bounceInLeft 300ms;
         &::after {
           content: '<';
-          border-radius: 50%;
+          border-radius: 30%;
           padding: 0.3rem;
           background: rgba(0,0,0,0.5);
           border: 1px solid white;
         }
       }
       .buttons.next {
-        right: 25%;
+        right: 30%;
         display: block;
         animation: bounceInRight 300ms; 
         &::after {
           content: '>';
-          border-radius: 50%;
+          border-radius: 30%;
           padding: 0.3rem;
           background: rgba(0,0,0,0.5);
           border: 1px solid white;
@@ -92,6 +92,4 @@
       display: none;
   }
 }
-
-
 
