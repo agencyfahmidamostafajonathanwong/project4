@@ -34,10 +34,18 @@
   justify-content: space-between;
 }
 
+.opponent-atk-display-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .opponent-life-points, .opponent-atk-display {
+  margin: 0;
   padding: 1rem 2rem;
   font-size: 1.5rem;
   width: 10rem;
+  height: 3.6rem;
   text-align: center;
   color:yellow;
   text-shadow:
@@ -47,4 +55,16 @@
         1px 1px 0 #000;
   background-image: linear-gradient(to right,blue,white, purple);
   border:2px solid black;
+}
+
+.opponent-life-points-label {
+  position: absolute;
+  color: white;
+}
+
+.opponent-atk-display-label {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  color: white;
 }

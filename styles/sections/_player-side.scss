@@ -40,11 +40,13 @@
 .player-atk-button {
   margin-right:.5rem;
 }
+
 .player-life-points, .player-atk-display {
+  margin: 0;
   padding: 1rem 2rem;
-  align-self: stretch;
   font-size: 1.5rem;
   width: 10rem;
+  height: 3.6rem;
   text-align: center;
   color:yellow;
   text-shadow:
@@ -57,3 +59,16 @@
 }
 //https://wpshout.com/quick-guides/create-text-outline-css/
 //https://codepen.io/chriscoyier/pen/niIjA
+
+.player-life-points-label {
+  position: absolute;
+  bottom: 4rem;
+  color: white;
+}
+
+.player-atk-display-label {
+  position: absolute;
+  right: 0;
+  bottom: 4rem;
+  color: white;
+}
