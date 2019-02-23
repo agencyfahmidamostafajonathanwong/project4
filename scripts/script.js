@@ -199,81 +199,90 @@ app.executeOpponentMove = function () {
   }
 }
 
+app.loadEventHandlers = function(e) {
+  if (e.which === 13) {
+    console.log(e.target);
+  }
+  let lastCard = $(".card-list .card").length - 1;
+
+  if (app.turn % 2 === 1) {
+
+    // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    if (e.target.matches(".opponent-side .buttons.next")) {
+      let prependList = function () {
+        if ($('.opponent-card').hasClass('activeNow')) {
+          let $slicedCard = $('.opponent-card').slice(lastCard).removeClass('transformThis activeNow');
+          $('.opponent-hand').prepend($slicedCard);
+        }
+      }
+      $('.opponent-card').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
+      setTimeout(function () { prependList(); }, 150);
+    }
+
+    // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    if (e.target.matches(".opponent-side .buttons.prev")) {
+      let appendToList = function () {
+        if ($('.opponent-card').hasClass('activeNow')) {
+          let $slicedCard = $('.opponent-card').slice(0, 1).addClass('transformPrev');
+          $('.opponent-hand').append($slicedCard);
+        }
+      }
+      $('.opponent-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
+      setTimeout(function () { appendToList(); }, 150);
+    }
+
+    // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    if (e.target.matches(".player-side .buttons.next")) {
+      let prependList = function () {
+        if ($('.player-card').hasClass('activeNow')) {
+          let $slicedCard = $('.player-card').slice(lastCard).removeClass('transformThis activeNow');
+          $('.player-hand').prepend($slicedCard);
+        }
+      }
+      $('.player-card').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
+      setTimeout(function () { prependList(); }, 150);
+    }
+
+    // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    if (e.target.matches(".player-side .buttons.prev")) {
+      let appendToList = function () {
+        if ($('.player-card').hasClass('activeNow')) {
+          let $slicedCard = $('.player-card').slice(0, 1).addClass('transformPrev');
+          $('.player-hand').append($slicedCard);
+        }
+      }
+      $('.player-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
+      setTimeout(function () { appendToList(); }, 150);
+    }
+
+    if (e.target.matches(".player-card, .player-card *")) {
+      const playerCard = e.target.closest(".player-card");
+      const playerCardId = playerCard.dataset.id;
+      app.currentPlayerCard = app.getPlayerCard(playerCardId);
+      app.updatePlayerAtkDisplay();
+      app.toggleHighlight("player", playerCard);
+      app.resetPlayerButtons();
+    }
+
+    if (e.target.matches(".opponent-card, .opponent-card *")) {
+      const opponentCard = e.target.closest(".opponent-card");
+      const opponentCardId = opponentCard.dataset.id;
+      app.currentOpponentCard = app.getOpponentCard(opponentCardId);
+      app.updateOpponentAtkDisplay();
+      app.toggleHighlight("opponent", opponentCard);
+      app.resetPlayerButtons();
+    }
+  }
+}
+
 app.clickGameBoard = () => {
   //Event delegation for gameboard.
-  $(".gameboard").on("click, keypress",  (e) => {
-    if(e.which === 13) {
-      console.log(e.target);
-    }
-    let lastCard = $(".card-list .card").length - 1;
-
-    if (app.turn % 2 === 1) {
-
-      // credit to https://codepen.io/prasannapegu/pen/JdyrZP
-      if (e.target.matches(".opponent-side .buttons.next")) {
-        let prependList = function () {
-          if ($('.opponent-card').hasClass('activeNow')) {
-            let $slicedCard = $('.opponent-card').slice(lastCard).removeClass('transformThis activeNow');
-            $('.opponent-hand').prepend($slicedCard);
-          }
-        }
-        $('.opponent-card').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
-        setTimeout(function () { prependList(); }, 150);
-      }
-
-      // credit to https://codepen.io/prasannapegu/pen/JdyrZP
-      if (e.target.matches(".opponent-side .buttons.prev")) {
-        let appendToList = function () {
-          if ($('.opponent-card').hasClass('activeNow')) {
-            let $slicedCard = $('.opponent-card').slice(0, 1).addClass('transformPrev');
-            $('.opponent-hand').append($slicedCard);
-          }
-        }
-        $('.opponent-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
-        setTimeout(function () { appendToList(); }, 150);
-      }
-
-      // credit to https://codepen.io/prasannapegu/pen/JdyrZP
-      if (e.target.matches(".player-side .buttons.next")) {
-        let prependList = function () {
-          if ($('.player-card').hasClass('activeNow')) {
-            let $slicedCard = $('.player-card').slice(lastCard).removeClass('transformThis activeNow');
-            $('.player-hand').prepend($slicedCard);
-          }
-        }
-        $('.player-card').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
-        setTimeout(function () { prependList(); }, 150);
-      }
-
-      // credit to https://codepen.io/prasannapegu/pen/JdyrZP
-      if (e.target.matches(".player-side .buttons.prev")) {
-        let appendToList = function () {
-          if ($('.player-card').hasClass('activeNow')) {
-            let $slicedCard = $('.player-card').slice(0, 1).addClass('transformPrev');
-            $('.player-hand').append($slicedCard);
-          }
-        }
-        $('.player-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
-        setTimeout(function () { appendToList(); }, 150);
-      }
-
-      if (e.target.matches(".player-card, .player-card *")) {
-        const playerCard = e.target.closest(".player-card");
-        const playerCardId = playerCard.dataset.id;
-        app.currentPlayerCard = app.getPlayerCard(playerCardId);
-        app.updatePlayerAtkDisplay();
-        app.toggleHighlight("player", playerCard);
-        app.resetPlayerButtons();
-      }
-
-      if (e.target.matches(".opponent-card, .opponent-card *")) {
-        const opponentCard = e.target.closest(".opponent-card");
-        const opponentCardId = opponentCard.dataset.id;
-        app.currentOpponentCard = app.getOpponentCard(opponentCardId);
-        app.updateOpponentAtkDisplay();
-        app.toggleHighlight("opponent", opponentCard);
-        app.resetPlayerButtons();
-      }
+  $(".gameboard").on("click",  (e) => {
+    app.loadEventHandlers(e);
+  })
+  $('.gameboard').on('keypress', function (e) {
+    if (e.which === 13) {
+      app.loadEventHandlers(e);
     }
   })
 }
@@ -441,6 +450,7 @@ app.init = async () => {
   app.setupPlayerCards();
   app.setupOpponentCards();
   app.handlePlayerButtons();
+  // app.loadEventHandlers();
   app.clickGameBoard();
   app.renderOpponentCards();
   app.renderPlayerCards();

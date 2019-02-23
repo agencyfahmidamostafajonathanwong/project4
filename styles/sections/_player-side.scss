@@ -1,8 +1,8 @@
 .player-side {
   height: 50%;
-  // display:flex;
-  // flex-direction: column;
-  // justify-content: flex-end;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
   position: relative;
 }
 
@@ -14,6 +14,7 @@
 }
 
 .player-card {
+  cursor: url(http://i258.photobucket.com/albums/hh263/Manah-Angel-Eyes/Tumblr%20Blog%20images/yugicursor.png~original), auto;
   margin: 1rem;
   width: 8rem;
   height: 12rem;
