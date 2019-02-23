@@ -26,8 +26,84 @@ button {
   }
 }
 
+.card {
+  margin: 1rem;
+  width: 8rem;
+  height: 12rem;
+  background:rgba(0,0,0,.75);
+  -webkit-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+  box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+  transition: .2s all;
+  cursor: url(http://i258.photobucket.com/albums/hh263/Manah-Angel-Eyes/Tumblr%20Blog%20images/yugicursor.png~original), auto;
+
+  &:focus {
+    border:3px solid red;
+    transform: scale(1.5);
+  }
+}
+
+.life-points, .atk-points {
+  margin: 0;
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  width: 9.5rem;
+  height: 3.6rem;
+  text-align: center;
+  color:yellow;
+  text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+  background-image: linear-gradient(to right,blue,white, purple);
+  border:2px solid black;
+}
+
+
+
+.transition-delay {
+
+}
+
 @media (max-width: 1000px) {
   .highlight {
     transform: scale(1.75);
   }
+
+  .card {
+    width: 6.5rem;
+    height: 10rem;
+
+    position: absolute;
+    &:nth-child(1) {
+        top: 1rem;
+        left: calc(50% - 4rem);
+    }
+    &:nth-child(2) {
+      top: 2rem;
+        left: calc(52% - 4rem);
+    }
+    &:nth-child(3) {
+        top: 3rem;
+        left: calc(54% - 4rem);
+    }
+    &:nth-child(4) {
+        top: 4rem;
+        left: calc(56% - 4rem);
+    }
+    &:nth-child(5) {
+        top: 5rem;
+        left: calc(58% - 4rem);
+    }
+  }
 }
+
+.card:focus {
+  transform: scale(1.5);
+  z-index: 0;
+}
+
+
+
+  

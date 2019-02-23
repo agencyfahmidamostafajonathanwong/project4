@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+.gameboard-half {
+  height: 50%;
+  position: relative;
+}
+
 @media (max-width: 1000px) {
   .start-game-instructions {
     font-size: 0.65rem;

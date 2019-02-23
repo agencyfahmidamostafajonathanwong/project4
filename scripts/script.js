@@ -200,15 +200,12 @@ app.executeOpponentMove = function () {
 }
 
 app.loadEventHandlers = function(e) {
-  if (e.which === 13) {
-    console.log(e.target);
-  }
   let lastCard = $(".card-list .card").length - 1;
 
   if (app.turn % 2 === 1) {
-
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     if (e.target.matches(".opponent-side .buttons.next")) {
+      app.toggleHighlight();
       let prependList = function () {
         if ($('.opponent-card').hasClass('activeNow')) {
           let $slicedCard = $('.opponent-card').slice(lastCard).removeClass('transformThis activeNow');
@@ -221,6 +218,7 @@ app.loadEventHandlers = function(e) {
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     if (e.target.matches(".opponent-side .buttons.prev")) {
+      app.toggleHighlight();
       let appendToList = function () {
         if ($('.opponent-card').hasClass('activeNow')) {
           let $slicedCard = $('.opponent-card').slice(0, 1).addClass('transformPrev');
@@ -233,6 +231,7 @@ app.loadEventHandlers = function(e) {
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     if (e.target.matches(".player-side .buttons.next")) {
+      app.toggleHighlight();
       let prependList = function () {
         if ($('.player-card').hasClass('activeNow')) {
           let $slicedCard = $('.player-card').slice(lastCard).removeClass('transformThis activeNow');
@@ -245,6 +244,7 @@ app.loadEventHandlers = function(e) {
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     if (e.target.matches(".player-side .buttons.prev")) {
+      app.toggleHighlight();
       let appendToList = function () {
         if ($('.player-card').hasClass('activeNow')) {
           let $slicedCard = $('.player-card').slice(0, 1).addClass('transformPrev');
@@ -360,11 +360,7 @@ app.toggleHighlight = function (cardType, currentCard) {
     $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
-    // need to create a function here to make highlighted card switch places with the last li !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // $(`li[data-id="${currentCard}"]`)
-    // $(`.opponent-hand:last-child`)
-
-
+    
     $(currentCard).toggleClass("highlight");
   } else { //Removes the highlight for both opponent and player cards.
     $(".player-card").toArray().forEach(card => {
