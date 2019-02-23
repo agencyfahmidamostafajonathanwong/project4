@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,103 +9,122 @@
   <link rel="stylesheet" href="styles/style.css">
   <title>Yu-Gi-Oh Game!</title>
   <style>
-   
+
   </style>
 </head>
+
 <body>
   <div class="game-over-background">
-      <div class="game-over-body">
-        <h2 class="game-over-heading">GAME OVER!</h2>
-        <p class="game-over-message">The winner is <span class='game-over-winner'></span></p>
-        <button class="game-over-play-again">Play Again</button>
-      </div>
+    <div class="game-over-body">
+      <h2 class="game-over-heading">GAME OVER!</h2>
+      <p class="game-over-message">The winner is <span class='game-over-winner'></span></p>
+      <button class="game-over-play-again">Play Again</button>
     </div>
+  </div>
   <main class="gameboard">
     <section class="opponent-side">
       <div class="opponent-stats">
         <ul>
-          <li class="opponent-life-points-box"><p class="opponent-life-points">2000</p><p class="opponent-life-points-label">LP</p></li>
-          <li class="opponent-atk-display-box"><p class="opponent-atk-display"></p><p class="opponent-atk-display-label">ATK</p></li>
+          <li class="opponent-life-points-box">
+            <p class="opponent-life-points">2000</p>
+            <p class="opponent-life-points-label">LP</p>
+          </li>
+          <li class="opponent-atk-display-box">
+            <p class="opponent-atk-display"></p>
+            <p class="opponent-atk-display-label">ATK</p>
+          </li>
         </ul>
       </div>
-      <ul class = "opponent-hand">
+      <a href="#" class="buttons prev"></a>
+      <ul class="opponent-hand">
         <li class="opponent-card">
-          <img src="" class = "opponent-card-img" alt="">
+          <img src="" class="opponent-card-img" alt="">
           <div class="opponent-atk"></div>
         </li>
 
         <li class="opponent-card">
-          <img src="" class = "opponent-card-img" alt="">
+          <img src="" class="opponent-card-img" alt="">
           <div class="opponent-atk"></div>
         </li>
         <li class="opponent-card">
-          <img src="" class = "opponent-card-img" alt="">
+          <img src="" class="opponent-card-img" alt="">
           <div class="opponent-atk"></div>
         </li>
 
         <li class="opponent-card">
-          <img src="" class = "opponent-card-img" alt="">
+          <img src="" class="opponent-card-img" alt="">
           <div class="opponent-atk"></div>
         </li>
         <li class="opponent-card">
-          <img src="" class = "opponent-card-img" alt="">
+          <img src="" class="opponent-card-img" alt="">
           <div class="opponent-atk"></div>
         </li>
       </ul>
+      <a href="#" class="buttons next"></a>
     </section>
 
     <section class="player-side">
+      <a href="#" class="buttons prev"></a>
       <ul class="player-hand">
         <li class="player-card">
-          <img src="" class = "player-card-img" alt="">
+          <img src="" class="player-card-img" alt="">
           <div class="player-atk"></div>
         </li>
 
         <li class="player-card">
-          <img src="" class = "player-card-img" alt="">
+          <img src="" class="player-card-img" alt="">
           <div class="player-atk"></div>
         </li>
 
         <li class="player-card">
-          <img src="" class = "player-card-img" alt="">
+          <img src="" class="player-card-img" alt="">
           <div class="player-atk"></div>
         </li>
 
         <li class="player-card">
-          <img src="" class = "player-card-img" alt="">
+          <img src="" class="player-card-img" alt="">
           <div class="player-atk"></div>
         </li>
 
         <li class="player-card">
-          <img src="" class = "player-card-img" alt="">
+          <img src="" class="player-card-img" alt="">
           <div class="player-atk"></div>
         </li>
       </ul>
       <div class="player-stats">
         <ul>
-          <li class="player-life-points-box"><p class="player-life-points-label">LP</p><p class="player-life-points">2000</p></li>
+          <li class="player-life-points-box">
+            <p class="player-life-points-label">LP</p>
+            <p class="player-life-points">2000</p>
+          </li>
           <li class="player-buttons">
             <ul class="player-button-list">
               <li class="player-button-list-item">
                 <button class="player-atk-button">
-                   Attack
+                  Attack
                 </button>
-              </li>  
+              </li>
 
               <li class="player-button-list-item">
                 <button class="player-cancel-button">
                   Cancel
                 </button>
-              </li>  
+              </li>
             </ul>
           </li>
-          <li class="player-atk-display-box"><p class="player-atk-display-label">ATK</p><p class="player-atk-display"></p></li>
+          <li class="player-atk-display-box">
+            <p class="player-atk-display-label">ATK</p>
+            <p class="player-atk-display"></p>
+          </li>
         </ul>
       </div>
+      <a href="#" class="buttons next"></a>
     </section>
   </main>
-  
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="scripts/script.js"></script>
 </body>
+
 </html>
