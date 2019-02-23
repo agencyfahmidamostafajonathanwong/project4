@@ -85,6 +85,16 @@
 }
 
 @media (max-width: 1000px) {
+  .opponent-card {
+    width: 6rem;
+    height: 10rem;
+  }
+
+  .opponent-card:focus {
+      transform: scale(1.5);
+      z-index: 0;
+  }
+
   .opponent-side {
     .buttons {
       z-index: 10;

@@ -158,9 +158,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .highlight {
   z-index: 2;
   border: 3px solid red;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2); }
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3); }
 
 button {
   display: block;
@@ -185,10 +185,24 @@ button {
     -ms-transform: translateY(-0.25rem) scale(1.05);
     transform: translateY(-0.25rem) scale(1.05); }
 
+@media (max-width: 1000px) {
+  .highlight {
+    -webkit-transform: scale(1.75);
+    -ms-transform: scale(1.75);
+    transform: scale(1.75); } }
+
 .gameboard {
   height: 100vh;
   background: rgba(0, 0, 0, 0.25);
   width: 100%; }
+
+@media (max-width: 1000px) {
+  .start-game-instructions {
+    font-size: 0.65rem; } }
+
+@media (max-width: 750px) {
+  .modal-heading, h3 {
+    font-size: 1rem; } }
 
 .player-side {
   height: 50%;
@@ -289,6 +303,14 @@ button {
   display: none; }
 
 @media (max-width: 1000px) {
+  .player-card {
+    width: 6rem;
+    height: 10rem; }
+  .player-card:focus {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    z-index: 0; }
   .player-side .buttons {
     z-index: 10;
     position: absolute;
@@ -341,6 +363,26 @@ button {
     .player-card:nth-child(5) {
       top: 5rem;
       left: calc(58% - 4rem); } }
+
+@media (max-width: 740px) {
+  .gameboard {
+    position: relative; }
+  .player-button-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  .player-atk-button {
+    margin-right: 0; } }
 
 @-webkit-keyframes prevCard {
   0% {
@@ -574,6 +616,14 @@ button {
   display: none; }
 
 @media (max-width: 1000px) {
+  .opponent-card {
+    width: 6rem;
+    height: 10rem; }
+  .opponent-card:focus {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    z-index: 0; }
   .opponent-side .buttons {
     z-index: 10;
     position: absolute;

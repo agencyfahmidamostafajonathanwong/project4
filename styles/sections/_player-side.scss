@@ -90,6 +90,16 @@
 }
 
 @media (max-width: 1000px) {
+  .player-card {
+    width: 6rem;
+    height: 10rem;
+  }
+
+  .player-card:focus {
+      transform: scale(1.5);
+      z-index: 0;
+  }
+
   .player-side {
    
     .buttons {
@@ -162,7 +172,22 @@
 }
 
 @media (max-width: 740px) {
-
+  .gameboard {
+    position: relative;
+  }
+  .player-button-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  .player-cancel-button {
+  }
+  .player-atk-button {
+    margin-right:0;
+  }
 }
 
 @keyframes prevCard {
