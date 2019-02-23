@@ -1,0 +1,17 @@
+.start-game {
+  display:flex;
+  z-index:100;
+}
+
+.start-game-instructions {
+  text-align: left;
+}
+
+.start-game-body {
+  width:80%;
+}
+
+.start-game-instructions li {
+  margin-bottom:1rem;
+}
+

@@ -175,6 +175,13 @@ app.playAgain = function () {
   });
 }
 
+app.startGame = () => {
+  $(".start-game-button").on("click", () => {
+    console.log('click');
+    $(".start-game").css("display", "none");
+  });
+}
+
 
 //Executes computer move
 app.executeOpponentMove = function () {
@@ -368,8 +375,41 @@ app.togglePlayerHighlightDelay = function (playerCardNode) {
 }
 
 app.updateLifePoints = () => {
-  $(".player-life-points").text(app.playerLife);
-  $(".opponent-life-points").text(app.opponentLife);
+  if(parseInt(app.currentPlayerCard.atk,10) > parseInt(app.currentOpponentCard.atk,10)){
+    const attackDifference = app.currentPlayerCard.atk - app.currentOpponentCard.atk;
+    const counterStart = app.opponentLife + attackDifference;
+    app.updateOpponentLife(counterStart);
+  }
+
+  if(parseInt(app.currentPlayerCard.atk,10) < parseInt(app.currentOpponentCard.atk,10)){
+    const attackDifference = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
+    const counterStart = app.playerLife + attackDifference;
+    app.updatePlayerLife(counterStart);
+  }
+}
+
+app.updateOpponentLife = (counter) => {
+  const updateOpponentLifeAnimation = setInterval(() => {
+    counter -= 10;
+    $(".opponent-life-points").text(counter);
+    if( counter === app.opponentLife && app.opponentLife > 0){
+      clearInterval(updateOpponentLifeAnimation);
+    } else if (app.opponentLife <= 0 && counter <= 0) {
+      clearInterval(updateOpponentLifeAnimation);
+    }
+  },.1);
+}
+
+app.updatePlayerLife = counter => {
+  const updatePlayerLifeAnimation = setInterval(() => {
+    counter -= 10;
+    $(".player-life-points").text(counter);
+    if( counter === app.playerLife && app.playerLife > 0){
+      clearInterval(updatePlayerLifeAnimation);
+    } else if(app.playerLife <= 0 && counter <= 0) {
+      clearInterval(updatePlayerLifeAnimation);
+    }
+  },.1);
 }
 
 app.renderPlayerCards = () => {
@@ -405,6 +445,7 @@ app.init = async () => {
   app.toggleAttackButton();
   app.toggleCancelButton();
   app.playAgain();
+  app.startGame();
 }
 
 $(function () {

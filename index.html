@@ -14,11 +14,32 @@
 </head>
 
 <body>
-  <div class="game-over-background">
-    <div class="game-over-body">
-      <h2 class="game-over-heading">GAME OVER!</h2>
+  <div class="modal-background start-game">
+    <div class="modal-body start-game-body">
+      <h2 class="modal-heading">Welcome to Yugi-Oh Duel Monsters!</h2>
+      <h3>Instructions</h3>
+      <ul class="start-game-instructions">
+        <li class> You start the game with 2000 Lifepoints. </li> 
+        <li>You can find them marked by LP in the bottom left corner.</li>
+        <li>The opponent's life points can be found in the top left corner.</li>
+        <li>To select a monster click on one of your cards on the bottom half of the game board.</li>
+        <li>Your monster's attack power will appear in the lower-right corner</li>
+        <li>To select an opponent's monster to attack, click on one of the opponent's cards</li>
+        <li>Your opponent's monster's attack appears in the top right corner.</li>
+        <li>You may only defeat enemy monsters with a lower attack power than your own.</li>
+        <li>When you are ready to attack, click the attack button.</li>
+        <li>To de-select cards at any time, click on cancel.</li>
+        <li>When a player reaches 0 lifepoints they lose!</li>
+      </ul>
+      <button class="start-game-button modal-button">Start</button>
+    </div>
+  </div>
+
+  <div class="modal-background game-over-background">
+    <div class="game-over-body modal-body">
+      <h2 class="modal-heading">GAME OVER!</h2>
       <p class="game-over-message">The winner is <span class='game-over-winner'></span></p>
-      <button class="game-over-play-again">Play Again</button>
+      <button class="game-over-play-again modal-button">Play Again</button>
     </div>
   </div>
   <main class="gameboard">

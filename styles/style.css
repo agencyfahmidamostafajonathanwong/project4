@@ -191,16 +191,7 @@ button {
 
 .player-side {
   height: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end; }
+  position: relative; }
 
 .player-hand {
   height: 80%;
@@ -216,8 +207,8 @@ button {
 
 .player-card {
   margin: 1rem;
-  width: 12%;
-  height: 80%;
+  width: 8rem;
+  height: 12rem;
   background: rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
@@ -236,9 +227,9 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -274,8 +265,209 @@ button {
   bottom: 4rem;
   color: white; }
 
+.player-side .buttons.next {
+  display: none; }
+
+.player-side .buttons.prev {
+  display: none; }
+
+@media (max-width: 1000px) {
+  .player-side .buttons {
+    z-index: 10;
+    position: absolute;
+    top: 60%;
+    text-decoration: none;
+    color: white; }
+  .player-side:hover .buttons.prev {
+    left: 45%;
+    display: block;
+    -webkit-animation: bounceInLeft 300ms;
+    animation: bounceInLeft 300ms; }
+    .player-side:hover .buttons.prev::after {
+      content: '<';
+      border-radius: 50%;
+      padding: 0.3rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white; }
+  .player-side:hover .buttons.next {
+    right: 25%;
+    display: block;
+    -webkit-animation: bounceInRight 300ms;
+    animation: bounceInRight 300ms; }
+    .player-side:hover .buttons.next::after {
+      content: '>';
+      border-radius: 50%;
+      padding: 0.3rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white; }
+  .transformThis {
+    -webkit-animation: nextCard 500ms;
+    animation: nextCard 500ms; }
+  .transformPrev {
+    -webkit-animation: prevCard 100ms;
+    animation: prevCard 100ms;
+    display: none; }
+  .player-card {
+    position: absolute; }
+    .player-card:nth-child(1) {
+      top: 1rem;
+      left: calc(50% - 4rem); }
+    .player-card:nth-child(2) {
+      top: 2rem;
+      left: calc(52% - 4rem); }
+    .player-card:nth-child(3) {
+      top: 3rem;
+      left: calc(54% - 4rem); }
+    .player-card:nth-child(4) {
+      top: 4rem;
+      left: calc(56% - 4rem); }
+    .player-card:nth-child(5) {
+      top: 5rem;
+      left: calc(58% - 4rem); } }
+
+@-webkit-keyframes prevCard {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0; }
+  20% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.10; }
+  40% {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    opacity: 0.20; }
+  60% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.40; }
+  80% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0.80; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes prevCard {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0; }
+  20% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.10; }
+  40% {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    opacity: 0.20; }
+  60% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.40; }
+  80% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0.80; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@-webkit-keyframes nextCard {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; }
+  20% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.80; }
+  40% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.40; }
+  60% {
+    -webkit-transform: translateX(60px);
+    transform: translateX(60px);
+    opacity: 0.20; }
+  80% {
+    -webkit-transform: translateX(80px);
+    transform: translateX(80px);
+    opacity: 0.10; }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0; } }
+
+@keyframes nextCard {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; }
+  20% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.80; }
+  40% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.40; }
+  60% {
+    -webkit-transform: translateX(60px);
+    transform: translateX(60px);
+    opacity: 0.20; }
+  80% {
+    -webkit-transform: translateX(80px);
+    transform: translateX(80px);
+    opacity: 0.10; }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0; } }
+
+@-webkit-keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@-webkit-keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-40px);
+    transform: translateX(-40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-40px);
+    transform: translateX(-40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
 .opponent-side {
-  height: 50%; }
+  height: 50%;
+  position: relative; }
 
 .opponent-hand {
   height: 80%;
@@ -291,8 +483,8 @@ button {
 
 .opponent-card {
   margin: 1rem;
-  width: 12%;
-  height: 80%;
+  width: 8rem;
+  height: 12rem;
   background: rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
@@ -329,9 +521,9 @@ button {
 
 .opponent-life-points, .opponent-atk-display {
   margin: 0;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   font-size: 1.5rem;
-  width: 10rem;
+  width: 9.5rem;
   height: 3.6rem;
   text-align: center;
   color: yellow;
@@ -352,27 +544,188 @@ button {
   right: 0;
   color: white; }
 
-.game-over-background {
+.opponent-side .buttons.next {
+  display: none; }
+
+.opponent-side .buttons.prev {
+  display: none; }
+
+@media (max-width: 1000px) {
+  .opponent-side .buttons {
+    z-index: 10;
+    position: absolute;
+    top: 60%;
+    text-decoration: none;
+    color: white; }
+  .opponent-side:hover .buttons.prev {
+    left: 45%;
+    display: block;
+    -webkit-animation: bounceInLeft 300ms;
+    animation: bounceInLeft 300ms; }
+    .opponent-side:hover .buttons.prev::after {
+      content: '<';
+      border-radius: 50%;
+      padding: 0.3rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white; }
+  .opponent-side:hover .buttons.next {
+    right: 25%;
+    display: block;
+    -webkit-animation: bounceInRight 300ms;
+    animation: bounceInRight 300ms; }
+    .opponent-side:hover .buttons.next::after {
+      content: '>';
+      border-radius: 50%;
+      padding: 0.3rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white; }
+  .transformThis {
+    -webkit-animation: nextCard 500ms;
+    animation: nextCard 500ms; }
+  .transformPrev {
+    -webkit-animation: prevCard 100ms;
+    animation: prevCard 100ms;
+    display: none; }
+  .opponent-card {
+    position: absolute; }
+    .opponent-card:nth-child(1) {
+      top: 1rem;
+      left: calc(50% - 4rem); }
+    .opponent-card:nth-child(2) {
+      top: 2rem;
+      left: calc(52% - 4rem); }
+    .opponent-card:nth-child(3) {
+      top: 3rem;
+      left: calc(54% - 4rem); }
+    .opponent-card:nth-child(4) {
+      top: 4rem;
+      left: calc(56% - 4rem); }
+    .opponent-card:nth-child(5) {
+      top: 5rem;
+      left: calc(58% - 4rem); } }
+
+@keyframes prevCard {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0; }
+  20% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.10; }
+  40% {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    opacity: 0.20; }
+  60% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.40; }
+  80% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0.80; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+
+@keyframes nextCard {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; }
+  20% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0.80; }
+  40% {
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px);
+    opacity: 0.40; }
+  60% {
+    -webkit-transform: translateX(60px);
+    transform: translateX(60px);
+    opacity: 0.20; }
+  80% {
+    -webkit-transform: translateX(80px);
+    transform: translateX(80px);
+    opacity: 0.10; }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0; } }
+
+@-webkit-keyframes scaleCard {
+  0% {
+    top: 5px; }
+  100% {
+    top: 24px; } }
+
+@keyframes scaleCard {
+  0% {
+    top: 5px; }
+  100% {
+    top: 24px; } }
+
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(40px);
+    transform: translateX(40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-40px);
+    transform: translateX(-40px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+.modal-background {
   height: 100vh;
   width: 100vw;
   background: rgba(0, 0, 0, 0.4);
-  position: absolute;
-  display: none; }
+  position: absolute; }
 
-.game-over-body {
+.modal-body {
   z-index: 5;
   position: relative;
-  background: white;
-  width: 50%;
   margin: auto;
   padding: 2rem;
   text-align: center;
   border: 10px solid black;
   border-radius: 10px;
-  background-color: red; }
+  background-color: blue;
+  color: white; }
 
-.game-over-heading {
+.modal-heading {
   margin: 0; }
 
-.game-over-play-again {
+.modal-button {
   margin: 0 auto; }
+
+.game-over-background {
+  display: none; }
+
+.game-over-body {
+  width: 50%; }
+
+.start-game {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 100; }
+
+.start-game-instructions {
+  text-align: left; }
+
+.start-game-body {
+  width: 80%; }
+
+.start-game-instructions li {
+  margin-bottom: 1rem; }
