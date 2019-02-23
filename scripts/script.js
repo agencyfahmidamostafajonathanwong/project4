@@ -191,6 +191,9 @@ app.startGame = () => {
 
 //Shows game over screen
 app.renderGameOver = () => {
+
+  app.turn === 2;
+
   if (app.playerLife <= 0) {
     app.$gameOverWinner.text("The Computer!");
   } else {
@@ -198,6 +201,7 @@ app.renderGameOver = () => {
   }
 
   app.$gameOverBackground.css("display", "flex");
+  app.$gameOverBackground.css("z-index", "1000");
 }
 
 //Executes computer move
