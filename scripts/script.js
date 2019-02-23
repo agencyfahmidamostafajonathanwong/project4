@@ -201,8 +201,10 @@ app.executeOpponentMove = function () {
 
 app.clickGameBoard = () => {
   //Event delegation for gameboard.
-  $(".gameboard").on("click", (e) => {
-
+  $(".gameboard").on("click, keypress",  (e) => {
+    if(e.which === 13) {
+      console.log(e.target);
+    }
     let lastCard = $(".card-list .card").length - 1;
 
     if (app.turn % 2 === 1) {
