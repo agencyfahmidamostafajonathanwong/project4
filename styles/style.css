@@ -208,6 +208,11 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     -ms-transform: scale(1.3);
     transform: scale(1.3); } }
 
+@media (max-width: 700px) {
+  .increment-z-index {
+    position: relative;
+    z-index: 10; } }
+
 @-webkit-keyframes prevCard {
   0% {
     -webkit-transform: translateX(50px);
@@ -674,7 +679,24 @@ button {
   display: none; }
 
 .game-over-body {
-  width: 50%; }
+  width: 60%;
+  padding: 3rem; }
+
+@media (max-width: 750px) {
+  .game-over-body {
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; } }
 
 .start-game {
   display: -webkit-box;
@@ -693,7 +715,7 @@ button {
 
 @media (max-width: 1000px) {
   .start-game-instructions {
-    font-size: 0.65rem;
+    font-size: .9rem;
     margin-bottom: .5rem; } }
 
 @media (max-width: 750px) {

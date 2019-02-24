@@ -3,6 +3,18 @@
 }
 
 .game-over-body {
-  width:50%;
+  width:60%;
+  padding:3rem
+}
+
+@media (max-width:750px) {
+  .game-over-body {
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 

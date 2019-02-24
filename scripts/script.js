@@ -70,10 +70,12 @@ app.calcOpponentAttack = function () {
   //Times outs sync attack display update with transition delay.
   setTimeout(() => {
     app.updateOpponentAtkDisplay();
+    opponentCardNode.css("z-index",10);
   }, 2000)
 
   setTimeout(() => {
     app.updatePlayerAtkDisplay();
+    playerCardNode.css("z-index",10);
   }, 4000)
 
   //Execute logic after animations are finished.
@@ -106,8 +108,6 @@ app.calcOpponentAttack = function () {
     //Increment turn if player and opponent alive. Else render game over.
     if (app.playerLife > 0 && app.opponentLife > 0) {
       app.turn += 1;
-    } else {
-      app.renderGameOver()
     }
   }, 8000);
 }
@@ -117,6 +117,7 @@ app.removePlayerCard = () => {
   const index = app.playerHand.findIndex(card => card.id === app.currentPlayerCard.id);
   $(`li[data-id="${app.currentPlayerCard.id}"]`).remove();
   app.playerHand.splice(index, 1);
+  app.renderPlayerCards();//Re-render player hand
 }
 
 //Removes Opponent card from the UI and database
@@ -213,8 +214,6 @@ app.executeOpponentMove = () => {
     app.toggleHighlight();
     app.resetAttackDisplay();
     app.calcOpponentAttack();
-  } else {
-    app.renderGameOver();
   }
 }
 
@@ -223,6 +222,7 @@ app.loadEventHandlers = (e) => {
 
   if (app.turn % 2 === 1) {
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    // Mobile next button scrolls to next opponent card
     if (e.target.matches(".opponent-side .buttons.next")) {
       app.toggleHighlight();
      const prependList = function () {
@@ -236,6 +236,7 @@ app.loadEventHandlers = (e) => {
     }
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    // Mobile prev button scrolls to prev opponent card
     if (e.target.matches(".opponent-side .buttons.prev")) {
       app.toggleHighlight();
      const appendToList = function () {
@@ -249,6 +250,7 @@ app.loadEventHandlers = (e) => {
     }
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    // Mobile next button scrolls to next player card
     if (e.target.matches(".player-side .buttons.next")) {
       app.toggleHighlight();
       const prependList = function () {
@@ -262,6 +264,7 @@ app.loadEventHandlers = (e) => {
     }
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
+    // Mobile prev button scrolls to prev player card
     if (e.target.matches(".player-side .buttons.prev")) {
       app.toggleHighlight();
       const appendToList = function () {
@@ -273,6 +276,7 @@ app.loadEventHandlers = (e) => {
       $('.player-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
       setTimeout(function () { appendToList(); }, 150);
     }
+
     //Select a player card
     if (e.target.matches(".player-card, .player-card *")) {
       const playerCard = e.target.closest(".player-card");
@@ -360,7 +364,7 @@ app.toggleAttackButton = () => {
 }
 
 //Toggles cancel button if player has selected a player card and opponent card
-app.toggleCancelButton = function () {
+app.toggleCancelButton = () => {
   if (app.currentOpponentCard && app.currentPlayerCard) {
     app.$playerCancelButton.attr("disabled", false)
   } else {
@@ -371,7 +375,7 @@ app.toggleCancelButton = function () {
 //Toggles the highlight if user clicks cancel or on new card.
 app.toggleHighlight = function (cardType, currentCard) {
   if (cardType === "player") { //Toggles player card highlights
-    app.$playerCard.toArray().forEach(card => {
+   $(".player-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
 
@@ -383,7 +387,7 @@ app.toggleHighlight = function (cardType, currentCard) {
     
     $(currentCard).toggleClass("highlight");
   } else { //Removes the highlight for both opponent and player cards.
-    app.$playerCard.toArray().forEach(card => {
+    $(".player-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
 
@@ -415,6 +419,11 @@ app.updateLifePoints = () => {
     const attackDifference = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
     const counterStart = app.playerLife + attackDifference;
     app.updatePlayerLife(counterStart);
+    console.log(app.playerLife);
+    console.log(app.opponentLife);
+    
+
+    
   }
 }
 
@@ -426,8 +435,12 @@ app.updateOpponentLife = (counter) => {
     app.$opponentLifePoints.text(counter); //Sets lifepoints to counter
     if( counter === app.opponentLife && app.opponentLife > 0){
       //Stop timer when counter reaches current lifepoints
+     
       clearInterval(updateOpponentLifeAnimation); 
     } else if (app.opponentLife <= 0 && counter <= 0) { //Stops lifepoints at 0.
+      if(app.opponentLife <= 0) {
+        app.renderGameOver();
+      }
       clearInterval(updateOpponentLifeAnimation);
     }
   },.1);
@@ -441,24 +454,44 @@ app.updatePlayerLife = counter => {
     if( counter === app.playerLife && app.playerLife > 0){
       clearInterval(updatePlayerLifeAnimation);
     } else if(app.playerLife <= 0 && counter <= 0) {
+      if(app.playerLife <= 0) {
+        app.renderGameOver();
+      }
       clearInterval(updatePlayerLifeAnimation);
+      
     }
   },.1);
 }
 
 app.renderPlayerCards = () => {
-  //Turns nodes into an iterable array and adds src and alt attributes
-  app.$playerCardImg.toArray().forEach(function (card, index) {
-    $(card).attr("src", app.playerHand[index].image_url);
-    $(card).attr("alt", app.playerHand[index].name);
+  $(".player-hand").html("");
+  app.playerHand.forEach(card => {
+    const markup = `
+    <li class="player-card card" tabindex="0" data-id=${card.id}>
+      <img src="${card.image_url}" class="player-card-img" alt="${card.name}">
+      <div class="player-atk"></div>
+    </li>
+  `;
 
-  });
+    $(".player-hand").append(markup);
+  })
 
-  //Sets a unique data-id on each card
-  app.$playerCard.toArray().forEach(function (card, index) {
-    $(card).attr("data-id", app.playerHand[index].id);
-  });
+  
 }
+
+// app.renderPlayerCards = () => {
+//   //Turns nodes into an iterable array and adds src and alt attributes
+//   app.$playerCardImg.toArray().forEach(function (card, index) {
+//     $(card).attr("src", app.playerHand[index].image_url);
+//     $(card).attr("alt", app.playerHand[index].name);
+
+//   });
+
+//   //Sets a unique data-id on each card
+//   app.$playerCard.toArray().forEach(function (card, index) {
+//     $(card).attr("data-id", app.playerHand[index].id);
+//   });
+// }
 
 //Renders opponent cards same as above.
 app.renderOpponentCards = function () {
