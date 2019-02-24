@@ -7,14 +7,29 @@
   padding:3rem
 }
 
+.game-over-message {
+  margin:1.5rem;
+}
+
 @media (max-width:750px) {
   .game-over-body {
-    width: 100vw;
-    height: 100vh;
-    text-align: center;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
+   @include set-modal-full;
+    padding:2rem;
+  }
+
+  .game-over-heading {
+    font-size:1.2rem;
+  }
+}
+
+@media (max-width:400px) {
+  .game-over-heading {
+    font-size:1rem;
+  }
+
+  .game-over-body {
+    font-size:.8rem;
+    padding:1rem;
   }
 }
 

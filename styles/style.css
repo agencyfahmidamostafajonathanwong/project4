@@ -156,6 +156,19 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+.visuallyhidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0);
+  overflow: hidden; }
+
 .highlight {
   z-index: 2;
   border: 3px solid red;
@@ -682,6 +695,9 @@ button {
   width: 60%;
   padding: 3rem; }
 
+.game-over-message {
+  margin: 1.5rem; }
+
 @media (max-width: 750px) {
   .game-over-body {
     width: 100vw;
@@ -696,7 +712,17 @@ button {
     flex-direction: column;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; } }
+    justify-content: center;
+    padding: 2rem; }
+  .game-over-heading {
+    font-size: 1.2rem; } }
+
+@media (max-width: 400px) {
+  .game-over-heading {
+    font-size: 1rem; }
+  .game-over-body {
+    font-size: .8rem;
+    padding: 1rem; } }
 
 .start-game {
   display: -webkit-box;
@@ -722,7 +748,7 @@ button {
   .start-game-body {
     width: 100vw;
     height: 100vh;
-    padding: 1rem;
+    text-align: center;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -732,7 +758,8 @@ button {
     flex-direction: column;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; }
+    justify-content: center;
+    padding: 1rem; }
   .start-game-instruct-heading {
     font-size: .6; } }
 

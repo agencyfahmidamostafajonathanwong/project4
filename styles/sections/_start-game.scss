@@ -24,12 +24,8 @@
 
 @media(max-width:750px) {
   .start-game-body {  
-    width:100vw;
-    height:100vh;
-    padding:1rem;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
+    @include set-modal-full;
+    padding:1rem; 
   }
 
   .start-game-instruct-heading {

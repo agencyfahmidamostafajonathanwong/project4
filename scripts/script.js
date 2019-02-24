@@ -29,6 +29,8 @@ app.calcPlayerAttack =  () => {
     app.removePlayerCard();
     app.removeOpponentCard();
   }
+  app.renderPlayerCards();
+  app.renderOpponentCards();
 };
 
 
@@ -100,11 +102,13 @@ app.calcOpponentAttack = function () {
       app.removePlayerCard();
       app.removeOpponentCard();
     }
-    
+
+    app.renderPlayerCards();
+    app.renderOpponentCards();
     app.updateLifePoints();
     app.resetAttackDisplay();
     app.resetCurrentCards();
-
+    app.checkGameOver();
     //Increment turn if player and opponent alive. Else render game over.
     if (app.playerLife > 0 && app.opponentLife > 0) {
       app.turn += 1;
@@ -117,7 +121,7 @@ app.removePlayerCard = () => {
   const index = app.playerHand.findIndex(card => card.id === app.currentPlayerCard.id);
   $(`li[data-id="${app.currentPlayerCard.id}"]`).remove();
   app.playerHand.splice(index, 1);
-  app.renderPlayerCards();//Re-render player hand
+  
 }
 
 //Removes Opponent card from the UI and database
@@ -125,6 +129,7 @@ app.removeOpponentCard = () => {
   const index = app.opponentHand.findIndex(card => card.id === app.currentOpponentCard.id);
   $(`li[data-id="${app.currentOpponentCard.id}"]`).remove();
   app.opponentHand.splice(index, 1);
+  
 }
 
 //Finds and returns a player card from hand
@@ -214,6 +219,7 @@ app.executeOpponentMove = () => {
     app.toggleHighlight();
     app.resetAttackDisplay();
     app.calcOpponentAttack();
+    
   }
 }
 
@@ -316,6 +322,7 @@ app.clickGameBoard = () => {
 app.handlePlayerButtons = () => {
   app.$playerAtkButton.on("click", () => {
     app.calcPlayerAttack();
+    app.checkGameOver()
     app.updateLifePoints();
     app.resetCurrentCards();
     app.resetPlayerButtons();
@@ -332,6 +339,13 @@ app.handlePlayerButtons = () => {
 }
 
 // UI LOGIC
+
+app.checkGameOver = () => {
+  if(app.playerLife <= 0 || app.opponentLife <= 0 || app.playerHand.length === 0 ||
+    app.opponentHand.length === 0) {
+      app.renderGameOver();
+    }
+}
 
 //Updates attack power based on current monster selected
 app.updatePlayerAtkDisplay = () => {
@@ -381,7 +395,7 @@ app.toggleHighlight = function (cardType, currentCard) {
 
     $(currentCard).toggleClass("highlight");
   } else if (cardType === "opponent") { //toggles opponent card highlights.
-    app.$opponentCard.toArray().forEach(card => {
+    $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
     
@@ -391,7 +405,7 @@ app.toggleHighlight = function (cardType, currentCard) {
       $(card).removeClass("highlight");
     });
 
-    app.$opponentCard.toArray().forEach(card => {
+    $(".opponent-card").toArray().forEach(card => {
       $(card).removeClass("highlight");
     });
   }
@@ -418,12 +432,7 @@ app.updateLifePoints = () => {
   if(parseInt(app.currentPlayerCard.atk,10) < parseInt(app.currentOpponentCard.atk,10)){
     const attackDifference = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
     const counterStart = app.playerLife + attackDifference;
-    app.updatePlayerLife(counterStart);
-    console.log(app.playerLife);
-    console.log(app.opponentLife);
-    
-
-    
+    app.updatePlayerLife(counterStart);   
   }
 }
 
@@ -432,15 +441,13 @@ app.updateOpponentLife = (counter) => {
   //Gives us the lifepoint decrement animation
   const updateOpponentLifeAnimation = setInterval(() => {
     counter -= 10;
-    app.$opponentLifePoints.text(counter); //Sets lifepoints to counter
+    //Sets lifepoints display to counter is it counts down.
+    app.$opponentLifePoints.text(counter); 
     if( counter === app.opponentLife && app.opponentLife > 0){
       //Stop timer when counter reaches current lifepoints
-     
       clearInterval(updateOpponentLifeAnimation); 
     } else if (app.opponentLife <= 0 && counter <= 0) { //Stops lifepoints at 0.
-      if(app.opponentLife <= 0) {
-        app.renderGameOver();
-      }
+      app.checkGameOver();
       clearInterval(updateOpponentLifeAnimation);
     }
   },.1);
@@ -454,11 +461,10 @@ app.updatePlayerLife = counter => {
     if( counter === app.playerLife && app.playerLife > 0){
       clearInterval(updatePlayerLifeAnimation);
     } else if(app.playerLife <= 0 && counter <= 0) {
-      if(app.playerLife <= 0) {
-        app.renderGameOver();
-      }
-      clearInterval(updatePlayerLifeAnimation);
-      
+
+        app.checkGameOver();
+    
+      clearInterval(updatePlayerLifeAnimation);    
     }
   },.1);
 }
@@ -469,14 +475,25 @@ app.renderPlayerCards = () => {
     const markup = `
     <li class="player-card card" tabindex="0" data-id=${card.id}>
       <img src="${card.image_url}" class="player-card-img" alt="${card.name}">
-      <div class="player-atk"></div>
+      <div class="visuallyhidden">${card.atk} Attack Points</div>
     </li>
   `;
-
     $(".player-hand").append(markup);
   })
+}
 
+app.renderOpponentCards = () => {
+  $(".opponent-hand").html("");
+  app.opponentHand.forEach(card => {
+    const markup = `
+      <li class="opponent-card card" tabindex="0" data-id=${card.id}>
+        <img src="${card.image_url}" class="opponent-card-img" alt="${card.name}">
+        <div class="visuallyhidden">${card.atk} Attack Points</div>
+      </li>
+    `;
   
+    $(".opponent-hand").append(markup);
+  })
 }
 
 // app.renderPlayerCards = () => {
@@ -493,17 +510,19 @@ app.renderPlayerCards = () => {
 //   });
 // }
 
-//Renders opponent cards same as above.
-app.renderOpponentCards = function () {
-  app.$opponentCardImg.toArray().forEach(function (card, index) {
-    $(card).attr("src", app.opponentHand[index].image_url);
-    $(card).attr("alt", app.opponentHand[index].name);
-  })
 
-  app.$opponentCard.toArray().forEach(function (card, index) {
-    $(card).attr("data-id", app.opponentHand[index].id);
-  });
-}
+
+//Renders opponent cards same as above.
+// app.renderOpponentCards = function () {
+//   app.$opponentCardImg.toArray().forEach(function (card, index) {
+//     $(card).attr("src", app.opponentHand[index].image_url);
+//     $(card).attr("alt", app.opponentHand[index].name);
+//   })
+
+//   app.$opponentCard.toArray().forEach(function (card, index) {
+//     $(card).attr("data-id", app.opponentHand[index].id);
+//   });
+// }
 
 app.init = async () => {
   app.$playerCard = $(".player-card");
