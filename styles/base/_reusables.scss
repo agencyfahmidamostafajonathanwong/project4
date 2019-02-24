@@ -12,28 +12,6 @@
   animation: prevCard 100ms;
 }
 
-button {
-    display: block;
-    padding: 1rem;
-    align-self: stretch;
-    z-index:10;
-    position:relative;
-    border-radius:10px;
-    background: darkblue;
-    color:white;
-    transform: translateY(-0.25rem) scale(1);
-    cursor: pointer;
-    
-  &:disabled {
-    background: darkgrey;
-    color: grey;
-  }
-
-  &:hover, &:focus {
-    transform: translateY(-0.25rem) scale(1.05);
-  }
-}
-
 .card {
   margin: 1rem;
   width: 8rem;
@@ -87,28 +65,6 @@ button {
   .card {
     width: 6.5rem;
     height: 10rem;
-
-    // position: absolute;
-    // &:nth-child(1) {
-    //     top: 1rem;
-    //     left: calc(50% - 4rem);
-    // }
-    // &:nth-child(2) {
-    //   top: 2rem;
-    //     left: calc(52% - 4rem);
-    // }
-    // &:nth-child(3) {
-    //     top: 3rem;
-    //     left: calc(54% - 4rem);
-    // }
-    // &:nth-child(4) {
-    //     top: 4rem;
-    //     left: calc(56% - 4rem);
-    // }
-    // &:nth-child(5) {
-    //     top: 5rem;
-    //     left: calc(58% - 4rem);
-    // }
   }
 }
 
@@ -117,98 +73,13 @@ button {
     width: 5rem;
     height: 7rem;
   }
-
-  // .opponent-card {
-  //   &:nth-child(1) {
-  //       top: 5rem;
-  //       left: calc(50% - 4rem);
-  //   }
-  //   &:nth-child(2) {
-  //     top: 5rem;
-  //       left: calc(52% - 4rem);
-  //   }
-  //   &:nth-child(3) {
-  //     top: 5rem;
-  //       left: calc(54% - 4rem);
-  //   }
-  //   &:nth-child(4) {
-  //     top: 5rem;
-  //       left: calc(56% - 4rem);
-  //   }
-  //   &:nth-child(5) {
-  //     top: 5rem;
-  //       left: calc(58% - 4rem);
-  //   }
-  // }
-
-  // .player-card {
-  //   &:nth-child(1) {
-  //       top: 0rem;
-  //       left: calc(50% - 4rem);
-  //   }
-  //   &:nth-child(2) {
-  //     top: 0rem;
-  //       left: calc(52% - 4rem);
-  //   }
-  //   &:nth-child(3) {
-  //       top: 0rem;
-  //       left: calc(54% - 4rem);
-  //   }
-  //   &:nth-child(4) {
-  //       top: 0rem;
-  //       left: calc(56% - 4rem);
-  //   }
-  //   &:nth-child(5) {
-  //       top: 0rem;
-  //       left: calc(58% - 4rem);
-  //   }
-  // }
 }
 
 @media (max-width:700px) {
   .card {
     position:absolute;
     margin-left:2rem;
-  }
-
-  .opponent-card {
-    top: 5rem;
-    
-    &:nth-child(1) {
-      left: calc(40% - 4rem);
-    }
-    &:nth-child(2) {
-      left: calc(45% - 4rem);
-    }
-    &:nth-child(3) {
-        left: calc(50% - 4rem);
-    }
-    &:nth-child(4) {
-        left: calc(55% - 4rem);
-    }
-    &:nth-child(5) {
-        left: calc(60% - 4rem);
-    }
-  }
-
-  .player-card {
-    top: 20%;
-    &:nth-child(1) {    
-        left: calc(40% - 4rem);
-    }
-    &:nth-child(2) {
-        left: calc(45% - 4rem);
-    }
-    &:nth-child(3) {
-        left: calc(50% - 4rem);
-    }
-    &:nth-child(4) {
-        left: calc(55% - 4rem);
-    }
-    &:nth-child(5) {
-        left: calc(60% - 4rem);
-    }
-  }
+  }  
 }
 
 @media (max-width: 500px) {

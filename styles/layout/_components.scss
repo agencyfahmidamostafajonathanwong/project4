@@ -1,8 +1,9 @@
-
+  
+//Mobile previous card button
   .prev { 
+  display:none;
   position:absolute;
   left: 8%;
-  display: block;
   animation: bounceInLeft 300ms;
   &::after {
     content: '<';
@@ -12,10 +13,11 @@
     border: 1px solid white;
   }
 }
+//Mobile next card button
   .next {
   position:absolute;
   right:5%;
-  display: block;
+  display: none;
   animation: bounceInRight 300ms; 
   &::after {
     content: '>';
@@ -26,3 +28,36 @@
   }
 }
 
+//General Buttons
+button {
+    display: block;
+    padding: 1rem;
+    align-self: stretch;
+    z-index:10;
+    position:relative;
+    border-radius:10px;
+    background: darkblue;
+    color:white;
+    transform: translateY(-0.25rem) scale(1);
+    cursor: pointer;
+    
+  &:disabled {
+    background: darkgrey;
+    color: grey;
+  }
+
+  &:hover, &:focus {
+    transform: translateY(-0.25rem) scale(1.05);
+  }
+}
+
+
+@media (max-width:700px) {
+  .prev {
+    display:block;
+  }
+
+  .next {
+    display:block;
+  }
+}

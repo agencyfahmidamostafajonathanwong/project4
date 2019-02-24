@@ -170,29 +170,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-animation: prevCard 100ms;
   animation: prevCard 100ms; }
 
-button {
-  display: block;
-  padding: 1rem;
-  -ms-flex-item-align: stretch;
-  -ms-grid-row-align: stretch;
-  align-self: stretch;
-  z-index: 10;
-  position: relative;
-  border-radius: 10px;
-  background: darkblue;
-  color: white;
-  -webkit-transform: translateY(-0.25rem) scale(1);
-  -ms-transform: translateY(-0.25rem) scale(1);
-  transform: translateY(-0.25rem) scale(1);
-  cursor: pointer; }
-  button:disabled {
-    background: darkgrey;
-    color: grey; }
-  button:hover, button:focus {
-    -webkit-transform: translateY(-0.25rem) scale(1.05);
-    -ms-transform: translateY(-0.25rem) scale(1.05);
-    transform: translateY(-0.25rem) scale(1.05); }
-
 .card {
   margin: 1rem;
   width: 8rem;
@@ -259,31 +236,7 @@ button {
 @media (max-width: 700px) {
   .card {
     position: absolute;
-    margin-left: 2rem; }
-  .opponent-card {
-    top: 5rem; }
-    .opponent-card:nth-child(1) {
-      left: calc(40% - 4rem); }
-    .opponent-card:nth-child(2) {
-      left: calc(45% - 4rem); }
-    .opponent-card:nth-child(3) {
-      left: calc(50% - 4rem); }
-    .opponent-card:nth-child(4) {
-      left: calc(55% - 4rem); }
-    .opponent-card:nth-child(5) {
-      left: calc(60% - 4rem); }
-  .player-card {
-    top: 20%; }
-    .player-card:nth-child(1) {
-      left: calc(40% - 4rem); }
-    .player-card:nth-child(2) {
-      left: calc(45% - 4rem); }
-    .player-card:nth-child(3) {
-      left: calc(50% - 4rem); }
-    .player-card:nth-child(4) {
-      left: calc(55% - 4rem); }
-    .player-card:nth-child(5) {
-      left: calc(60% - 4rem); } }
+    margin-left: 2rem; } }
 
 @media (max-width: 500px) {
   button, .opponent-life-points-label, .opponent-atk-display-label, .player-life-points-label, .player-atk-display-label {
@@ -475,9 +428,9 @@ button {
   position: relative; }
 
 .prev {
+  display: none;
   position: absolute;
   left: 8%;
-  display: block;
   -webkit-animation: bounceInLeft 300ms;
   animation: bounceInLeft 300ms; }
   .prev::after {
@@ -490,7 +443,7 @@ button {
 .next {
   position: absolute;
   right: 5%;
-  display: block;
+  display: none;
   -webkit-animation: bounceInRight 300ms;
   animation: bounceInRight 300ms; }
   .next::after {
@@ -499,6 +452,35 @@ button {
     padding: 0.3rem;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid white; }
+
+button {
+  display: block;
+  padding: 1rem;
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
+  z-index: 10;
+  position: relative;
+  border-radius: 10px;
+  background: darkblue;
+  color: white;
+  -webkit-transform: translateY(-0.25rem) scale(1);
+  -ms-transform: translateY(-0.25rem) scale(1);
+  transform: translateY(-0.25rem) scale(1);
+  cursor: pointer; }
+  button:disabled {
+    background: darkgrey;
+    color: grey; }
+  button:hover, button:focus {
+    -webkit-transform: translateY(-0.25rem) scale(1.05);
+    -ms-transform: translateY(-0.25rem) scale(1.05);
+    transform: translateY(-0.25rem) scale(1.05); }
+
+@media (max-width: 700px) {
+  .prev {
+    display: block; }
+  .next {
+    display: block; } }
 
 .player-side {
   height: 50%;
@@ -561,21 +543,27 @@ button {
   bottom: 4rem;
   color: white; }
 
-.player-side .next {
-  display: none; }
-
-.player-side .prev {
-  display: none; }
-
 @media (max-width: 700px) {
   .player-side .buttons {
-    display: block;
     z-index: 10;
+    top: 30%;
     text-decoration: none;
     color: white;
     -webkit-transform: translateY(200%);
     -ms-transform: translateY(200%);
-    transform: translateY(200%); } }
+    transform: translateY(200%); }
+  .player-card {
+    top: 20%; }
+    .player-card:nth-child(1) {
+      left: calc(40% - 4rem); }
+    .player-card:nth-child(2) {
+      left: calc(45% - 4rem); }
+    .player-card:nth-child(3) {
+      left: calc(50% - 4rem); }
+    .player-card:nth-child(4) {
+      left: calc(55% - 4rem); }
+    .player-card:nth-child(5) {
+      left: calc(60% - 4rem); } }
 
 @media (max-width: 800px) {
   .gameboard {
@@ -595,9 +583,7 @@ button {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%); }
   .player-atk-button {
-    margin-right: 0; }
-  .player-side .buttons {
-    top: 30%; } }
+    margin-right: 0; } }
 
 @media (max-width: 350px) {
   .player-card {
@@ -652,44 +638,24 @@ button {
   right: 0;
   color: white; }
 
-.opponent-side .buttons.next {
-  display: none; }
-
-.opponent-side .buttons.prev {
-  display: none; }
-
 @media (max-width: 700px) {
   .opponent-side .buttons {
     z-index: 10;
     text-decoration: none;
     color: white;
     top: 50%; }
-  .opponent-side .buttons.prev {
-    display: block;
-    -webkit-animation: bounceInLeft 300ms;
-    animation: bounceInLeft 300ms; }
-    .opponent-side .buttons.prev::after {
-      content: '<';
-      border-radius: 30%;
-      padding: 0.3rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid white; }
-  .opponent-side .buttons.next {
-    display: block;
-    -webkit-animation: bounceInRight 300ms;
-    animation: bounceInRight 300ms; }
-    .opponent-side .buttons.next::after {
-      content: '>';
-      border-radius: 30%;
-      padding: 0.3rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid white; }
-  .transformThis {
-    -webkit-animation: nextCard 500ms;
-    animation: nextCard 500ms; }
-  .transformPrev {
-    -webkit-animation: prevCard 100ms;
-    animation: prevCard 100ms; } }
+  .opponent-card {
+    top: 5rem; }
+    .opponent-card:nth-child(1) {
+      left: calc(40% - 4rem); }
+    .opponent-card:nth-child(2) {
+      left: calc(45% - 4rem); }
+    .opponent-card:nth-child(3) {
+      left: calc(50% - 4rem); }
+    .opponent-card:nth-child(4) {
+      left: calc(55% - 4rem); }
+    .opponent-card:nth-child(5) {
+      left: calc(60% - 4rem); } }
 
 .modal-background {
   height: 100vh;

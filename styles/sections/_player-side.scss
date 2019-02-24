@@ -47,27 +47,35 @@
   color: white;
 }
 
-
-.player-side {
-  .next {
-    display: none;
-  }
-  .prev {
-    display: none;
-  }
-}
-
 @media (max-width: 700px) {
   .player-side {
     .buttons {
-      display:block;
       z-index: 10;
+      top:30%;
       text-decoration: none;
       color: white;
       transform:translateY(200%);
     }
-   
   } 
+
+  .player-card {
+    top: 20%;
+    &:nth-child(1) {    
+        left: calc(40% - 4rem);
+    }
+    &:nth-child(2) {
+        left: calc(45% - 4rem);
+    }
+    &:nth-child(3) {
+        left: calc(50% - 4rem);
+    }
+    &:nth-child(4) {
+        left: calc(55% - 4rem);
+    }
+    &:nth-child(5) {
+        left: calc(60% - 4rem);
+    }
+  }
 }
 
 @media (max-width: 800px) {
@@ -86,12 +94,6 @@
   
   .player-atk-button {
     margin-right:0;
-  }
-
-  .player-side {
-    .buttons {
-      top: 30%;
-    }
   }
  }
 
