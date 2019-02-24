@@ -4,6 +4,14 @@
   transform: scale(1.5);
 }
 
+.transformThis {
+  animation: nextCard 500ms;
+}
+
+.transformPrev {
+  animation: prevCard 100ms;
+}
+
 button {
     display: block;
     padding: 1rem;

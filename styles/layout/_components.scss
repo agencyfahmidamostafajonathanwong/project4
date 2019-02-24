@@ -1,1 +1,28 @@
 
+  .prev { 
+  position:absolute;
+  left: 8%;
+  display: block;
+  animation: bounceInLeft 300ms;
+  &::after {
+    content: '<';
+    border-radius: 30%;
+    padding: 0.3rem;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid white;
+  }
+}
+  .next {
+  position:absolute;
+  right:5%;
+  display: block;
+  animation: bounceInRight 300ms; 
+  &::after {
+    content: '>';
+    border-radius: 30%;
+    padding: 0.3rem;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid white;
+  }
+}
+

@@ -50,16 +50,15 @@
   .opponent-side {
     .buttons {
       z-index: 10;
-      position: absolute;
-      top: 65%;
       text-decoration: none;
       color: white;
+      top:50%;
     }
 
     .buttons.prev {
-      left: 40%;
       display: block;
       animation: bounceInLeft 300ms;
+
       &::after {
         content: '<';
         border-radius: 30%;
@@ -69,9 +68,10 @@
       }
     }
     .buttons.next {
-      right: 30%;
+     
       display: block;
       animation: bounceInRight 300ms; 
+
       &::after {
         content: '>';
         border-radius: 30%;
@@ -79,10 +79,6 @@
         background: rgba(0,0,0,0.5);
         border: 1px solid white;
       }
-    }
-
-    &:hover {
-      
     }
   }
 
@@ -92,8 +88,6 @@
 
   .transformPrev {
       animation: prevCard 100ms;
-      display: none;
+      // display: none;
   }
 }
-
-
