@@ -165,7 +165,7 @@ app.setupPlayerCards = () => {
 }
 
 //Sets up initial opponent hand from totalDeck
-app.setupOpponentCards = function () {
+app.setupOpponentCards = () => {
   for (let i = 0; i < 5; i++) {
     let randomIndex = Math.floor(Math.random() * app.totalDeck.length);
     app.opponentHand.push(app.totalDeck[randomIndex]);
@@ -208,7 +208,7 @@ app.renderGameOver = () => {
 }
 
 //Executes computer move
-app.executeOpponentMove = function () {
+app.executeOpponentMove = () => {
   if (app.playerLife > 0 && app.opponentLife > 0) {
     app.toggleHighlight();
     app.resetAttackDisplay();
@@ -218,16 +218,16 @@ app.executeOpponentMove = function () {
   }
 }
 
-app.loadEventHandlers = function(e) {
-  let lastCard = $(".card-list .card").length - 1;
+app.loadEventHandlers = (e) => {
+  const lastCard = $(".card-list .card").length - 1;
 
   if (app.turn % 2 === 1) {
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     if (e.target.matches(".opponent-side .buttons.next")) {
       app.toggleHighlight();
-      let prependList = function () {
+     const prependList = function () {
         if ($('.opponent-card').hasClass('activeNow')) {
-          let $slicedCard = $('.opponent-card').slice(lastCard).removeClass('transformThis activeNow');
+         const $slicedCard = $('.opponent-card').slice(lastCard).removeClass('transformThis activeNow');
           $('.opponent-hand').prepend($slicedCard);
         }
       }
@@ -238,9 +238,9 @@ app.loadEventHandlers = function(e) {
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     if (e.target.matches(".opponent-side .buttons.prev")) {
       app.toggleHighlight();
-      let appendToList = function () {
+     const appendToList = function () {
         if ($('.opponent-card').hasClass('activeNow')) {
-          let $slicedCard = $('.opponent-card').slice(0, 1).addClass('transformPrev');
+         const $slicedCard = $('.opponent-card').slice(0, 1).addClass('transformPrev');
           $('.opponent-hand').append($slicedCard);
         }
       }

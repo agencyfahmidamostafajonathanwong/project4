@@ -1,12 +1,14 @@
 @import "base/base";
 @import "base/setup";
+@import "base/variables";
 @import "base/reusables";
 @import "base/animations";
 @import "layout/gameboard";
-@import "layout/components";
+@import "components/buttons";
+@import "components/card";
+@import "components/modal";
 @import "sections/player-side";
 @import "sections/_opponent-side.scss";
-@import "sections/modal";
 @import "sections/game-over";
 @import "sections/start-game";
 

@@ -1,12 +1,22 @@
 .gameboard {
+  position:relative;
   height:100vh;
   background: rgba(0, 0, 0, 0.25);
   width: 100%;
 }
 
+//Styling for each player's part of the board
 .gameboard-half {
   height: 50%;
   position: relative;
+}
+
+//Stylings for player hand
+.hand {
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

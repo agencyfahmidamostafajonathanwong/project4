@@ -1,11 +1,4 @@
 
-.opponent-hand {
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .opponent-transition-delay {
   transition: .2s all 2s;
   -webkit-transition: .2s all 2s;
@@ -23,25 +16,19 @@
   justify-content: space-between;
 }
 
-.opponent-life-points-label {
+.opponent-stats-label {
   top:3.6rem;
   position: absolute;
-  color: white;
 }
 
 .opponent-atk-display-label {
-  position: absolute;
-  top: 3.6rem;
   right: 0;
-  color: white;
 }
 
 @media (max-width: 700px) {
   .opponent-side {
     .buttons {
       z-index: 10;
-      text-decoration: none;
-      color: white;
       top:50%;
     }  
   }

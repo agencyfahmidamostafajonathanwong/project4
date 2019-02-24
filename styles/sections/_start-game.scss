@@ -22,6 +22,32 @@
   }
 }
 
-@media (max-width:750px){
-  
+@media(max-width:750px) {
+  .start-game-body {  
+    width:100vw;
+    height:100vh;
+    padding:1rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .start-game-instruct-heading {
+    font-size:.6;
+  }
+}
+
+@media(max-width: 350px) {
+  .start-game-instructions {
+    font-size: 0.6rem;
+    margin-bottom:.3rem;
+  }
+
+  .start-game-instructions li {
+    margin-bottom:.5rem;
+  }
+
+  .start-game-heading {
+    font-size:.8rem;
+  }
 }

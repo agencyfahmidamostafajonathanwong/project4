@@ -4,6 +4,9 @@
     width:100vw;
     background: rgba(0,0,0,.4);
     position:absolute;
+    top:0;
+    left: 0;
+    right:0;
   }
 
   &-body {
@@ -12,10 +15,9 @@
     margin: auto;
     padding: 2rem;
     text-align:center;
-    border:10px solid black;
+    border:10px solid $color-black;
     border-radius:10px;
-    background-color: blue;
-    color:white;
+    background-color: $color-blue;
   }
 }
 
@@ -38,8 +40,10 @@
   }
 
   .modal-body {
-    padding:1rem;
-    width:100vw;
-    height:100vh;
+    padding: 1rem;
+    border: none;
   }
 }
+
+
+

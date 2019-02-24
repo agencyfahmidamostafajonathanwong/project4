@@ -1,17 +1,7 @@
 .player-side {
-  height: 50%;
   display:flex; 
   flex-direction: column;
   justify-content: flex-end;
-  position: relative
-}
-
-.player-hand {
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
 }
 
 .player-transition-delay {
@@ -31,29 +21,19 @@
   margin-right:.5rem;
 }
 
-//https://wpshout.com/quick-guides/create-text-outline-css/
-//https://codepen.io/chriscoyier/pen/niIjA
-
-.player-life-points-label {
+.player-stats-label {
   position: absolute;
   bottom: 4rem;
-  color: white;
 }
 
 .player-atk-display-label {
-  position: absolute;
   right: 0;
-  bottom: 4rem;
-  color: white;
 }
 
 @media (max-width: 700px) {
   .player-side {
     .buttons {
-      z-index: 10;
       top:30%;
-      text-decoration: none;
-      color: white;
       transform:translateY(200%);
     }
   } 
@@ -79,10 +59,6 @@
 }
 
 @media (max-width: 800px) {
-  .gameboard {
-    position: relative;
-  }
- 
   .player-button-list {
     display: flex;
     flex-direction: column;
