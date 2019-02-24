@@ -204,6 +204,12 @@ button {
     transform: scale(1.5); }
 
 .life-points, .atk-points {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin: 0;
   padding: 1rem 1.5rem;
   font-size: 1.5rem;
@@ -229,194 +235,75 @@ button {
     -webkit-transform: scale(1.5);
     -ms-transform: scale(1.5);
     transform: scale(1.5); }
+  .card:focus {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5); }
   .card {
     width: 6.5rem;
-    height: 10rem;
-    position: absolute; }
-    .card:nth-child(1) {
-      top: 1rem;
-      left: calc(50% - 4rem); }
-    .card:nth-child(2) {
-      top: 2rem;
-      left: calc(52% - 4rem); }
-    .card:nth-child(3) {
-      top: 3rem;
-      left: calc(54% - 4rem); }
-    .card:nth-child(4) {
-      top: 4rem;
-      left: calc(56% - 4rem); }
-    .card:nth-child(5) {
-      top: 5rem;
-      left: calc(58% - 4rem); } }
+    height: 10rem; } }
 
 @media (max-width: 800px) {
-  .opponent-card:nth-child(1) {
-    top: 6.5rem;
-    left: calc(50% - 4rem); }
-  .opponent-card:nth-child(2) {
-    top: 6.5rem;
-    left: calc(52% - 4rem); }
-  .opponent-card:nth-child(3) {
-    top: 6.5rem;
-    left: calc(54% - 4rem); }
-  .opponent-card:nth-child(4) {
-    top: 6.5rem;
-    left: calc(56% - 4rem); }
-  .opponent-card:nth-child(5) {
-    top: 6.5rem;
-    left: calc(58% - 4rem); }
-  .player-card:nth-child(1) {
-    top: 0rem;
-    left: calc(50% - 4rem); }
-  .player-card:nth-child(2) {
-    top: 0rem;
-    left: calc(52% - 4rem); }
-  .player-card:nth-child(3) {
-    top: 0rem;
-    left: calc(54% - 4rem); }
-  .player-card:nth-child(4) {
-    top: 0rem;
-    left: calc(56% - 4rem); }
-  .player-card:nth-child(5) {
-    top: 0rem;
-    left: calc(58% - 4rem); } }
+  .card {
+    width: 5rem;
+    height: 7rem; } }
+
+@media (max-width: 700px) {
+  .card {
+    position: absolute;
+    margin-left: 2rem; }
+  .opponent-card {
+    top: 5rem; }
+    .opponent-card:nth-child(1) {
+      left: calc(40% - 4rem); }
+    .opponent-card:nth-child(2) {
+      left: calc(45% - 4rem); }
+    .opponent-card:nth-child(3) {
+      left: calc(50% - 4rem); }
+    .opponent-card:nth-child(4) {
+      left: calc(55% - 4rem); }
+    .opponent-card:nth-child(5) {
+      left: calc(60% - 4rem); }
+  .player-card {
+    top: 20%; }
+    .player-card:nth-child(1) {
+      left: calc(40% - 4rem); }
+    .player-card:nth-child(2) {
+      left: calc(45% - 4rem); }
+    .player-card:nth-child(3) {
+      left: calc(50% - 4rem); }
+    .player-card:nth-child(4) {
+      left: calc(55% - 4rem); }
+    .player-card:nth-child(5) {
+      left: calc(60% - 4rem); } }
 
 @media (max-width: 500px) {
   button, .opponent-life-points-label, .opponent-atk-display-label, .player-life-points-label, .player-atk-display-label {
-    font-size: 0.75rem; } }
+    font-size: 0.7rem;
+    margin: 0; }
+  button {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+    font-size: .7rem; }
+  .life-points, .atk-points {
+    font-size: 1rem;
+    width: 6rem;
+    height: 3rem;
+    text-align: center; }
+  .card {
+    width: 5rem;
+    height: 7rem; } }
 
-.gameboard {
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.25);
-  width: 100%; }
-
-.gameboard-half {
-  height: 50%;
-  position: relative; }
-
-.player-side {
-  height: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  position: relative; }
-
-.player-hand {
-  height: 80%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end; }
-
-.player-transition-delay {
-  -o-transition: .2s all 4s;
-  transition: .2s all 4s;
-  -webkit-transition: .2s all 4s;
-  -moz-transition: .2s all 4s; }
-
-.player-stats ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-item-align: end;
-  align-self: flex-end; }
-
-.player-atk-button {
-  margin-right: .5rem; }
-
-.player-life-points-label {
-  position: absolute;
-  bottom: 4rem;
-  color: white; }
-
-.player-atk-display-label {
-  position: absolute;
-  right: 0;
-  bottom: 4rem;
-  color: white; }
-
-.player-side .buttons.next {
-  display: none; }
-
-.player-side .buttons.prev {
-  display: none; }
-
-@media (max-width: 1000px) {
-  .player-side .buttons {
-    z-index: 10;
-    position: absolute;
-    top: 60%;
-    text-decoration: none;
-    color: white; }
-  .player-side:hover .buttons.prev {
-    left: 40%;
-    display: block;
-    -webkit-animation: bounceInLeft 300ms;
-    animation: bounceInLeft 300ms; }
-    .player-side:hover .buttons.prev::after {
-      content: '<';
-      border-radius: 30%;
-      padding: 0.3rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid white; }
-  .player-side:hover .buttons.next {
-    right: 30%;
-    display: block;
-    -webkit-animation: bounceInRight 300ms;
-    animation: bounceInRight 300ms; }
-    .player-side:hover .buttons.next::after {
-      content: '>';
-      border-radius: 30%;
-      padding: 0.3rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid white; }
-  .transformThis {
-    -webkit-animation: nextCard 500ms;
-    animation: nextCard 500ms; }
-  .transformPrev {
-    -webkit-animation: prevCard 100ms;
-    animation: prevCard 100ms;
-    display: none; } }
-
-@media (max-width: 800px) {
-  .gameboard {
-    position: relative; }
-  .player-button-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%); }
-  .player-atk-button {
-    margin-right: 0; }
-  .player-side .buttons {
-    top: 30%; } }
+@media (max-width: 400px) {
+  .highlight {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3); }
+  .card:focus {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3); } }
 
 @-webkit-keyframes prevCard {
   0% {
@@ -570,6 +457,147 @@ button {
     -webkit-transform: translateX(0);
     transform: translateX(0); } }
 
+.gameboard {
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  width: 100%; }
+
+.gameboard-half {
+  height: 50%;
+  position: relative; }
+
+.player-side {
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  position: relative; }
+
+.player-hand {
+  height: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-item-align: center;
+  align-self: center; }
+
+.player-transition-delay {
+  -o-transition: .2s all 4s;
+  transition: .2s all 4s;
+  -webkit-transition: .2s all 4s;
+  -moz-transition: .2s all 4s; }
+
+.player-stats ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-item-align: end;
+  align-self: flex-end; }
+
+.player-atk-button {
+  margin-right: .5rem; }
+
+.player-life-points-label {
+  position: absolute;
+  bottom: 4rem;
+  color: white; }
+
+.player-atk-display-label {
+  position: absolute;
+  right: 0;
+  bottom: 4rem;
+  color: white; }
+
+.player-side .buttons.next {
+  display: none; }
+
+.player-side .buttons.prev {
+  display: none; }
+
+@media (max-width: 700px) {
+  .player-side .buttons {
+    z-index: 10;
+    position: absolute;
+    top: 60%;
+    text-decoration: none;
+    color: white; }
+  .player-side .buttons.prev {
+    position: absolute;
+    left: 40%;
+    display: block;
+    -webkit-animation: bounceInLeft 300ms;
+    animation: bounceInLeft 300ms; }
+    .player-side .buttons.prev::after {
+      content: '<';
+      border-radius: 30%;
+      padding: 0.3rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white; }
+  .player-side .buttons.next {
+    position: absolute;
+    right: 30%;
+    display: block;
+    -webkit-animation: bounceInRight 300ms;
+    animation: bounceInRight 300ms; }
+    .player-side .buttons.next::after {
+      content: '>';
+      border-radius: 30%;
+      padding: 0.3rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white; }
+  .transformThis {
+    -webkit-animation: nextCard 500ms;
+    animation: nextCard 500ms; }
+  .transformPrev {
+    -webkit-animation: prevCard 100ms;
+    animation: prevCard 100ms;
+    display: none; } }
+
+@media (max-width: 800px) {
+  .gameboard {
+    position: relative; }
+  .player-button-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  .player-atk-button {
+    margin-right: 0; }
+  .player-side .buttons {
+    top: 30%; } }
+
+@media (max-width: 350px) {
+  .player-card {
+    top: 10%; } }
+
 .opponent-hand {
   height: 80%;
   display: -webkit-box;
@@ -578,9 +606,9 @@ button {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start; }
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
 
 .opponent-transition-delay {
   -o-transition: .2s all 2s;
@@ -609,6 +637,7 @@ button {
   justify-content: space-between; }
 
 .opponent-life-points-label {
+  top: 3.6rem;
   position: absolute;
   color: white; }
 
@@ -624,30 +653,30 @@ button {
 .opponent-side .buttons.prev {
   display: none; }
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
   .opponent-side .buttons {
     z-index: 10;
     position: absolute;
     top: 65%;
     text-decoration: none;
     color: white; }
-  .opponent-side:hover .buttons.prev {
+  .opponent-side .buttons.prev {
     left: 40%;
     display: block;
     -webkit-animation: bounceInLeft 300ms;
     animation: bounceInLeft 300ms; }
-    .opponent-side:hover .buttons.prev::after {
+    .opponent-side .buttons.prev::after {
       content: '<';
       border-radius: 30%;
       padding: 0.3rem;
       background: rgba(0, 0, 0, 0.5);
       border: 1px solid white; }
-  .opponent-side:hover .buttons.next {
+  .opponent-side .buttons.next {
     right: 30%;
     display: block;
     -webkit-animation: bounceInRight 300ms;
     animation: bounceInRight 300ms; }
-    .opponent-side:hover .buttons.next::after {
+    .opponent-side .buttons.next::after {
       content: '>';
       border-radius: 30%;
       padding: 0.3rem;

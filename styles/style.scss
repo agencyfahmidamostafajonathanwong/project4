@@ -1,7 +1,9 @@
 @import "base/base";
 @import "base/setup";
 @import "base/reusables";
+@import "base/animations";
 @import "layout/gameboard";
+@import "layout/components";
 @import "sections/player-side";
 @import "sections/_opponent-side.scss";
 @import "sections/modal";

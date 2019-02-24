@@ -31,6 +31,8 @@ app.calcPlayerAttack =  () => {
   }
 };
 
+
+//starts computer attack.
 app.calcOpponentAttack = function () {
   //Set current cards to first card by default
   app.currentOpponentCard = app.opponentHand[0];
@@ -79,8 +81,10 @@ app.calcOpponentAttack = function () {
     app.toggleOpponentHighlightDelay(opponentCardNode);
     app.togglePlayerHighlightDelay(playerCardNode);
     app.toggleHighlight();
+
     app.currentPlayerCard.atk = parseInt(app.currentPlayerCard.atk, 10);
     app.currentOpponentCard.atk = parseInt(app.currentOpponentCard.atk);
+
     if (app.currentOpponentCard.atk > app.currentPlayerCard.atk) {
       const overFlowDamage = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
       app.playerLife -= overFlowDamage;
@@ -105,7 +109,7 @@ app.calcOpponentAttack = function () {
     } else {
       app.renderGameOver()
     }
-  }, 8000)
+  }, 8000);
 }
 
 //Removes player card from the UI and database.
@@ -191,7 +195,6 @@ app.startGame = () => {
 
 //Shows game over screen
 app.renderGameOver = () => {
-
   app.turn === 2;
 
   if (app.playerLife <= 0) {
