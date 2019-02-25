@@ -1,6 +1,5 @@
 @import "base/base";
 @import "base/setup";
-@import "base/variables";
 @import "base/mixins";
 @import "base/reusables";
 @import "base/animations";
@@ -8,8 +7,9 @@
 @import "components/buttons";
 @import "components/card";
 @import "components/modal";
+@import "components/stats";
 @import "sections/player-side";
-@import "sections/_opponent-side.scss";
+@import "sections/opponent-side";
 @import "sections/game-over";
 @import "sections/start-game";
 
