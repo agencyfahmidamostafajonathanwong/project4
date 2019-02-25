@@ -1,24 +1,22 @@
-.modal {
-  &-background {
-    height:100vh;
-    width:100vw;
-    background: rgba(0,0,0,.4);
-    position:absolute;
-    top:0;
-    left: 0;
-    right:0;
-  }
+.modal-background {
+  height:100vh;
+  width:100vw;
+  background: rgba(0,0,0,.4);
+  position:absolute;
+  top:0;
+  left: 0;
+  right:0;
+}
 
-  &-body {
-    margin: auto;
-    padding: 2rem;
-    border: 10px solid $color-black;
-    border-radius: 10px;
-    z-index: 5;
-    position: relative;
-    text-align: center;
-    background-color: $color-blue;
-  }
+.modal-body {
+  margin: auto;
+  padding: 2rem;
+  border: 10px solid $color-black;
+  border-radius: 10px;
+  z-index: 5;
+  position: relative;
+  text-align: center;
+  background-color: $color-blue;
 }
 
 .modal-heading{
