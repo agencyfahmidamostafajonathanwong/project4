@@ -338,6 +338,7 @@ img {
     content: ">"; }
 
 .next::after, .prev::after {
+  cursor: pointer;
   border-radius: 30%;
   padding: 0.3rem;
   background: rgba(0, 0, 0, 0.5);
@@ -351,6 +352,11 @@ button {
   -webkit-transform: translateY(-0.25rem) scale(1);
   -ms-transform: translateY(-0.25rem) scale(1);
   transform: translateY(-0.25rem) scale(1);
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  -o-transition: transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
   border-radius: 10px;
   z-index: 10;
   position: relative;

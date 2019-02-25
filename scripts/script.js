@@ -163,7 +163,6 @@ app.calcOpponentAttack = function () {
     app.updateLifePoints();
     app.resetAttackDisplay();
     app.resetCurrentCards();
-    app.checkGameOver();
     //Increment turn if player and opponent alive. Else render game over.
     if (app.playerLife > 0 && app.opponentLife > 0) {
       app.turn += 1;
@@ -240,76 +239,91 @@ app.executeOpponentMove = () => {
 
 app.loadEventHandlers = (e) => {
   const lastCard = $(".card-list .card").length - 1;
-
-  if (app.turn % 2 === 1) {
+  if (app.turn % 2 === 1) { 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     // Mobile next button scrolls to next opponent card
     if (e.target.matches(".opponent-side .buttons.next")) {
       app.toggleHighlight("opponent", app.currentOpponentCard);
+      app.$opponentAtkDisplay.text("");
+      app.currentOpponentCard = null;
+      app.togglePlayerButtons();
+
       const prependList = () => {
-        if ($(".opponent-card").hasClass("activeNow")) {
-         const $slicedCard = $(".opponent-card").slice(lastCard).removeClass("transform-next activeNow");
+        if ($(".opponent-card").hasClass("active-now")) {
+         const $slicedCard = $(".opponent-card").slice(lastCard).removeClass("transform-next active-now");
           $(".opponent-hand").prepend($slicedCard);
         }
       }
 
-      $(".opponent-card").last().removeClass("transform-prev").addClass("transform-next").prev().addClass("activeNow");
-      setTimeout(function () { prependList(); }, 150);
+      $(".opponent-card").last().removeClass("transform-prev").addClass("transform-next").prev().addClass("active-now");
+      setTimeout(() => { prependList(); }, 150);
     }
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     // Mobile prev button scrolls to prev opponent card
     if (e.target.matches(".opponent-side .buttons.prev")) {
      app.toggleHighlight("opponent", app.currentOpponentCard);
+     app.$opponentAtkDisplay.text("");
+     app.currentOpponentCard = null;
+     app.togglePlayerButtons();
+
      const appendToList = () => {
-        if ($(".opponent-card").hasClass("activeNow")) {
+        if ($(".opponent-card").hasClass("active-now")) {
          const $slicedCard = $(".opponent-card").slice(0, 1).addClass("transform-prev");
           $(".opponent-hand").append($slicedCard);
         }
       }
 
-      $(".opponent-card").removeClass("transform-prev").last().addClass("activeNow").prevAll().removeClass("activeNow");
-      setTimeout(function () { appendToList(); }, 150);
+      $(".opponent-card").removeClass("transform-prev").last().addClass("active-now").prevAll().removeClass("active-now");
+      setTimeout(() => { appendToList(); }, 150);
     }
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     // Mobile next button scrolls to next player card
     if (e.target.matches(".player-side .buttons.next")) {
       app.toggleHighlight("player", app.currentPlayerCard);
+      app.$playerAtkDisplay.text("");
+      app.currentPlayerCard = null;
+      app.togglePlayerButtons();
+
       const prependList = () => {
-        if ($(".player-card").hasClass("activeNow")) {
-          const $slicedCard = $(".player-card").slice(lastCard).removeClass("transform-next activeNow");
+        if ($(".player-card").hasClass("active-now")) {
+          const $slicedCard = $(".player-card").slice(lastCard).removeClass("transform-next active-now");
           $(".player-hand").prepend($slicedCard);
         }
       }
 
-      $(".player-card").last().removeClass("transform-prev").addClass("transform-next").prev().addClass("activeNow");
-      setTimeout(function () { prependList(); }, 150);
+      $(".player-card").last().removeClass("transform-prev").addClass("transform-next").prev().addClass("active-now");
+      setTimeout(() => { prependList(); }, 150);
     }
 
     // credit to https://codepen.io/prasannapegu/pen/JdyrZP
     // Mobile prev button scrolls to prev player card
     if (e.target.matches(".player-side .buttons.prev")) {
       app.toggleHighlight("player", app.currentPlayerCard);
+      app.$playerAtkDisplay.text("");
+      app.currentPlayerCard = null;
+      app.togglePlayerButtons();
+      
       const appendToList = () => {
-        if ($(".player-card").hasClass("activeNow")) {
+        if ($(".player-card").hasClass("active-now")) {
           const $slicedCard = $(".player-card").slice(0, 1).addClass("transform-prev");
           $(".player-hand").append($slicedCard);
         }
       }
 
-      $(".player-card").removeClass("transform-prev").last().addClass("activeNow").prevAll().removeClass("activeNow");
-      setTimeout(function () { appendToList(); }, 150);
+      $(".player-card").removeClass("transform-prev").last().addClass("active-now").prevAll().removeClass("active-now");
+      setTimeout(() => { appendToList(); }, 150);
     }
-
+    
     //Select a player card
     if (e.target.matches(".player-card, .player-card *")) {
       const playerCard = e.target.closest(".player-card");
       const playerCardId = playerCard.dataset.id;
       app.currentPlayerCard = app.getPlayerCard(playerCardId);
-      app.updatePlayerAtkDisplay();
       app.toggleHighlight("player", playerCard);
       app.togglePlayerButtons();
+      app.updatePlayerAtkDisplay();
     }
 
     //Select an opponent card
@@ -317,16 +331,16 @@ app.loadEventHandlers = (e) => {
       const opponentCard = e.target.closest(".opponent-card");
       const opponentCardId = opponentCard.dataset.id;
       app.currentOpponentCard = app.getOpponentCard(opponentCardId);
-      app.updateOpponentAtkDisplay();
       app.toggleHighlight("opponent", opponentCard);
       app.togglePlayerButtons();
+      app.updateOpponentAtkDisplay();
     }
   }
 }
 
-app.clickGameBoard = () => {
+app.setupGameBoard = () => {
   //Event delegation for gameboard.
- app.$gameBoard.on("click",  (e) => {
+ app.$gameBoard.on("click", (e) => {
     app.loadEventHandlers(e);
   })
   //Handles event when enter pushed
@@ -342,7 +356,6 @@ app.clickGameBoard = () => {
 app.handlePlayerButtons = () => {
   app.$playerAtkButton.on("click", () => {
     app.calcPlayerAttack();
-    app.checkGameOver()
     app.updateLifePoints();
     app.resetCurrentCards();
     app.togglePlayerButtons();
@@ -360,11 +373,7 @@ app.handlePlayerButtons = () => {
 
 // UI LOGIC
 //Checks to see if game has ended
-app.checkGameOver = () => {
-  if(app.playerLife <= 0 || app.opponentLife <= 0){
-      app.renderGameOver();
-    }
-}
+
 //Updates attack power based on current monster selected
 app.updatePlayerAtkDisplay = () => {
   app.$playerAtkDisplay.text(app.currentPlayerCard.atk);
@@ -465,7 +474,7 @@ app.updateOpponentLife = (counter) => {
       //Stop timer when counter reaches current lifepoints
       clearInterval(updateOpponentLifeAnimation); 
     } else if (app.opponentLife <= 0 && counter <= 0) { //Stops lifepoints at 0.
-      app.checkGameOver();
+      app.renderGameOver();
       clearInterval(updateOpponentLifeAnimation);
     }
   },.1);
@@ -479,7 +488,7 @@ app.updatePlayerLife = counter => {
     if( counter === app.playerLife && app.playerLife > 0){
       clearInterval(updatePlayerLifeAnimation);
     } else if(app.playerLife <= 0 && counter <= 0) {     
-      app.checkGameOver();
+      app.renderGameOver();
       clearInterval(updatePlayerLifeAnimation);    
     }
   },.1);
@@ -488,32 +497,30 @@ app.updatePlayerLife = counter => {
 app.renderPlayerCards = () => {
   app.$playerHandNode.html("");
   app.playerHand.forEach(card => {
-    const markup = `
+  const markup = `
     <li class="player-card card" tabindex="0" data-id=${card.id}>
       <img src="${card.image_url}" class="player-card-img" alt="${card.name}">
-      <div class="visuallyhidden">${card.atk} Attack Points</div>
+      <span class="visuallyhidden">${card.atk} Attack Points</span>
     </li>
   `;
-    app.$playerHandNode.append(markup);
+  app.$playerHandNode.append(markup);
   })
 }
 
 app.renderOpponentCards = () => {
   app.$opponentHandNode.html("");
   app.opponentHand.forEach(card => {
-    const markup = `
-      <li class="opponent-card card" tabindex="0" data-id=${card.id}>
-        <img src="${card.image_url}" class="opponent-card-img" alt="${card.name}">
-        <div class="visuallyhidden">${card.atk} Attack Points</div>
-      </li>
-    `;
-  
+  const markup = `
+    <li class="opponent-card card" tabindex="0" data-id=${card.id}>
+      <img src="${card.image_url}" class="opponent-card-img" alt="${card.name}">
+      <span class="visuallyhidden">${card.atk} Attack Points</div>
+    </li>
+  `; 
    app.$opponentHandNode.append(markup);
   })
 }
 
 app.init = async () => {
-  
   app.$playerHandNode = $(".player-hand");
   app.$opponentHandNode = $(".opponent-hand");
   app.$playerLifePoints = $(".player-life-points");
@@ -533,7 +540,7 @@ app.init = async () => {
     app.setupPlayerCards();
     app.setupOpponentCards();
     app.handlePlayerButtons();
-    app.clickGameBoard();
+    app.setupGameBoard();
     app.renderOpponentCards();
     app.renderPlayerCards();
     app.toggleAttackButton();
