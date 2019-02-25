@@ -11,7 +11,7 @@
   cursor: url(http://i258.photobucket.com/albums/hh263/Manah-Angel-Eyes/Tumblr%20Blog%20images/yugicursor.png~original), auto;
 
   &:focus {
-    border:3px solid red;
+    border: 3px solid red;
     transform: scale(1.5);
   }
 }
@@ -41,8 +41,8 @@
 
 @media (max-width:700px) {
   .card {
-    position:absolute;
-    margin-left:2rem;
+    position: absolute;
+    margin-left: 2rem;
   }  
 }
 

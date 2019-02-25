@@ -1,6 +1,6 @@
 .start-game {
-  display:flex;
-  z-index:100;
+  display: flex;
+  z-index: 100;
 }
 
 .start-game-instructions {
@@ -8,42 +8,42 @@
 }
 
 .start-game-body {
-  width:80%;
+  width: 80%;
 }
 
 .start-game-instructions li {
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 1000px) {
   .start-game-instructions {
     font-size: .9rem;
-    margin-bottom:.5rem;
+    margin-bottom: .5rem;
   }
 }
 
 @media(max-width:750px) {
   .start-game-body {  
     @include set-modal-full;
-    padding:1rem; 
+    padding: 1rem; 
   }
 
   .start-game-instruct-heading {
-    font-size:.6;
+    font-size: .6;
   }
 }
 
 @media(max-width: 450px) {
   .start-game-instructions {
     font-size: 0.6rem;
-    margin-bottom:.3rem;
+    margin-bottom: .3rem;
   }
 
   .start-game-instructions li {
-    margin-bottom:.7rem;
+    margin-bottom: .7rem;
   }
 
   .start-game-heading {
-    font-size:.8rem;
+    font-size: .8rem;
   }
 }

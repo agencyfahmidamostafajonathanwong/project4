@@ -12,17 +12,17 @@
   &-body {
     margin: auto;
     padding: 2rem;
-    border:10px solid $color-black;
-    border-radius:10px;
-    z-index:5;
-    position:relative;
-    text-align:center;
+    border: 10px solid $color-black;
+    border-radius: 10px;
+    z-index: 5;
+    position: relative;
+    text-align: center;
     background-color: $color-blue;
   }
 }
 
 .modal-heading{
-  margin:0;  
+  margin: 0;  
 }
 
 .modal-button {
@@ -30,12 +30,11 @@
 }
 
 @media (max-width: 750px) {
-  .modal-heading, h3 {
-    font-size: .8rem;
+  .start-game-instruct-heading, .modal-heading{
+    font-size:.8rem;
   }
 
-  .modal-heading{
-    font-size: .8rem;
+  .modal-heading {  
     text-transform: uppercase;
   }
 

@@ -10,7 +10,7 @@
 }
 
 .opponent-stats-label {
-  top:3.6rem;
+  top: 3.6rem;
   position: absolute;
 }
 
@@ -35,13 +35,13 @@
       left: calc(45% - 4rem);
     }
     &:nth-child(3) {
-        left: calc(50% - 4rem);
+      left: calc(50% - 4rem);
     }
     &:nth-child(4) {
-        left: calc(55% - 4rem);
+      left: calc(55% - 4rem);
     }
     &:nth-child(5) {
-        left: calc(60% - 4rem);
+      left: calc(60% - 4rem);
     }
   }
 }

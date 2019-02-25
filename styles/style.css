@@ -335,7 +335,7 @@ img {
   right: 5%;
   display: none; }
   .next::after {
-    content: '>'; }
+    content: ">"; }
 
 .next::after, .prev::after {
   border-radius: 30%;
@@ -458,10 +458,9 @@ button {
   margin: 0 auto; }
 
 @media (max-width: 750px) {
-  .modal-heading, h3 {
+  .start-game-instruct-heading, .modal-heading {
     font-size: .8rem; }
   .modal-heading {
-    font-size: .8rem;
     text-transform: uppercase; }
   .modal-body {
     padding: 1rem;

@@ -1,5 +1,5 @@
 .player-side {
-  display:flex; 
+  display: flex; 
   flex-direction: column;
   justify-content: flex-end;
 }
@@ -14,7 +14,7 @@
 }
 
 .player-atk-button {
-  margin-right:.5rem;
+  margin-right: .5rem;
 }
 
 .player-stats-label {
@@ -29,8 +29,8 @@
 @media (max-width: 700px) {
   .player-side {
     .buttons {
-      top:30%;
-      transform:translateY(200%);
+      top: 30%;
+      transform: translateY(200%);
     }
   } 
 
@@ -65,13 +65,13 @@
   }
   
   .player-atk-button {
-    margin-right:0;
+    margin-right: 0;
   }
  }
 
  @media(max-width:350px) {
   .player-card{
-    top:10%;
+    top: 10%;
   }
 }
 

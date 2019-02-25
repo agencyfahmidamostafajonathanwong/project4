@@ -1,35 +1,35 @@
 .game-over-background {
-  display:none;
+  display: none;
 }
 
 .game-over-body {
-  width:60%;
-  padding:3rem
+  width: 60%;
+  padding: 3rem
 }
 
 .game-over-message {
-  margin:1.5rem;
+  margin: 1.5rem;
 }
 
 @media (max-width:750px) {
   .game-over-body {
    @include set-modal-full;
-    padding:2rem;
+    padding: 2rem;
   }
 
   .game-over-heading {
-    font-size:1.2rem;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width:400px) {
   .game-over-heading {
-    font-size:1rem;
+    font-size: 1rem;
   }
 
   .game-over-body {
-    font-size:.8rem;
-    padding:1rem;
+    font-size: .8rem;
+    padding: 1rem;
   }
 }
 

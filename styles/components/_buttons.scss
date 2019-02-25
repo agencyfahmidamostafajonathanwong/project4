@@ -1,4 +1,4 @@
-//General styles for before and after buttons
+//General styles for prev and next buttons
 .buttons {
   z-index: 10;
   text-decoration: none;
@@ -7,8 +7,8 @@
 
 //Mobile previous card button
 .prev { 
-  display:none;
-  position:absolute;
+  display: none;
+  position: absolute;
   left: 8%;
 
   &::after {
@@ -18,12 +18,12 @@
 
 //Mobile next card button
   .next {
-  position:absolute;
-  right:5%;
+  position: absolute;
+  right: 5%;
   display: none;
 
   &::after {
-    content: '>';
+    content: ">";
   }
 }
 
@@ -39,11 +39,11 @@ button {
   display: block;
   padding: 1rem;
   background: darken($color-blue,20);
-  color:$color-white;
+  color: $color-white;
   transform: translateY(-0.25rem) scale(1);
-  border-radius:10px;
-  z-index:10;
-  position:relative;
+  border-radius: 10px;
+  z-index: 10;
+  position: relative;
   align-self: stretch;
   cursor: pointer;
     
@@ -59,17 +59,17 @@ button {
 
 @media (max-width:700px) {
   .prev {
-    display:block;
+    display: block;
   }
 
   .next {
-    display:block;
+    display: block;
   }
 }
 
 @media (max-width: 500px) {
   button {
-    transform:scale(.9);
-    font-size:.7rem;
+    transform: scale(.9);
+    font-size: .7rem;
   }
 }
