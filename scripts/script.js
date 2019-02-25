@@ -117,16 +117,16 @@ app.calcOpponentAttack = function () {
     app.toggleHighlight("opponent", opponentCardNode);
     app.togglePlayerHighlightDelay(playerCardNode);
     app.toggleHighlight("player", playerCardNode);
-  }, 500)
+  }, 500);
   
   //Time out syncs attack display update with transition delay.
   setTimeout(() => {
     app.updateOpponentAtkDisplay();
-  }, 2000)
+  }, 2000);
 
   setTimeout(() => {
     app.updatePlayerAtkDisplay();
-  }, 4000)
+  }, 4000);
 
   //Execute logic after animations are finished.
   setTimeout(() => {
@@ -342,13 +342,13 @@ app.setupGameBoard = () => {
   //Event delegation for gameboard.
  app.$gameBoard.on("click", (e) => {
     app.loadEventHandlers(e);
-  })
+  });
   //Handles event when enter pushed
  app.$gameBoard.on("keypress", function (e) {
     if (e.which === 13) {
       app.loadEventHandlers(e);
     }
-  })
+  });
 }
 
 //Event handlers for attack and cancel buttons
@@ -504,7 +504,7 @@ app.renderPlayerCards = () => {
     </li>
   `;
   app.$playerHandNode.append(markup);
-  })
+  });
 }
 
 app.renderOpponentCards = () => {
@@ -517,7 +517,7 @@ app.renderOpponentCards = () => {
     </li>
   `; 
    app.$opponentHandNode.append(markup);
-  })
+  });
 }
 
 app.init = async () => {
@@ -535,6 +535,7 @@ app.init = async () => {
   app.$gameOverPlayAgain = $(".game-over-play-again");
   app.$startGameButton = $(".start-game-button");
   app.$startGameScreen = $(".start-game");
+
   try {
     await app.getDeck();
     app.setupPlayerCards();
@@ -550,7 +551,6 @@ app.init = async () => {
   } catch(error) {
     throw error;
   }
-  
 }
 
 $(function () {
