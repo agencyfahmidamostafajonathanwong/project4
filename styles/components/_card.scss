@@ -1,12 +1,13 @@
 .card {
-  margin: 1rem;
   width: 8rem;
   height: 12rem;
+  margin: 1rem;
+  
   background:rgba(0,0,0,.75);
-  -webkit-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
-  -moz-box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
   box-shadow: 1px -1px 0px 17px rgba(0,0,0,0.75);
+  
   transition: .2s all;
+
   cursor: url(http://i258.photobucket.com/albums/hh263/Manah-Angel-Eyes/Tumblr%20Blog%20images/yugicursor.png~original), auto;
 
   &:focus {

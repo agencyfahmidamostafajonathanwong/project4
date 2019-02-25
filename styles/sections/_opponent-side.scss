@@ -1,13 +1,6 @@
 
 .opponent-transition-delay {
   transition: .2s all 2s;
-  -webkit-transition: .2s all 2s;
-  -moz-transition: .2s all 2s;
-}
-
-.opponent-stats ul {
-  display: flex;
-  justify-content: space-between;
 }
 
 .opponent-atk-display-box {
@@ -52,3 +45,4 @@
     }
   }
 }
+

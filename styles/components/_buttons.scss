@@ -10,14 +10,9 @@
   display:none;
   position:absolute;
   left: 8%;
-  animation: bounceInLeft 300ms;
-  
+
   &::after {
-    content: '<';
-    border-radius: 30%;
-    padding: 0.3rem;
-    background: rgba($color-black, 0.5);
-    border: 1px solid $color-white;
+    content: "<";
   }
 }
 
@@ -26,33 +21,35 @@
   position:absolute;
   right:5%;
   display: none;
-  animation: bounceInRight 300ms; 
 
   &::after {
     content: '>';
-    border-radius: 30%;
-    padding: 0.3rem;
-    background: rgba($color-black, 0.5);
-    border: 1px solid $color-white;
   }
+}
+
+.next::after, .prev::after {
+  border-radius: 30%;
+  padding: 0.3rem;
+  background: rgba($color-black, 0.5);
+  border: 1px solid $color-white;
 }
 
 //General Buttons
 button {
-    display: block;
-    padding: 1rem;
-    align-self: stretch;
-    z-index:10;
-    position:relative;
-    border-radius:10px;
-    background: darken($color-blue,20);
-    color:$color-white;
-    transform: translateY(-0.25rem) scale(1);
-    cursor: pointer;
+  display: block;
+  padding: 1rem;
+  background: darken($color-blue,20);
+  color:$color-white;
+  transform: translateY(-0.25rem) scale(1);
+  border-radius:10px;
+  z-index:10;
+  position:relative;
+  align-self: stretch;
+  cursor: pointer;
     
   &:disabled {
-    background: darkgrey;
-    color: grey;
+    background: lighten($color-grey,17);
+    color: $color-grey;
   }
 
   &:hover, &:focus {

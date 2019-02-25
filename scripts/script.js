@@ -46,9 +46,10 @@ app.setupOpponentCards = () => {
   }
 }
 
+//Draws a card from the total deck and adds to player or opp hand.
 app.drawCard = (type) => {
     const randomIndex = Math.floor(Math.random() * app.totalDeck.length);
-    if(type==='player'){
+    if(type==="player"){
       app.playerHand.push(app.totalDeck[randomIndex]);
     } else {
       app.opponentHand.push(app.totalDeck[randomIndex]);
@@ -66,11 +67,8 @@ app.calcPlayerAttack =  () => {
     app.opponentLife -= overFlowDamage;
     app.removeOpponentCard();
     app.drawCard("opponent");
-    //If no monsters direct attack
-  } else if (app.opponentHand.length === 0) {
-    app.opponentLife -= playerAttack;
-    //Failed attack
-  } else if (opponentAttack > playerAttack) {
+    //IOpponent wins
+  }  else if (opponentAttack > playerAttack) {
     app.playerLife -= (opponentAttack - playerAttack);
     app.removePlayerCard();
     app.drawCard("player");
@@ -84,7 +82,6 @@ app.calcPlayerAttack =  () => {
   app.renderPlayerCards();
   app.renderOpponentCards();
 };
-
 
 //starts computer attack.
 app.calcOpponentAttack = function () {
@@ -102,6 +99,7 @@ app.calcOpponentAttack = function () {
         app.currentOpponentCard = app.opponentHand[i];
       }
     }
+    
     //Finds lowest attack player card and sets to current player card
     for (let i = 1; i < app.playerHand.length; i++) {
       if (parseInt(app.playerHand[i].atk, 10) < parseInt(app.currentPlayerCard.atk, 10)) {
@@ -140,17 +138,18 @@ app.calcOpponentAttack = function () {
     app.currentOpponentCard.atk = parseInt(app.currentOpponentCard.atk, 10);
 
     // calculates opponent attack
+    //Opponent wins
     if (app.currentOpponentCard.atk > app.currentPlayerCard.atk) {
       const overFlowDamage = app.currentOpponentCard.atk - app.currentPlayerCard.atk;
       app.playerLife -= overFlowDamage;
       app.removePlayerCard();
       app.drawCard("player");
-    } else if (app.playerHand.length === 0) {
-      app.playerLife -= app.currentOpponentCard.atk;
+      //player wins
     } else if (app.currentPlayerCard.atk > app.currentOpponentCard.atk) {
       app.opponentLife -= (app.currentPlayerCard.atk - app.currentOpponentCard.atk);
       app.removeOpponentCard();
       app.drawCard("opponent");
+      //tie
     } else {
       app.removePlayerCard();
       app.removeOpponentCard();
@@ -177,7 +176,6 @@ app.removePlayerCard = () => {
   const index = app.playerHand.findIndex(card => card.id === app.currentPlayerCard.id);
   $(`li[data-id="${app.currentPlayerCard.id}"]`).remove();
   app.playerHand.splice(index, 1);
-  
 }
 
 //Removes Opponent card from the UI and database
@@ -185,7 +183,6 @@ app.removeOpponentCard = () => {
   const index = app.opponentHand.findIndex(card => card.id === app.currentOpponentCard.id);
   $(`li[data-id="${app.currentOpponentCard.id}"]`).remove();
   app.opponentHand.splice(index, 1);
-  
 }
 
 //Finds and returns a player card from hand
@@ -214,7 +211,7 @@ app.playAgain = () => {
 //Hides the intro screen when you hit start game.
 app.startGame = () => {
   app.$startGameButton.on("click", () => {
-    app.$startGameScreen.css("display", "none");
+  app.$startGameScreen.css("display", "none");
   });
 }
 
@@ -249,14 +246,14 @@ app.loadEventHandlers = (e) => {
     // Mobile next button scrolls to next opponent card
     if (e.target.matches(".opponent-side .buttons.next")) {
       app.toggleHighlight("opponent", app.currentOpponentCard);
-     const prependList = function () {
-        if ($('.opponent-card').hasClass('activeNow')) {
-         const $slicedCard = $('.opponent-card').slice(lastCard).removeClass('transformThis activeNow');
-          $('.opponent-hand').prepend($slicedCard);
+      const prependList = () => {
+        if ($(".opponent-card").hasClass("activeNow")) {
+         const $slicedCard = $(".opponent-card").slice(lastCard).removeClass("transform-next activeNow");
+          $(".opponent-hand").prepend($slicedCard);
         }
       }
 
-      $('.opponent-card').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
+      $(".opponent-card").last().removeClass("transform-prev").addClass("transform-next").prev().addClass("activeNow");
       setTimeout(function () { prependList(); }, 150);
     }
 
@@ -264,14 +261,14 @@ app.loadEventHandlers = (e) => {
     // Mobile prev button scrolls to prev opponent card
     if (e.target.matches(".opponent-side .buttons.prev")) {
      app.toggleHighlight("opponent", app.currentOpponentCard);
-     const appendToList = function () {
-        if ($('.opponent-card').hasClass('activeNow')) {
-         const $slicedCard = $('.opponent-card').slice(0, 1).addClass('transformPrev');
-          $('.opponent-hand').append($slicedCard);
+     const appendToList = () => {
+        if ($(".opponent-card").hasClass("activeNow")) {
+         const $slicedCard = $(".opponent-card").slice(0, 1).addClass("transform-prev");
+          $(".opponent-hand").append($slicedCard);
         }
       }
 
-      $('.opponent-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
+      $(".opponent-card").removeClass("transform-prev").last().addClass("activeNow").prevAll().removeClass("activeNow");
       setTimeout(function () { appendToList(); }, 150);
     }
 
@@ -279,14 +276,14 @@ app.loadEventHandlers = (e) => {
     // Mobile next button scrolls to next player card
     if (e.target.matches(".player-side .buttons.next")) {
       app.toggleHighlight("player", app.currentPlayerCard);
-      const prependList = function () {
-        if ($('.player-card').hasClass('activeNow')) {
-          const $slicedCard = $('.player-card').slice(lastCard).removeClass('transformThis activeNow');
-          $('.player-hand').prepend($slicedCard);
+      const prependList = () => {
+        if ($(".player-card").hasClass("activeNow")) {
+          const $slicedCard = $(".player-card").slice(lastCard).removeClass("transform-next activeNow");
+          $(".player-hand").prepend($slicedCard);
         }
       }
 
-      $('.player-card').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
+      $(".player-card").last().removeClass("transform-prev").addClass("transform-next").prev().addClass("activeNow");
       setTimeout(function () { prependList(); }, 150);
     }
 
@@ -294,14 +291,14 @@ app.loadEventHandlers = (e) => {
     // Mobile prev button scrolls to prev player card
     if (e.target.matches(".player-side .buttons.prev")) {
       app.toggleHighlight("player", app.currentPlayerCard);
-      const appendToList = function () {
-        if ($('.player-card').hasClass('activeNow')) {
-          const $slicedCard = $('.player-card').slice(0, 1).addClass('transformPrev');
-          $('.player-hand').append($slicedCard);
+      const appendToList = () => {
+        if ($(".player-card").hasClass("activeNow")) {
+          const $slicedCard = $(".player-card").slice(0, 1).addClass("transform-prev");
+          $(".player-hand").append($slicedCard);
         }
       }
 
-      $('.player-card').removeClass('transformPrev').last().addClass('activeNow').prevAll().removeClass('activeNow');
+      $(".player-card").removeClass("transform-prev").last().addClass("activeNow").prevAll().removeClass("activeNow");
       setTimeout(function () { appendToList(); }, 150);
     }
 
@@ -333,7 +330,7 @@ app.clickGameBoard = () => {
     app.loadEventHandlers(e);
   })
   //Handles event when enter pushed
- app.$gameBoard.on('keypress', function (e) {
+ app.$gameBoard.on("keypress", function (e) {
     if (e.which === 13) {
       app.loadEventHandlers(e);
     }
@@ -379,8 +376,8 @@ app.updateOpponentAtkDisplay = () => {
 
 //Resets atk power display
 app.resetAttackDisplay = () => {
-  app.$playerAtkDisplay.text('');
-  app.$opponentAtkDisplay.text('');
+  app.$playerAtkDisplay.text("");
+  app.$opponentAtkDisplay.text("");
 }
 
 //Resets the player buttons to disabled
@@ -432,18 +429,18 @@ app.toggleHighlight = function (cardType, currentCard) {
   }
 }
 
-//toggles animations on computer's turn for selecting cards.
+//toggles animations on computer"s turn for selecting cards.
 app.toggleOpponentHighlightDelay = (opponentCardNode) => {
-  $(opponentCardNode).toggleClass('opponent-transition-delay');
+  $(opponentCardNode).toggleClass("opponent-transition-delay");
 }
 
 app.togglePlayerHighlightDelay = (playerCardNode) => {
-  $(playerCardNode).toggleClass('player-transition-delay');
+  $(playerCardNode).toggleClass("player-transition-delay");
 }
 
 //Updates Life Points
 app.updateLifePoints = () => {
-  //Checks to see if who's monster won the battle. Player or Opponent?
+  //Checks to see if who"s monster won the battle. Player or Opponent?
   if(parseInt(app.currentPlayerCard.atk,10) > parseInt(app.currentOpponentCard.atk,10)){
     const attackDifference = app.currentPlayerCard.atk - app.currentOpponentCard.atk;
     const counterStart = app.opponentLife + attackDifference; 
@@ -458,7 +455,7 @@ app.updateLifePoints = () => {
 }
 
 app.updateOpponentLife = (counter) => {
-  //Counter starts at Opponent's previous life and counts down by 10
+  //Counter starts at Opponent"s previous life and counts down by 10
   //Gives us the lifepoint decrement animation
   const updateOpponentLifeAnimation = setInterval(() => {
     counter -= 10;
@@ -531,18 +528,22 @@ app.init = async () => {
   app.$gameOverPlayAgain = $(".game-over-play-again");
   app.$startGameButton = $(".start-game-button");
   app.$startGameScreen = $(".start-game");
-
-  await app.getDeck();
-  app.setupPlayerCards();
-  app.setupOpponentCards();
-  app.handlePlayerButtons();
-  app.clickGameBoard();
-  app.renderOpponentCards();
-  app.renderPlayerCards();
-  app.toggleAttackButton();
-  app.toggleCancelButton();
-  app.playAgain();
-  app.startGame();
+  try {
+    await app.getDeck();
+    app.setupPlayerCards();
+    app.setupOpponentCards();
+    app.handlePlayerButtons();
+    app.clickGameBoard();
+    app.renderOpponentCards();
+    app.renderPlayerCards();
+    app.toggleAttackButton();
+    app.toggleCancelButton();
+    app.playAgain();
+    app.startGame();
+  } catch(error) {
+    throw error;
+  }
+  
 }
 
 $(function () {

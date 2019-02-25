@@ -10,13 +10,13 @@
   }
 
   &-body {
-    z-index:5;
-    position:relative;
     margin: auto;
     padding: 2rem;
-    text-align:center;
     border:10px solid $color-black;
     border-radius:10px;
+    z-index:5;
+    position:relative;
+    text-align:center;
     background-color: $color-blue;
   }
 }

@@ -1,27 +1,3 @@
-html {
-  font-size: 125%; }
-
-body {
-  background: url(../assets/H3iy16W.jpg);
-  background-size: cover;
-  font-family: "Press Start 2P", cursive;
-  color: #fff; }
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0; }
-
-li {
-  list-style: none; }
-
-img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  -o-object-fit: cover;
-  object-fit: cover; }
-
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -147,7 +123,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   visibility: hidden;
   display: block;
   font-size: 0;
-  content: '';
+  content: "";
   clear: both;
   height: 0; }
 
@@ -155,6 +131,32 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
+
+html {
+  font-size: 125%; }
+
+body {
+  font-family: "Press Start 2P", cursive;
+  background: url(../assets/H3iy16W.jpg);
+  background-size: cover;
+  color: #fff;
+  line-height: 1.6; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -o-object-fit: cover;
+  object-fit: cover; }
+
+@media (max-width: 350px) {
+  body {
+    line-height: 1.2; } }
 
 .visuallyhidden:not(:focus):not(:active) {
   position: absolute;
@@ -176,13 +178,13 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -ms-transform: scale(1.5);
   transform: scale(1.5); }
 
-.transformThis {
-  -webkit-animation: nextCard 500ms;
-  animation: nextCard 500ms; }
+.transform-next {
+  -webkit-animation: next-card 500ms;
+  animation: next-card 500ms; }
 
-.transformPrev {
-  -webkit-animation: prevCard 100ms;
-  animation: prevCard 100ms; }
+.transform-prev {
+  -webkit-animation: prev-card 100ms;
+  animation: prev-card 100ms; }
 
 @media (max-width: 400px) {
   .highlight {
@@ -190,7 +192,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     -ms-transform: scale(1.3);
     transform: scale(1.3); } }
 
-@-webkit-keyframes prevCard {
+@-webkit-keyframes prev-card {
   0% {
     -webkit-transform: translateX(50px);
     transform: translateX(50px);
@@ -216,7 +218,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     transform: translateX(0);
     opacity: 1; } }
 
-@keyframes prevCard {
+@keyframes prev-card {
   0% {
     -webkit-transform: translateX(50px);
     transform: translateX(50px);
@@ -242,7 +244,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     transform: translateX(0);
     opacity: 1; } }
 
-@-webkit-keyframes nextCard {
+@-webkit-keyframes next-card {
   0% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -268,7 +270,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     transform: translateX(100px);
     opacity: 0; } }
 
-@keyframes nextCard {
+@keyframes next-card {
   0% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -293,60 +295,12 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; } }
-
-@-webkit-keyframes scaleCard {
-  0% {
-    top: 5px; }
-  100% {
-    top: 24px; } }
-
-@keyframes scaleCard {
-  0% {
-    top: 5px; }
-  100% {
-    top: 24px; } }
-
-@-webkit-keyframes bounceInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(40px);
-    transform: translateX(40px); }
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0); } }
-
-@keyframes bounceInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(40px);
-    transform: translateX(40px); }
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0); } }
-
-@-webkit-keyframes bounceInRight {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-40px);
-    transform: translateX(-40px); }
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0); } }
-
-@keyframes bounceInRight {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-40px);
-    transform: translateX(-40px); }
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0); } }
 
 .gameboard {
   position: relative;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.25);
-  width: 100%; }
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25); }
 
 .gameboard-half {
   height: 50%;
@@ -372,46 +326,40 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .prev {
   display: none;
   position: absolute;
-  left: 8%;
-  -webkit-animation: bounceInLeft 300ms;
-  animation: bounceInLeft 300ms; }
+  left: 8%; }
   .prev::after {
-    content: '<';
-    border-radius: 30%;
-    padding: 0.3rem;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid #fff; }
+    content: "<"; }
 
 .next {
   position: absolute;
   right: 5%;
-  display: none;
-  -webkit-animation: bounceInRight 300ms;
-  animation: bounceInRight 300ms; }
+  display: none; }
   .next::after {
-    content: '>';
-    border-radius: 30%;
-    padding: 0.3rem;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid #fff; }
+    content: '>'; }
+
+.next::after, .prev::after {
+  border-radius: 30%;
+  padding: 0.3rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff; }
 
 button {
   display: block;
   padding: 1rem;
-  -ms-flex-item-align: stretch;
-  -ms-grid-row-align: stretch;
-  align-self: stretch;
-  z-index: 10;
-  position: relative;
-  border-radius: 10px;
   background: #000099;
   color: #fff;
   -webkit-transform: translateY(-0.25rem) scale(1);
   -ms-transform: translateY(-0.25rem) scale(1);
   transform: translateY(-0.25rem) scale(1);
+  border-radius: 10px;
+  z-index: 10;
+  position: relative;
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
   cursor: pointer; }
   button:disabled {
-    background: darkgrey;
+    background: #ababab;
     color: grey; }
   button:hover, button:focus {
     -webkit-transform: translateY(-0.25rem) scale(1.05);
@@ -432,12 +380,11 @@ button {
     font-size: .7rem; } }
 
 .card {
-  margin: 1rem;
   width: 8rem;
   height: 12rem;
+  margin: 1rem;
   background: rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   box-shadow: 1px -1px 0px 17px rgba(0, 0, 0, 0.75);
   -webkit-transition: .2s all;
   -o-transition: .2s all;
@@ -495,13 +442,13 @@ button {
   right: 0; }
 
 .modal-body {
-  z-index: 5;
-  position: relative;
   margin: auto;
   padding: 2rem;
-  text-align: center;
   border: 10px solid #000;
   border-radius: 10px;
+  z-index: 5;
+  position: relative;
+  text-align: center;
   background-color: blue; }
 
 .modal-heading {
@@ -520,35 +467,43 @@ button {
     padding: 1rem;
     border: none; } }
 
+.stats-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
 .life-points, .atk-points {
+  width: 10rem;
+  height: 3.6rem;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  border: 2px solid #000;
+  color: yellow;
+  background-image: -webkit-gradient(linear, left top, right top, from(blue), color-stop(#fff), to(purple));
+  background-image: -webkit-linear-gradient(left, blue, #fff, purple);
+  background-image: -o-linear-gradient(left, blue, #fff, purple);
+  background-image: linear-gradient(to right, blue, #fff, purple);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
-  margin: 0;
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
-  width: 10rem;
-  height: 3.6rem;
-  text-align: center;
-  color: yellow;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  background-image: -webkit-gradient(linear, left top, right top, from(blue), color-stop(#fff), to(purple));
-  background-image: -webkit-linear-gradient(left, blue, #fff, purple);
-  background-image: -o-linear-gradient(left, blue, #fff, purple);
-  background-image: linear-gradient(to right, blue, #fff, purple);
-  border: 2px solid #000; }
+  justify-content: center; }
 
 @media (max-width: 500px) {
   .opponent-stats-label, .player-stats-label {
     font-size: 0.7rem;
     margin: 0; }
   .life-points, .atk-points {
-    font-size: 1rem;
     width: 6rem;
     height: 3rem;
+    font-size: 1rem;
     text-align: center; } }
 
 .player-side {
@@ -564,23 +519,17 @@ button {
   justify-content: flex-end; }
 
 .player-transition-delay {
-  -o-transition: .2s all 4s;
-  transition: .2s all 4s;
   -webkit-transition: .2s all 4s;
-  -moz-transition: .2s all 4s; }
+  -o-transition: .2s all 4s;
+  transition: .2s all 4s; }
 
-.player-stats ul {
+.player-button-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: end;
   -ms-flex-align: end;
-  align-items: flex-end;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-item-align: end;
-  align-self: flex-end; }
+  align-items: flex-end; }
 
 .player-atk-button {
   margin-right: .5rem; }
@@ -634,18 +583,9 @@ button {
     top: 10%; } }
 
 .opponent-transition-delay {
-  -o-transition: .2s all 2s;
-  transition: .2s all 2s;
   -webkit-transition: .2s all 2s;
-  -moz-transition: .2s all 2s; }
-
-.opponent-stats ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between; }
+  -o-transition: .2s all 2s;
+  transition: .2s all 2s; }
 
 .opponent-atk-display-box {
   display: -webkit-box;
@@ -763,6 +703,6 @@ button {
     font-size: 0.6rem;
     margin-bottom: .3rem; }
   .start-game-instructions li {
-    margin-bottom: .5rem; }
+    margin-bottom: .7rem; }
   .start-game-heading {
     font-size: .8rem; } }

@@ -6,15 +6,13 @@
   transform: scale(1.5);
 }
 
-.transformThis {
-  animation: nextCard 500ms;
+.transform-next {
+  animation: next-card 500ms;
 }
 
-.transformPrev {
-  animation: prevCard 100ms;
+.transform-prev {
+  animation: prev-card 100ms;
 }
-
-
 
 @media(max-width: 400px) {
   .highlight {

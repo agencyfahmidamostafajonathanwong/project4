@@ -6,15 +6,11 @@
 
 .player-transition-delay {
   transition: .2s all 4s;
-  -webkit-transition: .2s all 4s;
-  -moz-transition: .2s all 4s;
 }
 
-.player-stats ul {
+.player-button-list {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  align-self: flex-end;
 }
 
 .player-atk-button {
